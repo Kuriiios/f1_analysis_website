@@ -1,0 +1,202 @@
+package com.kurios.f1_analysis.car_data;
+
+import com.kurios.f1_analysis.drs.Drs;
+import com.kurios.f1_analysis.lap.Lap;
+import com.kurios.f1_analysis.track_status.TrackStatus;
+import jakarta.persistence.*;
+
+import java.util.Date;
+
+@Entity
+public class CarData {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="car_data_id")
+    private Integer id;
+
+    @ManyToOne()
+    @JoinColumn(name= "lap_id")
+    private Lap carData;
+
+    @ManyToOne()
+    @JoinColumn(name= "drs_id")
+    private Drs drs;
+
+    @ManyToOne()
+    @JoinColumn(name= "track_status_id")
+    private TrackStatus trackStatus;
+
+    private Date dateTime;
+
+    private Integer time;
+
+    private Integer sessionTime;
+
+    private Short rpm;
+
+    private Short speed;
+
+    private Short nGear;
+
+    private Short throttle;
+
+    private Boolean brake;
+
+    private Float distance;
+
+    private Float differentialDistance;
+
+    private Float relativeDistance;
+
+    private Integer distanceDriverAhead;
+
+
+    public CarData() {
+    }
+
+    public CarData(Lap carData, Drs drs, TrackStatus trackStatus, Date dateTime, Integer time, Integer sessionTime, Short rpm, Short speed, Short nGear, Short throttle, Boolean brake, Float distance, Float differentialDistance, Float relativeDistance, Integer distanceDriverAhead) {
+        this.carData = carData;
+        this.drs = drs;
+        this.trackStatus = trackStatus;
+        this.dateTime = dateTime;
+        this.time = time;
+        this.sessionTime = sessionTime;
+        this.rpm = rpm;
+        this.speed = speed;
+        this.nGear = nGear;
+        this.throttle = throttle;
+        this.brake = brake;
+        this.distance = distance;
+        this.differentialDistance = differentialDistance;
+        this.relativeDistance = relativeDistance;
+        this.distanceDriverAhead = distanceDriverAhead;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Lap getCarData() {
+        return carData;
+    }
+
+    public void setCarData(Lap carData) {
+        this.carData = carData;
+    }
+
+    public Drs getDrs() {
+        return drs;
+    }
+
+    public void setDrs(Drs drs) {
+        this.drs = drs;
+    }
+
+    public TrackStatus getTrackStatus() {
+        return trackStatus;
+    }
+
+    public void setTrackStatus(TrackStatus trackStatus) {
+        this.trackStatus = trackStatus;
+    }
+
+    public Date getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public void setTime(Integer time) {
+        this.time = time;
+    }
+
+    public Integer getSessionTime() {
+        return sessionTime;
+    }
+
+    public void setSessionTime(Integer sessionTime) {
+        this.sessionTime = sessionTime;
+    }
+
+    public Short getRpm() {
+        return rpm;
+    }
+
+    public void setRpm(Short rpm) {
+        this.rpm = rpm;
+    }
+
+    public Short getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Short speed) {
+        this.speed = speed;
+    }
+
+    public Short getNGear() {
+        return nGear;
+    }
+
+    public void setNGear(Short nGear) {
+        this.nGear = nGear;
+    }
+
+    public Short getThrottle() {
+        return throttle;
+    }
+
+    public void setThrottle(Short throttle) {
+        this.throttle = throttle;
+    }
+
+    public Boolean getBrake() {
+        return brake;
+    }
+
+    public void setBrake(Boolean brake) {
+        this.brake = brake;
+    }
+
+    public Float getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Float distance) {
+        this.distance = distance;
+    }
+
+    public Float getDifferentialDistance() {
+        return differentialDistance;
+    }
+
+    public void setDifferentialDistance(Float differentialDistance) {
+        this.differentialDistance = differentialDistance;
+    }
+
+    public Float getRelativeDistance() {
+        return relativeDistance;
+    }
+
+    public void setRelativeDistance(Float relativeDistance) {
+        this.relativeDistance = relativeDistance;
+    }
+
+    public Integer getDistanceDriverAhead() {
+        return distanceDriverAhead;
+    }
+
+    public void setDistanceDriverAhead(Integer distanceDriverAhead) {
+        this.distanceDriverAhead = distanceDriverAhead;
+    }
+}
