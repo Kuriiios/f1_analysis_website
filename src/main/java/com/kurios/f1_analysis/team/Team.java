@@ -15,6 +15,9 @@ public class Team {
     @Column(length = 30, unique = true)
     private String teamName;
 
+    @Column(length = 3, unique = true)
+    private String teamAbbreviation;
+
     @Column(length = 7)
     private String teamHexColor;
 
@@ -27,8 +30,9 @@ public class Team {
     public Team() {
     }
 
-    public Team(String teamName, String teamHexColor) {
+    public Team(String teamName, String teamAbbreviation, String teamHexColor) {
         this.teamName = teamName;
+        this.teamAbbreviation = teamAbbreviation;
         this.teamHexColor = teamHexColor;
     }
 
@@ -46,6 +50,14 @@ public class Team {
 
     public void setTeamName(String teamName) {
         this.teamName = teamName;
+    }
+
+    public String getTeamAbbreviation() {
+        return teamAbbreviation;
+    }
+
+    public void setTeamAbbreviation(String teamAbbreviation) {
+        this.teamAbbreviation = teamAbbreviation;
     }
 
     public String getTeamHexColor() {

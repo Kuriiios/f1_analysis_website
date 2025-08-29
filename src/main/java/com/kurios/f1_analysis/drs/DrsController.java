@@ -10,19 +10,14 @@ import java.util.List;
 @RestController
 public class DrsController {
 
-    private final DrsRepository drsRepository;
+    private final DrsService drsService;
 
-    public DrsController(DrsRepository drsRepository) {
-        this.drsRepository = drsRepository;
-    }
-
-    @PostMapping("/drs")
-    public Drs create(@RequestBody Drs drs) {
-        return drsRepository.save(drs);
+    public DrsController(DrsService drsService) {
+        this.drsService = drsService;
     }
 
     @GetMapping("/drs")
-    public List<Drs> findAll() {
-        return drsRepository.findAll();
+    public List<DrsResponseDto> findAll() {
+        return drsService.findAll();
     }
 }

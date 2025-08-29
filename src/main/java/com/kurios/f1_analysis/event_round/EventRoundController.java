@@ -10,20 +10,19 @@ import java.util.List;
 @RestController
 public class EventRoundController {
 
-    private final EventRoundRepository eventRoundRepository;
+    private final EventRoundService eventRoundService;
 
-    public EventRoundController(EventRoundRepository eventRoundRepository) {
-        this.eventRoundRepository = eventRoundRepository;
+    public EventRoundController(EventRoundService eventRoundService) {
+        this.eventRoundService = eventRoundService;
     }
 
-
     @PostMapping("/event-round")
-    public EventRound create(@RequestBody EventRound eventRound) {
-        return eventRoundRepository.save(eventRound);
+    public EventRoundResponseDto create(@RequestBody EventRoundDto eventRoundDto) {
+        return eventRoundService.create(eventRoundDto);
     }
 
     @GetMapping("/event-round")
-    public List<EventRound> findAll() {
-        return eventRoundRepository.findAll();
+    public List<EventRoundResponseDto> findAll() {
+        return eventRoundService.findAll();
     }
 }

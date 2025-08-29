@@ -24,6 +24,7 @@ public class EventRound {
 
     private Short year;
 
+    @Column(unique = true)
     private Short roundNumber;
 
     @Column(length = 30)

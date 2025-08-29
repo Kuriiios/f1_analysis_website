@@ -15,7 +15,7 @@ public class PosData {
 
     @ManyToOne()
     @JoinColumn(name= "lap_id")
-    private Lap posData;
+    private Lap posDataLap;
 
     @ManyToOne()
     @JoinColumn(name= "track_status_id")
@@ -38,8 +38,8 @@ public class PosData {
     public PosData() {
     }
 
-    public PosData(Lap posData, TrackStatus trackStatus, Date dateTime, Integer time, Integer sessionTime, Short x, Short y, Short z, Boolean carOnTrack) {
-        this.posData = posData;
+    public PosData(Lap posDataLap, TrackStatus trackStatus, Date dateTime, Integer time, Integer sessionTime, Short x, Short y, Short z, Boolean carOnTrack) {
+        this.posDataLap = posDataLap;
         this.trackStatus = trackStatus;
         this.dateTime = dateTime;
         this.time = time;
@@ -58,12 +58,12 @@ public class PosData {
         this.id = id;
     }
 
-    public Lap getPosData() {
-        return posData;
+    public Lap getPosDataLap() {
+        return posDataLap;
     }
 
-    public void setPosData(Lap posData) {
-        this.posData = posData;
+    public void setPosDataLap(Lap posDataLap) {
+        this.posDataLap = posDataLap;
     }
 
     public TrackStatus getTrackStatus() {

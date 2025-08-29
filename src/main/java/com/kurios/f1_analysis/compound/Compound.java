@@ -8,7 +8,6 @@ import java.util.List;
 @Entity
 public class Compound {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="compound_id")
     private Integer id;
 
@@ -19,13 +18,14 @@ public class Compound {
     private List<Lap> laps;
 
     @Column(length = 15)
-    private String compound_name;
+    private String compoundName;
 
     public Compound() {
     }
 
-    public Compound(String compound_name) {
-        this.compound_name = compound_name;
+    public Compound(Integer id, String compoundName) {
+        this.id = id;
+        this.compoundName = compoundName;
     }
 
     public Integer getId() {
@@ -36,11 +36,11 @@ public class Compound {
         this.id = id;
     }
 
-    public String getCompound_name() {
-        return compound_name;
+    public String getCompoundName() {
+        return compoundName;
     }
 
-    public void setCompound_name(String compound_name) {
-        this.compound_name = compound_name;
+    public void setCompound_name(String compoundName) {
+        this.compoundName = compoundName;
     }
 }

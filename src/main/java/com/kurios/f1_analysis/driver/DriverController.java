@@ -10,19 +10,19 @@ import java.util.List;
 @RestController
 public class DriverController {
 
-    private final DriverRepository driverRepository;
+    private final DriverService driverService;
 
-    public DriverController(DriverRepository driverRepository) {
-        this.driverRepository = driverRepository;
+    public DriverController(DriverService driverService) {
+        this.driverService = driverService;
     }
 
-    @PostMapping("/drivers")
-    public Driver create(@RequestBody Driver driver) {
-        return driverRepository.save(driver);
+    @PostMapping("/driver")
+    public DriverResponseDto create(@RequestBody DriverDto driverDto) {
+        return driverService.create(driverDto);
     }
 
-    @GetMapping("/drivers")
-    public List<Driver> findAll() {
-        return driverRepository.findAll();
+    @GetMapping("/driver")
+    public List<DriverResponseDto> findAll() {
+        return driverService.findAll();
     }
 }

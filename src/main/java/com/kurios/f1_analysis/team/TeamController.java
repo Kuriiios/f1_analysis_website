@@ -10,19 +10,19 @@ import java.util.List;
 @RestController
 public class TeamController {
 
-    private final TeamRepository teamRepository;
+    private TeamService teamService;
 
-    public TeamController(TeamRepository teamRepository) {
-        this.teamRepository = teamRepository;
+    public TeamController(TeamService teamService) {
+        this.teamService = teamService;
     }
 
     @PostMapping("/team")
-    public Team create(@RequestBody Team team) {
-        return teamRepository.save(team);
+    public TeamDto create(@RequestBody TeamDto teamDto) {
+        return teamService.create(teamDto);
     }
 
     @GetMapping("/team")
-    public List<Team> findAll() {
-        return teamRepository.findAll();
+    public List<TeamDto> findAll() {
+        return teamService.findAll();
     }
 }

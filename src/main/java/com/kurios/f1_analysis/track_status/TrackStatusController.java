@@ -10,19 +10,14 @@ import java.util.List;
 @RestController
 public class TrackStatusController {
 
-    private final TrackStatusRepository trackStatusRepository;
+    private final TrackStatusService trackStatusService;
 
-    public TrackStatusController(TrackStatusRepository trackStatusRepository) {
-        this.trackStatusRepository = trackStatusRepository;
-    }
-
-    @PostMapping("/track-status")
-    public TrackStatus create(@RequestBody TrackStatus trackStatus) {
-        return trackStatusRepository.save(trackStatus);
+    public TrackStatusController(TrackStatusService trackStatusService) {
+        this.trackStatusService = trackStatusService;
     }
 
     @GetMapping("/track-status")
-    public List<TrackStatus> findAll() {
-        return trackStatusRepository.findAll();
+    public List<TrackStatusResponseDto> findAll() {
+        return trackStatusService.findAll();
     }
 }

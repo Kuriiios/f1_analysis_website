@@ -9,19 +9,20 @@ import java.util.List;
 
 @RestController
 public class DriverTeamAssignmentController {
-    private final DriverTeamAssignmentRepository driverTeamAssignmentRepository;
 
-    public DriverTeamAssignmentController(DriverTeamAssignmentRepository driverTeamAssignmentRepository) {
-        this.driverTeamAssignmentRepository = driverTeamAssignmentRepository;
+    private final DriverTeamAssignmentService driverTeamAssignmentService;
+
+    public DriverTeamAssignmentController(DriverTeamAssignmentService driverTeamAssignmentService) {
+        this.driverTeamAssignmentService = driverTeamAssignmentService;
     }
 
     @PostMapping("/driver-team-assignment")
-    public DriverTeamAssignment create(@RequestBody DriverTeamAssignment driverTeamAssignment) {
-        return driverTeamAssignmentRepository.save(driverTeamAssignment);
+    public DriverTeamAssignment create(@RequestBody DriverTeamAssignmentDto driverTeamAssignmentDto) {
+        return driverTeamAssignmentService.create(driverTeamAssignmentDto);
     }
 
     @GetMapping("/driver-team-assignment")
-    public List<DriverTeamAssignment>  findAll() {
-        return driverTeamAssignmentRepository.findAll();
+    public List<DriverTeamAssignmentResponseDto>  findAll() {
+        return driverTeamAssignmentService.findAll();
     }
 }

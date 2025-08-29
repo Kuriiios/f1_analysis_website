@@ -10,19 +10,19 @@ import java.util.List;
 @RestController
 public class LapController {
 
-    private final LapRepository lapRepository;
+    private LapService lapService;
 
-    public LapController(LapRepository lapRepository) {
-        this.lapRepository = lapRepository;
+    public LapController(LapService lapService) {
+        this.lapService = lapService;
     }
 
     @PostMapping("/lap")
-    public Lap create(@RequestBody Lap lap) {
-        return lapRepository.save(lap);
+    public LapResponseDto create(@RequestBody LapDto lapDto) {
+        return lapService.create(lapDto);
     }
 
     @GetMapping("/lap")
-    public List<Lap> findAll() {
-        return lapRepository.findAll();
+    public List<LapResponseDto> findAll() {
+        return lapService.findAll();
     }
 }

@@ -9,19 +9,20 @@ import java.util.List;
 
 @RestController
 public class CarDataController {
-    private final CarDataRepository carDataRepository;
 
-    public CarDataController(CarDataRepository carDataRepository) {
-        this.carDataRepository = carDataRepository;
+    private final CarDataService carDataService;
+
+    public CarDataController(CarDataService carDataService) {
+        this.carDataService = carDataService;
     }
 
     @PostMapping("/car-data")
-    public CarData create(@RequestBody CarData carData) {
-        return carDataRepository.save(carData);
+    public CarDataResponseDto create(@RequestBody CarDataDto carDataDto) {
+        return carDataService.create(carDataDto);
     }
 
     @GetMapping("/car-data")
-    public List<CarData> findAll() {
-        return carDataRepository.findAll();
+    public List<CarDataResponseDto> findAll() {
+        return carDataService.findAll();
     }
 }

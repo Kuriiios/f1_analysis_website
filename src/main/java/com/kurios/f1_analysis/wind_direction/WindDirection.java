@@ -8,7 +8,6 @@ import java.util.List;
 @Entity
 public class WindDirection {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "wind_direction_id")
     private Integer id;
 
@@ -18,15 +17,17 @@ public class WindDirection {
     )
     private List<Weather> weatherList;
 
-    @Column(length = 3)
+    @Column(length = 3,
+            unique = true,
+            nullable = false)
     private String cardinalDirection;
 
     public WindDirection() {
     }
 
-    public WindDirection(String cardinalDirection, Integer id) {
-        this.cardinalDirection = cardinalDirection;
+    public WindDirection(Integer id, String cardinalDirection) {
         this.id = id;
+        this.cardinalDirection = cardinalDirection;
     }
 
     public Integer getId() {

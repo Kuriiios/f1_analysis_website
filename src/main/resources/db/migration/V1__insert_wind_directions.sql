@@ -1,0 +1,16 @@
+INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (1, 'N');
+INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (2, 'NNE');
+INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (3, 'NE');
+INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (4, 'ENE');
+INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (5, 'E');
+INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (6, 'ESE');
+INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (7, 'SE');
+INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (8, 'SSE');
+INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (9, 'S');
+INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (10, 'SSW');
+INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (11, 'SW');
+INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (12, 'WSW');
+INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (13, 'W');
+INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (14, 'WNW');
+INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (15, 'NW');
+INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (16, 'NNW');

@@ -10,19 +10,19 @@ import java.util.List;
 @RestController
 public class PosDataController {
 
-    private final PosDataRepository posDataRepository;
+    private final PosDataService posDataService;
 
-    public PosDataController(PosDataRepository posDataRepository) {
-        this.posDataRepository = posDataRepository;
+    public PosDataController(PosDataService posDataService) {
+        this.posDataService = posDataService;
     }
 
     @PostMapping("/pos-data")
-    public PosData create(@RequestBody PosData posData) {
-        return posDataRepository.save(posData);
+    public PosDataResponseDto create(@RequestBody PosDataDto posDataDto) {
+        return posDataService.create(posDataDto);
     }
 
     @GetMapping("/pos-data")
-    public List<PosData> findAll() {
-        return posDataRepository.findAll();
+    public List<PosDataResponseDto> findAll() {
+        return posDataService.findAll();
     }
 }

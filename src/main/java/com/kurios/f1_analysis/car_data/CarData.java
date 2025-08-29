@@ -16,7 +16,7 @@ public class CarData {
 
     @ManyToOne()
     @JoinColumn(name= "lap_id")
-    private Lap carData;
+    private Lap carDataLap;
 
     @ManyToOne()
     @JoinColumn(name= "drs_id")
@@ -54,8 +54,8 @@ public class CarData {
     public CarData() {
     }
 
-    public CarData(Lap carData, Drs drs, TrackStatus trackStatus, Date dateTime, Integer time, Integer sessionTime, Short rpm, Short speed, Short nGear, Short throttle, Boolean brake, Float distance, Float differentialDistance, Float relativeDistance, Integer distanceDriverAhead) {
-        this.carData = carData;
+    public CarData(Lap carDataLap, Drs drs, TrackStatus trackStatus, Date dateTime, Integer time, Integer sessionTime, Short rpm, Short speed, Short nGear, Short throttle, Boolean brake, Float distance, Float differentialDistance, Float relativeDistance, Integer distanceDriverAhead) {
+        this.carDataLap = carDataLap;
         this.drs = drs;
         this.trackStatus = trackStatus;
         this.dateTime = dateTime;
@@ -80,12 +80,12 @@ public class CarData {
         this.id = id;
     }
 
-    public Lap getCarData() {
-        return carData;
+    public Lap getCarDataLap() {
+        return carDataLap;
     }
 
-    public void setCarData(Lap carData) {
-        this.carData = carData;
+    public void setCarDataLap(Lap carDataLap) {
+        this.carDataLap = carDataLap;
     }
 
     public Drs getDrs() {
@@ -144,11 +144,11 @@ public class CarData {
         this.speed = speed;
     }
 
-    public Short getNGear() {
+    public Short getnGear() {
         return nGear;
     }
 
-    public void setNGear(Short nGear) {
+    public void setnGear(Short nGear) {
         this.nGear = nGear;
     }
 

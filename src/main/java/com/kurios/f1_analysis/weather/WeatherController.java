@@ -10,19 +10,19 @@ import java.util.List;
 @RestController
 public class WeatherController {
 
-    private final WeatherRepository weatherRepository;
+    private final WeatherService weatherService;
 
-    public WeatherController(WeatherRepository weatherRepository) {
-        this.weatherRepository = weatherRepository;
+    public WeatherController(WeatherService weatherService) {
+        this.weatherService = weatherService;
     }
 
     @PostMapping("/weather")
-    public Weather create(@RequestBody Weather weather) {
-        return weatherRepository.save(weather);
+    public WeatherResponseDto create(@RequestBody WeatherDto weatherDto) {
+        return this.weatherService.create(weatherDto);
     }
 
     @GetMapping("/weather")
-    public List<Weather> findAll() {
-        return weatherRepository.findAll();
+    public List<WeatherResponseDto> findAll() {
+        return this.weatherService.findAll();
     }
 }

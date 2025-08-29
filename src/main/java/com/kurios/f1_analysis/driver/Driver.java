@@ -36,8 +36,7 @@ public class Driver {
     public Driver() {
     }
 
-    public Driver(Integer id, Short driverNumber, String driverAbbreviation, String driverName, String driverHexColor, String country) {
-        this.id = id;
+    public Driver(Short driverNumber, String driverAbbreviation, String driverName, String driverHexColor, String country) {
         this.driverNumber = driverNumber;
         this.driverAbbreviation = driverAbbreviation;
         this.driverName = driverName;

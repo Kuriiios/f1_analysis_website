@@ -9,8 +9,7 @@ import java.util.List;
 
 public class Drs {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "drs_data_id")
+    @Column(name = "drs_id")
     private Integer id;
 
     @OneToMany(
@@ -20,14 +19,14 @@ public class Drs {
     private List<CarData> drsList;
 
     @Column(length = 10)
-    private String drs_state;
+    private String drsState;
 
     public Drs() {
     }
 
-    public Drs(Integer id, String drs_state) {
+    public Drs(Integer id, String drsState) {
         this.id = id;
-        this.drs_state = drs_state;
+        this.drsState = drsState;
     }
 
     public Integer getId() {
@@ -38,11 +37,11 @@ public class Drs {
         this.id = id;
     }
 
-    public String getDrs_state() {
-        return drs_state;
+    public String getDrsState() {
+        return drsState;
     }
 
-    public void setDrs_state(String drs_state) {
-        this.drs_state = drs_state;
+    public void setDrsState(String drsState) {
+        this.drsState = drsState;
     }
 }

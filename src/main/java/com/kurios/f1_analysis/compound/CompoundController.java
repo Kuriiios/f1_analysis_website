@@ -10,19 +10,14 @@ import java.util.List;
 @RestController
 public class CompoundController {
 
-    private final CompoundRepository compoundRepository;
+    private final CompoundService compoundService;
 
-    public CompoundController(CompoundRepository compoundRepository) {
-        this.compoundRepository = compoundRepository;
-    }
-
-    @PostMapping("/compound")
-    public Compound create(@RequestBody Compound compound) {
-        return compoundRepository.save(compound);
+    public CompoundController(CompoundService compoundService) {
+        this.compoundService = compoundService;
     }
 
     @GetMapping("/compound")
-    public List<Compound> findAll() {
-        return compoundRepository.findAll();
+    public List<CompoundResponseDto> findAll() {
+        return compoundService.findAll();
     }
 }

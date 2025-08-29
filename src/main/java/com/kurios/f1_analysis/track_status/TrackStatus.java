@@ -10,8 +10,7 @@ import java.util.List;
 @Entity
 public class TrackStatus {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="track_status_data_id")
+    @Column(name="track_status_id")
     private Integer id;
 
     @OneToMany(
@@ -33,14 +32,14 @@ public class TrackStatus {
     private List<Lap> lapList;
 
     @Column(length = 20)
-    private String track_state;
+    private String trackState;
 
     public TrackStatus() {
     }
 
-    public TrackStatus(List<Lap> lapList, String track_state) {
-        this.lapList = lapList;
-        this.track_state = track_state;
+    public TrackStatus(Integer id, String trackState) {
+        this.id = id;
+        this.trackState = trackState;
     }
 
     public Integer getId() {
@@ -59,11 +58,27 @@ public class TrackStatus {
         this.lapList = lapList;
     }
 
-    public String getTrack_state() {
-        return track_state;
+    public List<CarData> getCarDataList() {
+        return carDataList;
     }
 
-    public void setTrack_state(String track_state) {
-        this.track_state = track_state;
+    public void setCarDataList(List<CarData> carDataList) {
+        this.carDataList = carDataList;
+    }
+
+    public List<PosData> getPosDataList() {
+        return posDataList;
+    }
+
+    public void setPosDataList(List<PosData> posDataList) {
+        this.posDataList = posDataList;
+    }
+
+    public String getTrackState() {
+        return trackState;
+    }
+
+    public void setTrackState(String trackState) {
+        this.trackState = trackState;
     }
 }

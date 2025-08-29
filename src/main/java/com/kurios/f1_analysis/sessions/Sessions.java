@@ -41,8 +41,7 @@ public class Sessions {
     public Sessions() {
     }
 
-    public Sessions(Integer id, EventRound eventRound, String sessionName, Date sessionDate) {
-        this.id = id;
+    public Sessions(EventRound eventRound, String sessionName, Date sessionDate) {
         this.eventRound = eventRound;
         this.sessionName = sessionName;
         this.sessionDate = sessionDate;
@@ -62,14 +61,6 @@ public class Sessions {
 
     public void setEventRound(EventRound eventRound) {
         this.eventRound = eventRound;
-    }
-
-    public Integer getSessionId() {
-        return id;
-    }
-
-    public void setSessionId(Integer sessionId) {
-        this.id = sessionId;
     }
 
     public String getSessionName() {

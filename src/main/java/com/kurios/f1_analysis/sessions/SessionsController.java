@@ -10,19 +10,19 @@ import java.util.List;
 @RestController
 public class SessionsController {
 
-    private final SessionsRepository sessionRepository;
+    private final SessionsService sessionsService;
 
-    public SessionsController(SessionsRepository sessionRepository) {
-        this.sessionRepository = sessionRepository;
+    public SessionsController(SessionsService sessionsService) {
+        this.sessionsService = sessionsService;
     }
 
     @PostMapping("/sessions")
-    public Sessions create(@RequestBody Sessions sessions) {
-        return sessionRepository.save(sessions);
+    public SessionsResponseDto create(@RequestBody SessionsDto sessionsDto) {
+        return this.sessionsService.create(sessionsDto);
     }
 
     @GetMapping("/sessions")
-    public List<Sessions> findAll() {
-        return sessionRepository.findAll();
+    public List<SessionsResponseDto> findAll() {
+        return sessionsService.findAll();
     }
 }

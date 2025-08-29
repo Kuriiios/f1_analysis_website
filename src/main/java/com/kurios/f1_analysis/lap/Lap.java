@@ -18,13 +18,41 @@ public class Lap {
     private Integer id;
 
     @OneToMany(
-            mappedBy = "carData",
+            mappedBy = "carDataLap",
             cascade = CascadeType.ALL
     )
     private List<CarData> carDataList;
 
+    public Lap(Compound compound, DriverTeamAssignment driverTeamAssignment, TrackStatus trackStatus, Integer laptimeS, Short lapNumber, Short stint, Integer pitInTime, Integer pitOutTime, Integer sector1Time, Integer sector2Time, Integer sector3Time, Integer sector1SessionTime, Integer sector2SessionTime, Integer sector3SessionTime, Short speedI1, Short speedI2, Short speedFl, Short speedSt, Boolean isPersonalBest, Short tyreLife, Integer lapStartTime, Date lapStartDate, Short position, Boolean deleted, Boolean isAccurate) {
+        this.compound = compound;
+        this.driverTeamAssignment = driverTeamAssignment;
+        this.trackStatus = trackStatus;
+        this.laptimeS = laptimeS;
+        this.lapNumber = lapNumber;
+        this.stint = stint;
+        this.pitInTime = pitInTime;
+        this.pitOutTime = pitOutTime;
+        this.sector1Time = sector1Time;
+        this.sector2Time = sector2Time;
+        this.sector3Time = sector3Time;
+        this.sector1SessionTime = sector1SessionTime;
+        this.sector2SessionTime = sector2SessionTime;
+        this.sector3SessionTime = sector3SessionTime;
+        this.speedI1 = speedI1;
+        this.speedI2 = speedI2;
+        this.speedFl = speedFl;
+        this.speedSt = speedSt;
+        this.isPersonalBest = isPersonalBest;
+        this.tyreLife = tyreLife;
+        this.lapStartTime = lapStartTime;
+        this.lapStartDate = lapStartDate;
+        this.position = position;
+        this.deleted = deleted;
+        this.isAccurate = isAccurate;
+    }
+
     @OneToMany(
-            mappedBy = "posData",
+            mappedBy = "posDataLap",
             cascade = CascadeType.ALL
     )
     private List<PosData> posDataList;
@@ -87,35 +115,7 @@ public class Lap {
 
     public Lap() {
     }
-
-    public Lap(Compound compound, DriverTeamAssignment driverTeamAssignment, TrackStatus trackStatus, Integer laptimeS, Short lapNumber, Short stint, Integer pitInTime, Integer pitOutTime, Integer sector1Time, Integer sector2Time, Integer sector3Time, Integer sector1SessionTime, Integer sector2SessionTime, Integer sector3SessionTime, Short speedI1, Short speedI2, Short speedFl, Short speedSt, Boolean isPersonalBest, Short tyreLife, Integer lapStartTime, Date lapStartDate, Short position, Boolean deleted, Boolean isAccurate) {
-        this.compound = compound;
-        this.driverTeamAssignment = driverTeamAssignment;
-        this.trackStatus = trackStatus;
-        this.laptimeS = laptimeS;
-        this.lapNumber = lapNumber;
-        this.stint = stint;
-        this.pitInTime = pitInTime;
-        this.pitOutTime = pitOutTime;
-        this.sector1Time = sector1Time;
-        this.sector2Time = sector2Time;
-        this.sector3Time = sector3Time;
-        this.sector1SessionTime = sector1SessionTime;
-        this.sector2SessionTime = sector2SessionTime;
-        this.sector3SessionTime = sector3SessionTime;
-        this.speedI1 = speedI1;
-        this.speedI2 = speedI2;
-        this.speedFl = speedFl;
-        this.speedSt = speedSt;
-        this.isPersonalBest = isPersonalBest;
-        this.tyreLife = tyreLife;
-        this.lapStartTime = lapStartTime;
-        this.lapStartDate = lapStartDate;
-        this.position = position;
-        this.deleted = deleted;
-        this.isAccurate = isAccurate;
-    }
-
+    
     public Integer getId() {
         return id;
     }
