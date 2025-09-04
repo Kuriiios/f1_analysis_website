@@ -1,7 +1,7 @@
 package com.kurios.f1_analysis.driver_team_assignment;
 
 import com.kurios.f1_analysis.driver.DriverRepository;
-import com.kurios.f1_analysis.sessions.SessionsRepository;
+import com.kurios.f1_analysis.session.SessionRepository;
 import com.kurios.f1_analysis.team.TeamRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +13,16 @@ public class DriverTeamAssignmentService {
     private final DriverTeamAssignmentRepository driverTeamAssignmentRepository;
     private final DriverRepository driverRepository;
     private final TeamRepository teamRepository;
-    private final SessionsRepository sessionsRepository;
+    private final SessionRepository sessionRepository;
 
     private final DriverTeamAssignmentMapper driverTeamAssignmentMapper;
 
 
-    public DriverTeamAssignmentService(DriverTeamAssignmentRepository driverTeamAssignmentRepository, DriverRepository driverRepository, TeamRepository teamRepository, SessionsRepository sessionsRepository, DriverTeamAssignmentMapper driverTeamAssignmentMapper) {
+    public DriverTeamAssignmentService(DriverTeamAssignmentRepository driverTeamAssignmentRepository, DriverRepository driverRepository, TeamRepository teamRepository, SessionRepository sessionRepository, DriverTeamAssignmentMapper driverTeamAssignmentMapper) {
         this.driverTeamAssignmentRepository = driverTeamAssignmentRepository;
         this.driverRepository = driverRepository;
         this.teamRepository = teamRepository;
-        this.sessionsRepository = sessionsRepository;
+        this.sessionRepository = sessionRepository;
         this.driverTeamAssignmentMapper = driverTeamAssignmentMapper;
 
     }
@@ -32,7 +32,7 @@ public class DriverTeamAssignmentService {
                 .orElseThrow(() -> new RuntimeException("Driver not found"));
         var teamId = teamRepository.findById(driverTeamAssignmentDto.teamId())
                 .orElseThrow(() -> new RuntimeException("Team not found"));
-        var sessionId = sessionsRepository.findById(driverTeamAssignmentDto.sessionId())
+        var sessionId = sessionRepository.findById(driverTeamAssignmentDto.sessionId())
                 .orElseThrow(() -> new RuntimeException("Session not found"));
         var driverTeamAssignment = driverTeamAssignmentMapper.toDriverTeamAssignment(sessionId, driverId, teamId );
         driverTeamAssignmentRepository.save(driverTeamAssignment);

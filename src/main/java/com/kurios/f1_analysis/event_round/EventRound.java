@@ -1,7 +1,7 @@
 package com.kurios.f1_analysis.event_round;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.kurios.f1_analysis.sessions.Sessions;
+import com.kurios.f1_analysis.session.Session;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -20,7 +20,7 @@ public class EventRound {
             cascade = CascadeType.ALL
     )
     @JsonManagedReference
-    private List<Sessions> sessions;
+    private List<Session> sessions;
 
     private Short year;
 
@@ -39,7 +39,7 @@ public class EventRound {
     @Column(unique = true)
     private Date eventDate;
 
-    private Boolean sprintEvent;
+    private Boolean isSprintEvent;
 
     private Short soft;
 
@@ -50,14 +50,14 @@ public class EventRound {
     public EventRound() {
     }
 
-    public EventRound(Short year, Short roundNumber, String country, String location, String eventName, Date eventDate, Boolean sprintEvent, Short soft, Short medium, Short hard) {
+    public EventRound(Short year, Short roundNumber, String country, String location, String eventName, Date eventDate, Boolean isSprintEvent, Short soft, Short medium, Short hard) {
         this.year = year;
         this.roundNumber = roundNumber;
         this.country = country;
         this.location = location;
         this.eventName = eventName;
         this.eventDate = eventDate;
-        this.sprintEvent = sprintEvent;
+        this.isSprintEvent = isSprintEvent;
         this.soft = soft;
         this.medium = medium;
         this.hard = hard;
@@ -71,11 +71,11 @@ public class EventRound {
         this.id = id;
     }
 
-    public List<Sessions> getSessions() {
+    public List<Session> getSessions() {
         return sessions;
     }
 
-    public void setSessions(List<Sessions> sessions) {
+    public void setSessions(List<Session> sessions) {
         this.sessions = sessions;
     }
 
@@ -136,11 +136,11 @@ public class EventRound {
     }
 
     public Boolean getSprintEvent() {
-        return sprintEvent;
+        return isSprintEvent;
     }
 
     public void setSprintEvent(Boolean sprintEvent) {
-        this.sprintEvent = sprintEvent;
+        isSprintEvent = sprintEvent;
     }
 
     public Short getSoft() {

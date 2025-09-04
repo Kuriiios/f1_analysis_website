@@ -1,8 +1,8 @@
-package com.kurios.f1_analysis.sessions;
+package com.kurios.f1_analysis.session;
 
 import java.sql.Date;
 
-public record SessionsDto(
+public record SessionDto(
         Integer eventRoundId,
 
         String sessionName,

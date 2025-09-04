@@ -40,7 +40,7 @@ public class CarData {
 
     private Short throttle;
 
-    private Boolean brake;
+    private Boolean isBraking;
 
     private Float distance;
 
@@ -54,7 +54,7 @@ public class CarData {
     public CarData() {
     }
 
-    public CarData(Lap carDataLap, Drs drs, TrackStatus trackStatus, Date dateTime, Integer time, Integer sessionTime, Short rpm, Short speed, Short nGear, Short throttle, Boolean brake, Float distance, Float differentialDistance, Float relativeDistance, Integer distanceDriverAhead) {
+    public CarData(Lap carDataLap, Drs drs, TrackStatus trackStatus, Date dateTime, Integer time, Integer sessionTime, Short rpm, Short speed, Short nGear, Short throttle, Boolean isBraking, Float distance, Float differentialDistance, Float relativeDistance, Integer distanceDriverAhead) {
         this.carDataLap = carDataLap;
         this.drs = drs;
         this.trackStatus = trackStatus;
@@ -65,7 +65,7 @@ public class CarData {
         this.speed = speed;
         this.nGear = nGear;
         this.throttle = throttle;
-        this.brake = brake;
+        this.isBraking = isBraking;
         this.distance = distance;
         this.differentialDistance = differentialDistance;
         this.relativeDistance = relativeDistance;
@@ -160,12 +160,12 @@ public class CarData {
         this.throttle = throttle;
     }
 
-    public Boolean getBrake() {
-        return brake;
+    public Boolean getBraking() {
+        return isBraking;
     }
 
-    public void setBrake(Boolean brake) {
-        this.brake = brake;
+    public void setBraking(Boolean braking) {
+        isBraking = braking;
     }
 
     public Float getDistance() {

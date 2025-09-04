@@ -1,6 +1,6 @@
 package com.kurios.f1_analysis.weather;
 
-import com.kurios.f1_analysis.sessions.Sessions;
+import com.kurios.f1_analysis.session.Session;
 import com.kurios.f1_analysis.wind_direction.WindDirection;
 import jakarta.persistence.*;
 
@@ -14,7 +14,7 @@ public class Weather {
 
     @ManyToOne()
     @JoinColumn(name= "session_id")
-    private Sessions weather;
+    private Session weather;
 
     @ManyToOne()
     @JoinColumn(name= "wind_direction_id")
@@ -26,7 +26,7 @@ public class Weather {
 
     private Short pressure;
 
-    private Boolean rainfall;
+    private Boolean isRainfall;
 
     private Short trackTemp;
 
@@ -35,13 +35,13 @@ public class Weather {
     public Weather() {
     }
 
-    public Weather(Sessions weather, WindDirection windDirection, Short airTemp, Short humidity, Short pressure, Boolean rainfall, Short trackTemp, Short windSpeed) {
+    public Weather(Session weather, WindDirection windDirection, Short airTemp, Short humidity, Short pressure, Boolean isRainfall, Short trackTemp, Short windSpeed) {
         this.weather = weather;
         this.windDirection = windDirection;
         this.airTemp = airTemp;
         this.humidity = humidity;
         this.pressure = pressure;
-        this.rainfall = rainfall;
+        this.isRainfall = isRainfall;
         this.trackTemp = trackTemp;
         this.windSpeed = windSpeed;
     }
@@ -54,11 +54,11 @@ public class Weather {
         this.id = id;
     }
 
-    public Sessions getWeather() {
+    public Session getWeather() {
         return weather;
     }
 
-    public void setWeather(Sessions weather) {
+    public void setWeather(Session weather) {
         this.weather = weather;
     }
 
@@ -95,11 +95,11 @@ public class Weather {
     }
 
     public Boolean getRainfall() {
-        return rainfall;
+        return isRainfall;
     }
 
     public void setRainfall(Boolean rainfall) {
-        this.rainfall = rainfall;
+        isRainfall = rainfall;
     }
 
     public Short getTrackTemp() {

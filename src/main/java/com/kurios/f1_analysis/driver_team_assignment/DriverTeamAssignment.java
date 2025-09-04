@@ -2,7 +2,7 @@ package com.kurios.f1_analysis.driver_team_assignment;
 
 import com.kurios.f1_analysis.driver.Driver;
 import com.kurios.f1_analysis.lap.Lap;
-import com.kurios.f1_analysis.sessions.Sessions;
+import com.kurios.f1_analysis.session.Session;
 import com.kurios.f1_analysis.team.Team;
 import jakarta.persistence.*;
 
@@ -19,7 +19,7 @@ public class DriverTeamAssignment {
 
     @ManyToOne()
     @JoinColumn(name= "session_id")
-    private Sessions session;
+    private Session session;
 
     @ManyToOne()
     @JoinColumn(name= "driver_id")
@@ -38,7 +38,7 @@ public class DriverTeamAssignment {
     public DriverTeamAssignment() {
     }
 
-    public DriverTeamAssignment(Sessions session, Driver driver, Team team) {
+    public DriverTeamAssignment(Session session, Driver driver, Team team) {
         this.session = session;
         this.driver = driver;
         this.team = team;
@@ -52,11 +52,11 @@ public class DriverTeamAssignment {
         this.id = id;
     }
 
-    public Sessions getSession() {
+    public Session getSession() {
         return session;
     }
 
-    public void setSession(Sessions session) {
+    public void setSession(Session session) {
         this.session = session;
     }
 

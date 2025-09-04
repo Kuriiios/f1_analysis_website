@@ -1,6 +1,6 @@
 package com.kurios.f1_analysis.weather;
 
-import com.kurios.f1_analysis.sessions.SessionsRepository;
+import com.kurios.f1_analysis.session.SessionRepository;
 import com.kurios.f1_analysis.wind_direction.WindDirectionRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,21 +12,21 @@ public class WeatherService {
 
     private final WeatherRepository weatherRepository;
 
-    private final SessionsRepository sessionsRepository;
+    private final SessionRepository sessionRepository;
 
     private final WeatherMapper weatherMapper;
 
     private final WindDirectionRepository windDirectionRepository;
 
-    public WeatherService(WeatherRepository weatherRepository, SessionsRepository sessionsRepository, WeatherMapper weatherMapper, WindDirectionRepository windDirectionRepository) {
+    public WeatherService(WeatherRepository weatherRepository, SessionRepository sessionRepository, WeatherMapper weatherMapper, WindDirectionRepository windDirectionRepository) {
         this.weatherRepository = weatherRepository;
-        this.sessionsRepository = sessionsRepository;
+        this.sessionRepository = sessionRepository;
         this.weatherMapper = weatherMapper;
         this.windDirectionRepository = windDirectionRepository;
     }
 
     public WeatherResponseDto create(WeatherDto weatherDto) {
-        var session = sessionsRepository.findById(weatherDto.sessionId())
+        var session = sessionRepository.findById(weatherDto.sessionId())
                 .orElseThrow(() -> new RuntimeException("Session not found"));
         var windDirection =  windDirectionRepository.findById(weatherDto.windDirectionId())
                 .orElseThrow(() -> new RuntimeException("Wind Direction not found"));

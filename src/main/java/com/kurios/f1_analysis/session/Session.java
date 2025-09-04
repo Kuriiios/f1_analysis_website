@@ -1,4 +1,4 @@
-package com.kurios.f1_analysis.sessions;
+package com.kurios.f1_analysis.session;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.kurios.f1_analysis.driver_team_assignment.DriverTeamAssignment;
@@ -10,7 +10,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Entity
-public class Sessions {
+public class Session {
     @Id
     @GeneratedValue
     @Column(name="session_id")
@@ -38,10 +38,10 @@ public class Sessions {
     )
     private List<DriverTeamAssignment> dtaList;
 
-    public Sessions() {
+    public Session() {
     }
 
-    public Sessions(EventRound eventRound, String sessionName, Date sessionDate) {
+    public Session(EventRound eventRound, String sessionName, Date sessionDate) {
         this.eventRound = eventRound;
         this.sessionName = sessionName;
         this.sessionDate = sessionDate;

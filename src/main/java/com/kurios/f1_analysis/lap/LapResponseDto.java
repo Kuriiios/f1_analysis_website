@@ -26,7 +26,7 @@ public record LapResponseDto(
         Integer lapStartTime,
         Date lapStartDate,
         Short position,
-        Boolean deleted,
+        Boolean isDeleted,
         Boolean isAccurate
 ) {
 }

@@ -13,7 +13,7 @@ public record CarDataResponseDto(
         Short speed,
         Short nGear,
         Short throttle,
-        Boolean brake,
+        Boolean isBraking,
         Float distance,
         Float differentialDistance,
         Float relativeDistance,

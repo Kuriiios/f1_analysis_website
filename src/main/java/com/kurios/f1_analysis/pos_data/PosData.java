@@ -33,12 +33,12 @@ public class PosData {
 
     private Short z;
 
-    private Boolean carOnTrack;
+    private Boolean isCarOnTrack;
 
     public PosData() {
     }
 
-    public PosData(Lap posDataLap, TrackStatus trackStatus, Date dateTime, Integer time, Integer sessionTime, Short x, Short y, Short z, Boolean carOnTrack) {
+    public PosData(Lap posDataLap, TrackStatus trackStatus, Date dateTime, Integer time, Integer sessionTime, Short x, Short y, Short z, Boolean isCarOnTrack) {
         this.posDataLap = posDataLap;
         this.trackStatus = trackStatus;
         this.dateTime = dateTime;
@@ -47,7 +47,7 @@ public class PosData {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.carOnTrack = carOnTrack;
+        this.isCarOnTrack = isCarOnTrack;
     }
 
     public Integer getId() {
@@ -123,10 +123,10 @@ public class PosData {
     }
 
     public Boolean getCarOnTrack() {
-        return carOnTrack;
+        return isCarOnTrack;
     }
 
     public void setCarOnTrack(Boolean carOnTrack) {
-        this.carOnTrack = carOnTrack;
+        isCarOnTrack = carOnTrack;
     }
 }
