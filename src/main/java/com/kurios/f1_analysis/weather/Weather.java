@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 public class Weather {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "weather_id")
     private Integer id;
 

@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class Session {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="session_id")
     private Integer id;
 

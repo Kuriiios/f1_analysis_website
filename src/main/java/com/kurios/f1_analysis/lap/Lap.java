@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 public class Lap {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "lap_id")
     private Integer id;
 
@@ -88,7 +88,10 @@ public class Lap {
     public Lap() {
     }
 
-    public Lap(Integer laptimeS, Short lapNumber, Short stint, Integer pitInTime, Integer pitOutTime, Integer sector1Time, Integer sector2Time, Integer sector3Time, Integer sector1SessionTime, Integer sector2SessionTime, Integer sector3SessionTime, Short speedI1, Short speedI2, Short speedFl, Short speedSt, Boolean isPersonalBest, Short tyreLife, Integer lapStartTime, Date lapStartDate, Short position, Boolean isDeleted, Boolean isAccurate) {
+    public Lap(Compound compound, DriverTeamAssignment driverTeamAssignment, TrackStatus trackStatus, Integer laptimeS, Short lapNumber, Short stint, Integer pitInTime, Integer pitOutTime, Integer sector1Time, Integer sector2Time, Integer sector3Time, Integer sector1SessionTime, Integer sector2SessionTime, Integer sector3SessionTime, Short speedI1, Short speedI2, Short speedFl, Short speedSt, Boolean isPersonalBest, Short tyreLife, Integer lapStartTime, Date lapStartDate, Short position, Boolean isDeleted, Boolean isAccurate) {
+        this.compound = compound;
+        this.driverTeamAssignment = driverTeamAssignment;
+        this.trackStatus = trackStatus;
         this.laptimeS = laptimeS;
         this.lapNumber = lapNumber;
         this.stint = stint;

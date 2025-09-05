@@ -1,23 +1,14 @@
-TRUNCATE TABLE wind_direction RESTART IDENTITY CASCADE;
-TRUNCATE TABLE track_status RESTART IDENTITY CASCADE;
-TRUNCATE TABLE compound RESTART IDENTITY CASCADE;
-TRUNCATE TABLE drs RESTART IDENTITY CASCADE;
-TRUNCATE TABLE event_round RESTART IDENTITY CASCADE;
-TRUNCATE TABLE sessions RESTART IDENTITY CASCADE;
-TRUNCATE TABLE driver RESTART IDENTITY CASCADE;
-TRUNCATE TABLE team RESTART IDENTITY CASCADE;
-TRUNCATE TABLE dta RESTART IDENTITY CASCADE;
-
-INSERT INTO event_round (event_round_id, year, round_number, country, location, event_name, event_date, sprint_event, soft, medium, hard)
-VALUES (1, 2025, 1, 'Australia', 'Melbourne', 'Australian Grand Prix', '2025-05-16T15:15:00Z', 'false', '5', '4', '3');
-
-INSERT INTO sessions (session_id, event_round_id, session_date, session_name) VALUES (1, 1, '2025-05-16T15:15:00Z', 'Race');
-
-INSERT INTO driver (driver_id, driver_number, driver_abbreviation, driver_name, driver_hex_color, country) VALUES (1, 16, 'LEC', 'Charles Leclerc', '#666999', 'MC');
-
-INSERT INTO team (team_id, team_name, team_hex_color) VALUES (1, 'Ferrari', '#999666');
-
-INSERT INTO dta(dta_id, session_id, driver_id, team_id) VALUES (1, 1,1,1);
+TRUNCATE TABLE
+    wind_direction,
+    track_status,
+    compound,
+    drs,
+    event_round,
+    session,
+    driver,
+    team,
+    dta
+RESTART IDENTITY CASCADE;
 
 INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (1, 'N');
 INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (2, 'NNE');
@@ -92,3 +83,10 @@ INSERT INTO driver (driver_number, driver_abbreviation, driver_name, driver_hex_
 INSERT INTO driver (driver_number, driver_abbreviation, driver_name, driver_hex_color, country) VALUES (87, 'BEA', 'Ollie Bearman', '#fff200', 'UK');
 INSERT INTO driver (driver_number, driver_abbreviation, driver_name, driver_hex_color, country) VALUES (4, 'NOR', 'Lando Norris', '#d2ff00', 'UK');
 INSERT INTO driver (driver_number, driver_abbreviation, driver_name, driver_hex_color, country) VALUES (81, 'PIA', 'Oscar Piastri', '#0e1f66', 'AU');
+
+INSERT INTO event_round (event_round_id, year, round_number, country, location, event_name, event_date, is_sprint_event, soft, medium, hard)
+VALUES (1, 2025, 1, 'Australia', 'Melbourne', 'Australian Grand Prix', '2025-05-16T15:15:00Z', 'false', '5', '4', '3');
+
+INSERT INTO session (session_id, event_round_id, session_date, session_name) VALUES (1, 1, '2025-05-16T15:15:00Z', 'Race');
+
+INSERT INTO dta(dta_id, session_id, driver_id, team_id) VALUES (1, 1,1,1);

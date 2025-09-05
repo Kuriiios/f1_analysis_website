@@ -33,7 +33,7 @@ public class LapMapper {
                 lapDto.lapStartTime(),
                 lapDto.lapStartDate(),
                 lapDto.position(),
-                lapDto.deleted(),
+                lapDto.isDeleted(),
                 lapDto.isAccurate()
         );
     }
