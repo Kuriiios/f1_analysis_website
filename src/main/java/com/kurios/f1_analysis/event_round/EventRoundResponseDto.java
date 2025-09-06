@@ -6,6 +6,6 @@ public record EventRoundResponseDto(
         Short year,
         Short roundNumber,
         Date eventDate,
-        Boolean sprintEvent
+        Boolean isSprintEvent
 ) {
 }

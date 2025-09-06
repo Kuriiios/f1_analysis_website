@@ -1,5 +1,6 @@
 package com.kurios.f1_analysis.team;
 
+import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,16 +17,24 @@ public class TeamService {
         this.teamMapper = teamMapper;
     }
 
-    public TeamDto create(TeamDto teamDto) {
+    public TeamResponseDto save(TeamDto teamDto) {
         var team = teamMapper.toTeam(teamDto);
-        teamRepository.save(team);
-        return teamDto;
+        var savedTeam = teamRepository.save(team);
+        var teamResponseDto = teamMapper.toTeamResponseDto(savedTeam);
+        return teamResponseDto;
     }
 
-    public List<TeamDto> findAll() {
+    public List<TeamResponseDto> findAll() {
         return teamRepository.findAll()
                 .stream()
-                .map(teamMapper::toTeamDto)
+                .map(teamMapper::toTeamResponseDto)
                 .collect(Collectors.toList());
+    }
+
+
+    public TeamResponseDto findById(Integer id) {
+        return teamRepository.findById(id)
+                .map(teamMapper::toTeamResponseDto)
+                .orElse(null);
     }
 }

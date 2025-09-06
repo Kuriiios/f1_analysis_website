@@ -11,6 +11,6 @@ public record PosDataResponseDto(
         Short x,
         Short y,
         Short z,
-        Boolean carOnTrack
+        Boolean isCarOnTrack
 ) {
 }

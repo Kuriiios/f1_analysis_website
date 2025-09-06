@@ -1,13 +1,13 @@
 package com.kurios.f1_analysis.weather;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/weather")
 public class WeatherController {
 
     private final WeatherService weatherService;
@@ -16,13 +16,18 @@ public class WeatherController {
         this.weatherService = weatherService;
     }
 
-    @PostMapping("/weather")
-    public WeatherResponseDto create(@RequestBody WeatherDto weatherDto) {
-        return this.weatherService.create(weatherDto);
+    @PostMapping("")
+    public WeatherResponseDto create(@Valid @RequestBody WeatherDto weatherDto) {
+        return this.weatherService.save(weatherDto);
     }
 
-    @GetMapping("/weather")
+    @GetMapping("")
     public List<WeatherResponseDto> findAll() {
         return this.weatherService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public WeatherResponseDto findById(@PathVariable Integer id) {
+        return weatherService.findById(id);
     }
 }

@@ -1,16 +1,12 @@
 package com.kurios.f1_analysis.lap;
 
-import com.kurios.f1_analysis.compound.Compound;
 import com.kurios.f1_analysis.compound.CompoundRepository;
-import com.kurios.f1_analysis.driver_team_assignment.DriverTeamAssignment;
 import com.kurios.f1_analysis.driver_team_assignment.DriverTeamAssignmentRepository;
-import com.kurios.f1_analysis.track_status.TrackStatus;
+import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
 import com.kurios.f1_analysis.track_status.TrackStatusRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class LapService {
@@ -33,13 +29,13 @@ public class LapService {
         this.trackStatusRepository = trackStatusRepository;
     }
 
-    public LapResponseDto create(LapDto lapDto) {
+    public LapResponseDto save(LapDto lapDto) {
         var dta = driverTeamAssignmentRepository.findById(lapDto.driverTeamAssignmentId())
                 .orElseThrow(() -> new RuntimeException("DriverTeamAssignment not found"));
         var compound = compoundRepository.findById(lapDto.compoundId())
-                .orElseThrow(() -> new RuntimeException("DriverTeamAssignment not found"));
+                .orElseThrow(() -> new RuntimeException("Compound not found"));
         var trackStatus = trackStatusRepository.findById(lapDto.trackStatusId())
-                .orElseThrow(() -> new RuntimeException("DriverTeamAssignment not found"));
+                .orElseThrow(() -> new RuntimeException("TrackStatus not found"));
         var lap = lapMapper.toLap(lapDto, dta, compound, trackStatus);
         lapRepository.save(lap);
         return  lapMapper.toLapResponseDto(lap);
@@ -50,5 +46,11 @@ public class LapService {
                 .stream()
                 .map(lapMapper::toLapResponseDto)
                 .toList();
+    }
+
+    public LapResponseDto findById(Integer id) {
+        return lapRepository.findById(id)
+                .map(lapMapper::toLapResponseDto)
+                .orElse(null);
     }
 }

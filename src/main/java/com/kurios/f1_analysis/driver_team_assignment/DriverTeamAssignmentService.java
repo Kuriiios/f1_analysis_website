@@ -1,6 +1,7 @@
 package com.kurios.f1_analysis.driver_team_assignment;
 
 import com.kurios.f1_analysis.driver.DriverRepository;
+import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
 import com.kurios.f1_analysis.session.SessionRepository;
 import com.kurios.f1_analysis.team.TeamRepository;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class DriverTeamAssignmentService {
 
     }
 
-    public DriverTeamAssignment create(DriverTeamAssignmentDto driverTeamAssignmentDto) {
+    public DriverTeamAssignment save(DriverTeamAssignmentDto driverTeamAssignmentDto) {
         var driverId = driverRepository.findById(driverTeamAssignmentDto.driverId())
                 .orElseThrow(() -> new RuntimeException("Driver not found"));
         var teamId = teamRepository.findById(driverTeamAssignmentDto.teamId())
@@ -44,5 +45,11 @@ public class DriverTeamAssignmentService {
                 .stream()
                 .map(driverTeamAssignmentMapper::toDriverTeamAssignmentResponseDto)
                 .collect(Collectors.toList());
+    }
+
+    public DriverTeamAssignmentResponseDto findById(Integer id) {
+        return driverTeamAssignmentRepository.findById(id)
+                .map(driverTeamAssignmentMapper::toDriverTeamAssignmentResponseDto)
+                .orElse(null);
     }
 }

@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 public class EventRoundMapper {
 
     public EventRound toEventRound(EventRoundDto eventRoundDto) {
+        if (eventRoundDto == null) {
+            throw new NullPointerException("eventRoundDto should not be null");
+        }
         var eventRound = new EventRound();
         eventRound.setYear(eventRoundDto.year());
         eventRound.setRoundNumber(eventRoundDto.roundNumber());
@@ -14,7 +17,7 @@ public class EventRoundMapper {
         eventRound.setLocation(eventRoundDto.location());
         eventRound.setEventName(eventRoundDto.eventName());
         eventRound.setEventDate(eventRoundDto.eventDate());
-        eventRound.setSprintEvent(eventRoundDto.sprintEvent());
+        eventRound.setSprintEvent(eventRoundDto.isSprintEvent());
         eventRound.setSoft(eventRoundDto.soft());
         eventRound.setMedium(eventRoundDto.medium());
         eventRound.setHard(eventRoundDto.hard());

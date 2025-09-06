@@ -24,7 +24,7 @@ public class PosDataService {
         this.trackStatusRepository = trackStatusRepository;
     }
 
-    public PosDataResponseDto create(PosDataDto posDataDto) {
+    public PosDataResponseDto save(PosDataDto posDataDto) {
         var lap = lapRepository.findById(posDataDto.lapId())
                 .orElseThrow(()-> new RuntimeException("Lap not found"));
         var trackStatus = trackStatusRepository.findById(posDataDto.trackStatusId())
@@ -39,5 +39,11 @@ public class PosDataService {
                 .stream()
                 .map(posDataMapper::toPosDataResponseDto)
                 .toList();
+    }
+
+    public PosDataResponseDto findById(Integer id) {
+        return posDataRepository.findById(id)
+                .map(posDataMapper::toPosDataResponseDto)
+                .orElse(null);
     }
 }

@@ -1,14 +1,16 @@
 package com.kurios.f1_analysis.weather;
 
 
+import jakarta.validation.constraints.*;
+
 public record WeatherDto(
-        Integer sessionId,
-        Integer windDirectionId,
+        @NotNull Integer sessionId,
+        @NotNull Integer windDirectionId,
         Short airTemp,
-        Short humidity,
-        Short pressure,
+        @Min(0) @Max(100) Short humidity,
+        @Positive Short pressure,
         Boolean rainfall,
         Short trackTemp,
-        Short windSpeed
+        @PositiveOrZero Short windSpeed
 ) {
 }

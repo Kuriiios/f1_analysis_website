@@ -1,13 +1,17 @@
 package com.kurios.f1_analysis.driver;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
+@RequestMapping("/driver")
 public class DriverController {
 
     private final DriverService driverService;
@@ -16,13 +20,34 @@ public class DriverController {
         this.driverService = driverService;
     }
 
-    @PostMapping("/driver")
-    public DriverResponseDto create(@RequestBody DriverDto driverDto) {
+    @PostMapping("")
+    public DriverResponseDto create(
+            @Valid @RequestBody DriverDto driverDto
+    ) {
         return driverService.create(driverDto);
     }
 
-    @GetMapping("/driver")
+    @GetMapping("")
     public List<DriverResponseDto> findAll() {
         return driverService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public DriverResponseDto findById(@PathVariable Integer id) {
+        return driverService.findById(id);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<?> handleMethodArgumentNotValidException(
+            MethodArgumentNotValidException e
+    ) {
+        var errors = new HashMap<String, String>();
+        e.getBindingResult().getAllErrors()
+                .forEach(error -> {
+                    var fieldName = ((FieldError) error).getField();
+                    var errorMessage = error.getDefaultMessage();
+                    errors.put(fieldName, errorMessage);
+                });
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }

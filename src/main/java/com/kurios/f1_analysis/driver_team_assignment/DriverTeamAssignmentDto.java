@@ -1,10 +1,11 @@
 package com.kurios.f1_analysis.driver_team_assignment;
 
+import jakarta.validation.constraints.NotNull;
+
 public record DriverTeamAssignmentDto(
-        Integer sessionId,
 
-        Integer driverId,
-
-        Integer teamId
+        @NotNull Integer sessionId,
+        @NotNull Integer driverId,
+        @NotNull Integer teamId
 ) {
 }

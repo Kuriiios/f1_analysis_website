@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SessionMapper {
 
-    public Session toSessions(SessionDto sessionDto, EventRound eventRound) {
+    public Session toSession(SessionDto sessionDto, EventRound eventRound) {
         var sessions = new Session();
         sessions.setSessionName(sessionDto.sessionName());
         sessions.setSessionDate(sessionDto.sessionDate());
@@ -15,7 +15,7 @@ public class SessionMapper {
         return sessions;
     }
 
-    public SessionResponseDto toSessionsResponseDto(Session sessions) {
+    public SessionResponseDto toSessionResponseDto(Session sessions) {
 
         return new SessionResponseDto(
                 sessions.getEventRound().getRoundNumber(),

@@ -1,13 +1,12 @@
 package com.kurios.f1_analysis.drs;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/drs")
 public class DrsController {
 
     private final DrsService drsService;
@@ -16,8 +15,14 @@ public class DrsController {
         this.drsService = drsService;
     }
 
-    @GetMapping("/drs")
+    @GetMapping("")
     public List<DrsResponseDto> findAll() {
         return drsService.findAll();
     }
+
+    @GetMapping("/{id}")
+    public DrsResponseDto findById(@PathVariable Integer id) {
+        return drsService.findById(id);
+    }
+
 }

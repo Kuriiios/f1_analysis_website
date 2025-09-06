@@ -1,5 +1,6 @@
 package com.kurios.f1_analysis.compound;
 
+import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -23,5 +24,11 @@ public class CompoundService {
                 .stream()
                 .map(compoundMapper::toCompoundResponseDto)
                 .collect(Collectors.toList());
+    }
+
+    public CompoundResponseDto findById(Integer id) {
+        return compoundRepository.findById(id)
+                .map(compoundMapper::toCompoundResponseDto)
+                .orElse(null);
     }
 }

@@ -1,7 +1,7 @@
 package com.kurios.f1_analysis.track_status;
 
+import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +23,12 @@ public class TrackStatusService {
                 .stream()
                 .map(trackStatusMapper::toTrackStatusResponseDto)
                 .collect(Collectors.toList());
+    }
+
+    public TrackStatusResponseDto findById(Integer id) {
+        return trackStatusRepository.findById(id)
+                .map(trackStatusMapper::toTrackStatusResponseDto)
+                .orElse(null);
     }
 
 }

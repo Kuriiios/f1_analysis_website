@@ -1,26 +1,24 @@
 package com.kurios.f1_analysis.car_data;
 
-import com.kurios.f1_analysis.drs.Drs;
-import com.kurios.f1_analysis.lap.Lap;
-import com.kurios.f1_analysis.track_status.TrackStatus;
+import jakarta.validation.constraints.*;
 
 import java.util.Date;
 
 public record CarDataDto(
-        Integer lapId,
-        Integer drsId,
+        @NotNull Integer lapId,
+        @Min(0) @Max(14) Integer drsId,
         Integer trackStatusId,
-        Date dateTime,
-        Integer time,
-        Integer sessionTime,
-        Short rpm,
-        Short speed,
-        Short nGear,
-        Short throttle,
+        @PastOrPresent Date dateTime,
+        @PositiveOrZero Integer time,
+        @PositiveOrZero Integer sessionTime,
+        @Min(0) @Max(15000) Short rpm,
+        @Min(0) @Max(399) Short speed,
+        @Min(0) @Max(8) Short nGear,
+        @Min(0) @Max(100) Short throttle,
         Boolean isBraking,
-        Float distance,
-        Float differentialDistance,
+        @PositiveOrZero Float distance,
+        @PositiveOrZero Float differentialDistance,
         Float relativeDistance,
-        Integer distanceDriverAhead
+        @PositiveOrZero Integer distanceDriverAhead
 ) {
 }

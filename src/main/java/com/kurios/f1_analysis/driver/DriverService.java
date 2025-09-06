@@ -1,5 +1,6 @@
 package com.kurios.f1_analysis.driver;
 
+import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,5 +29,11 @@ public class DriverService {
                 .stream()
                 .map(driverMapper::toDriverResponseDto)
                 .collect(Collectors.toList());
+    }
+
+    public DriverResponseDto findById(Integer id) {
+        return driverRepository.findById(id)
+                .map(driverMapper::toDriverResponseDto)
+                .orElse(null);
     }
 }

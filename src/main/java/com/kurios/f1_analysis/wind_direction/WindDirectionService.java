@@ -3,7 +3,6 @@ package com.kurios.f1_analysis.wind_direction;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class WindDirectionService {
@@ -21,5 +20,11 @@ public class WindDirectionService {
                 .stream()
                 .map(windDirectionMapper::toWindDirectionResponseDto)
                 .toList();
+    }
+
+    public WindDirectionResponseDto findById(Integer id) {
+        return windDirectionRepository.findById(id)
+                .map(windDirectionMapper::toWindDirectionResponseDto)
+                .orElse(null);
     }
 }

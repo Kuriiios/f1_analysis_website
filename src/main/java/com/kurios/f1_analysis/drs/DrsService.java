@@ -1,5 +1,6 @@
 package com.kurios.f1_analysis.drs;
 
+import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,5 +22,11 @@ public class DrsService {
                 .stream()
                 .map(drsMapper::toDrsResponseDto)
                 .toList();
+    }
+
+    public DrsResponseDto findById(Integer id) {
+        return drsRepository.findById(id)
+                .map(drsMapper::toDrsResponseDto)
+                .orElse(null);
     }
 }

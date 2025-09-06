@@ -17,17 +17,32 @@ public class EventRoundService {
         this.eventRoundMapper = eventRoundMapper;
     }
 
-    public EventRoundResponseDto create(EventRoundDto eventRoundDto) {
+    public EventRoundResponseDto save(
+            EventRoundDto eventRoundDto
+    ) {
         var eventRound = eventRoundMapper.toEventRound(eventRoundDto);
         var savedEventRound = eventRoundRepository.save(eventRound);
         var eventRoundResponseDto = eventRoundMapper.toEventRoundResponseDto(savedEventRound);
         return eventRoundResponseDto;
     }
 
-    public List<EventRoundResponseDto> findAll() {
+    public List<EventRoundResponseDto> findAll(
+    ) {
         return eventRoundRepository.findAll()
                 .stream()
                 .map(eventRoundMapper::toEventRoundResponseDto)
                 .collect(Collectors.toList());
+    }
+
+    public EventRoundResponseDto findById(Integer id) {
+        return eventRoundRepository.findById(id)
+                .map(eventRoundMapper::toEventRoundResponseDto)
+                .orElse(null);
+    }
+
+    public EventRoundResponseDto findAllByRoundNumber(Short roundNumber) {
+        return eventRoundRepository.findAllByRoundNumber(roundNumber)
+                .map(eventRoundMapper::toEventRoundResponseDto)
+                .orElse(null);
     }
 }

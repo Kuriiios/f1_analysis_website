@@ -1,6 +1,7 @@
 package com.kurios.f1_analysis.car_data;
 
 import com.kurios.f1_analysis.drs.DrsRepository;
+import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
 import com.kurios.f1_analysis.lap.LapRepository;
 import com.kurios.f1_analysis.track_status.TrackStatusRepository;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class CarDataService {
         this.trackStatusRepository = trackStatusRepository;
     }
 
-    public CarDataResponseDto create(CarDataDto carDataDto) {
+    public CarDataResponseDto save(CarDataDto carDataDto) {
         var lap = lapRepository.findById(carDataDto.lapId())
                 .orElseThrow(()-> new RuntimeException("Lap not found"));
         var drs = drsRepository.findById(carDataDto.drsId())
@@ -46,5 +47,11 @@ public class CarDataService {
                 .stream()
                 .map(carDataMapper::toCarDataResponseDto)
                 .toList();
+    }
+
+    public CarDataResponseDto findById(Integer id) {
+        return carDataRepository.findById(id)
+                .map(carDataMapper::toCarDataResponseDto)
+                .orElse(null);
     }
 }

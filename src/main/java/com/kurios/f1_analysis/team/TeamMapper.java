@@ -20,4 +20,12 @@ public class TeamMapper {
                 team.getTeamHexColor()
         );
     }
+
+    public TeamResponseDto toTeamResponseDto(Team team) {
+        return new TeamResponseDto(
+                team.getTeamName(),
+                team.getTeamAbbreviation(),
+                team.getTeamHexColor()
+        );
+    }
 }
