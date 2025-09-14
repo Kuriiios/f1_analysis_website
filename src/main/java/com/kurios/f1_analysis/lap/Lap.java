@@ -11,10 +11,13 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "lap", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"compound_id", "dta_id", "track_status_id", "laptime_s", "lap_number", "stint", "pit_in_time", "pit_out_time", "sector1_time", "sector2_time", "sector3_time", "sector1_session_time", "sector2_session_time", "sector3_session_time", "speed_i1", "speed_i2", "speed_fl", "speed_st", "is_personal_best", "tyre_life", "lap_start_time", "lap_start_date", "position", "is_deleted", "is_accurate"})
+})
 public class Lap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "lap_id")
+    @Column(name = "lap_id", unique=true)
     private Integer id;
 
     @OneToMany(

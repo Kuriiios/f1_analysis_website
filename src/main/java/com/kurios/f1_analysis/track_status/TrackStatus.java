@@ -8,9 +8,12 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "track_status", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"track-state"})
+})
 public class TrackStatus {
     @Id
-    @Column(name="track_status_id")
+    @Column(name="track_status_id", unique=true)
     private Integer id;
 
     @OneToMany(
@@ -37,8 +40,7 @@ public class TrackStatus {
     public TrackStatus() {
     }
 
-    public TrackStatus(Integer id, String trackState) {
-        this.id = id;
+    public TrackStatus(String trackState) {
         this.trackState = trackState;
     }
 

@@ -11,18 +11,13 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/event-round")
+@RequestMapping("/event-rounds")
 public class EventRoundController {
 
     private final EventRoundService eventRoundService;
 
     public EventRoundController(EventRoundService eventRoundService) {
         this.eventRoundService = eventRoundService;
-    }
-
-    @PostMapping("")
-    public EventRoundResponseDto create(@Valid @RequestBody EventRoundDto eventRoundDto) {
-        return eventRoundService.save(eventRoundDto);
     }
 
     @GetMapping("")
@@ -36,8 +31,14 @@ public class EventRoundController {
     }
 
     @GetMapping("/by-round/{roundNumber}")
-    public EventRoundResponseDto findAllByRoundNumber(@PathVariable Short roundNumber) {
+    public EventRoundResponseDto findByRoundNumber(@PathVariable Short roundNumber) {
         return eventRoundService.findAllByRoundNumber(roundNumber);
+    }
+
+    @PostMapping("/{year}")
+    public ResponseEntity<String> importSeason(@PathVariable Integer year) {
+        eventRoundService.saveRacesForSeason(year);
+        return ResponseEntity.ok().body("Succesfully imported data from fastF1 to database.");
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

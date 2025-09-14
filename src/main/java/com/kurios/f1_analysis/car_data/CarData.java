@@ -8,10 +8,13 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "car_data", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"lap_id", "drs_id", "track_status_id", "date_time", "time", "session_time", "rpm", "speed", "n_gear", "throttle", "is_braking", "distance", "differential_distance", "relative_distance", "distance_driver_ahead"})
+})
 public class CarData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="car_data_id")
+    @Column(name="car_data_id", unique=true)
     private Integer id;
 
     @ManyToOne()

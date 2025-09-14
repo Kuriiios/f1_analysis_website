@@ -1,11 +1,11 @@
 package com.kurios.f1_analysis.session;
 
-import java.sql.Date;
+import java.util.Date;
 
 public record SessionResponseDto(
         Short roundNumber,
 
-        String sessionName,
+        Integer sessionNameId,
 
         Date sessionDate
 

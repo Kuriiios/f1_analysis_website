@@ -1,6 +1,5 @@
 package com.kurios.f1_analysis.compound;
 
-import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

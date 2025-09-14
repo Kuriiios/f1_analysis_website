@@ -17,7 +17,7 @@ public class PosDataMapper {
                 posDataDto.x(),
                 posDataDto.y(),
                 posDataDto.z(),
-                posDataDto.carOnTrack()
+                posDataDto.isCarOnTrack()
         );
     }
 

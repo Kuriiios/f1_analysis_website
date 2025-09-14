@@ -52,4 +52,25 @@ public class DriverTeamAssignmentService {
                 .map(driverTeamAssignmentMapper::toDriverTeamAssignmentResponseDto)
                 .orElse(null);
     }
+
+    public List<DriverTeamAssignmentResponseDto> findAllBySessionId(Integer sessionId) {
+        return driverTeamAssignmentRepository.findAllBySessionId(sessionId)
+                .stream()
+                .map(driverTeamAssignmentMapper::toDriverTeamAssignmentResponseDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<DriverTeamAssignmentResponseDto> findAllByDriverId(Integer driverId) {
+        return driverTeamAssignmentRepository.findAllByDriverId(driverId)
+                .stream()
+                .map(driverTeamAssignmentMapper::toDriverTeamAssignmentResponseDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<DriverTeamAssignmentResponseDto> findAllByTeamId(Integer teamId) {
+        return driverTeamAssignmentRepository.findAllByTeamId(teamId)
+                .stream()
+                .map(driverTeamAssignmentMapper::toDriverTeamAssignmentResponseDto)
+                .collect(Collectors.toList());
+    }
 }

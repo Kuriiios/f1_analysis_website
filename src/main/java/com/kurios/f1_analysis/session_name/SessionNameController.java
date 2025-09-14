@@ -1,7 +1,5 @@
-package com.kurios.f1_analysis.lap;
+package com.kurios.f1_analysis.session_name;
 
-import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -12,40 +10,30 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/lap")
-public class LapController {
+@RequestMapping("/session-name")
+public class SessionNameController {
 
-    private LapService lapService;
+    private final SessionNameService sessionNameService;
 
-    public LapController(LapService lapService) {
-        this.lapService = lapService;
+    public SessionNameController(SessionNameService sessionNameService) {
+        this.sessionNameService = sessionNameService;
     }
 
-    @PostMapping("")
-    public LapResponseDto create(@Valid @RequestBody LapDto lapDto) {
-        return lapService.save(lapDto);
-    }
-
-    @GetMapping("")
-    public List<LapResponseDto> findAll() {
-        return lapService.findAll();
+    @GetMapping
+    public List<SessionNameResponseDto> findAll() {
+        return sessionNameService.findAll();
     }
 
     @GetMapping("/{id}")
-    public LapResponseDto findById(@PathVariable Integer id) {
-        return lapService.findById(id);
-    }
-
-    @GetMapping("/by-dta/{dtaId}")
-    public List<LapResponseDto> findByDtaId(@PathVariable Integer dtaId) {
-        return lapService.findAllByDtaId(dtaId);
+    public SessionNameResponseDto findById(@PathVariable Integer id) {
+        return sessionNameService.findById(id);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleMethodArgumentNotValidException(
             MethodArgumentNotValidException e
     ) {
-        var errors =  new HashMap<String, String>();
+        var errors = new HashMap<String, String>();
         e.getBindingResult().getAllErrors()
                 .forEach(error -> {
                     var fieldName = ((FieldError) error).getField();
@@ -54,4 +42,5 @@ public class LapController {
                 });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
 }

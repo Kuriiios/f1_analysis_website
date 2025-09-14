@@ -1,24 +1,24 @@
 package com.kurios.f1_analysis.weather;
 
 import com.kurios.f1_analysis.session.Session;
-import com.kurios.f1_analysis.wind_direction.WindDirection;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "weather", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"session_id", "wind_direction", "air_temp", "humidity", "pressure", "is_rainfall", "track_temp", "wind_speed"})
+})
 public class Weather {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "weather_id")
+    @Column (name = "weather_id", unique=true)
     private Integer id;
 
     @ManyToOne()
     @JoinColumn(name= "session_id")
     private Session weather;
 
-    @ManyToOne()
-    @JoinColumn(name= "wind_direction_id")
-        private WindDirection windDirection;
+    private Short windDirection;
 
     private Short airTemp;
 
@@ -35,7 +35,7 @@ public class Weather {
     public Weather() {
     }
 
-    public Weather(Session weather, WindDirection windDirection, Short airTemp, Short humidity, Short pressure, Boolean isRainfall, Short trackTemp, Short windSpeed) {
+    public Weather(Session weather, Short windDirection, Short airTemp, Short humidity, Short pressure, Boolean isRainfall, Short trackTemp, Short windSpeed) {
         this.weather = weather;
         this.windDirection = windDirection;
         this.airTemp = airTemp;
@@ -62,11 +62,11 @@ public class Weather {
         this.weather = weather;
     }
 
-    public WindDirection getWindDirection() {
+    public Short getWindDirection() {
         return windDirection;
     }
 
-    public void setWindDirection(WindDirection windDirection) {
+    public void setWindDirection(Short windDirection) {
         this.windDirection = windDirection;
     }
 

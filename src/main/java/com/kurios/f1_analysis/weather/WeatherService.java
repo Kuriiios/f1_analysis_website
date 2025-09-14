@@ -1,9 +1,11 @@
 package com.kurios.f1_analysis.weather;
 
-import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
+import com.kurios.f1_analysis.session.Session;
 import com.kurios.f1_analysis.session.SessionRepository;
-import com.kurios.f1_analysis.wind_direction.WindDirectionRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,27 +13,24 @@ import java.util.stream.Collectors;
 @Service
 public class WeatherService {
 
+    private RestTemplate restTemplate = new RestTemplate();
+
     private final WeatherRepository weatherRepository;
 
     private final SessionRepository sessionRepository;
 
     private final WeatherMapper weatherMapper;
 
-    private final WindDirectionRepository windDirectionRepository;
-
-    public WeatherService(WeatherRepository weatherRepository, SessionRepository sessionRepository, WeatherMapper weatherMapper, WindDirectionRepository windDirectionRepository) {
+    public WeatherService(WeatherRepository weatherRepository, SessionRepository sessionRepository, WeatherMapper weatherMapper) {
         this.weatherRepository = weatherRepository;
         this.sessionRepository = sessionRepository;
         this.weatherMapper = weatherMapper;
-        this.windDirectionRepository = windDirectionRepository;
     }
 
     public WeatherResponseDto save(WeatherDto weatherDto) {
         var session = sessionRepository.findById(weatherDto.sessionId())
                 .orElseThrow(() -> new RuntimeException("Session not found"));
-        var windDirection =  windDirectionRepository.findById(weatherDto.windDirectionId())
-                .orElseThrow(() -> new RuntimeException("Wind Direction not found"));
-        var weather = weatherMapper.toWeather(weatherDto, session, windDirection);
+        var weather = weatherMapper.toWeather(weatherDto, session);
         var savedWeather= weatherRepository.save(weather);
         var weatherResponseDto = weatherMapper.toWeatherResponseDto(weather);
         return weatherResponseDto;
@@ -49,6 +48,15 @@ public class WeatherService {
         return weatherRepository.findById(id)
                 .map(weatherMapper::toWeatherResponseDto)
                 .orElse(null);
+    }
+
+    @Transactional
+    public void saveWeathersForRoundNumber(Integer year, Integer roundNumber) {
+        String url = "http://127.0.0.1:8000/weathers/" + year + "/" + roundNumber;
+        ResponseEntity<WeatherDto[]> response =
+                restTemplate.getForEntity(url, WeatherDto[].class);
+
+        WeatherDto[] weatherDtos = response.getBody();
     }
 
 }

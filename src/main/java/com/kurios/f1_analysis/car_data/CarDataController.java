@@ -26,7 +26,7 @@ public class CarDataController {
         return carDataService.save(carDataDto);
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<CarDataResponseDto> findAll() {
         return carDataService.findAll();
     }
@@ -35,6 +35,11 @@ public class CarDataController {
     @GetMapping("/{id}")
     public CarDataResponseDto findById(@PathVariable Integer id) {
         return carDataService.findById(id);
+    }
+
+    @GetMapping("/by-lap/{lapId}")
+    public List<CarDataResponseDto> findAllByLapId(@PathVariable Integer lapId) {
+        return carDataService.findAllByLapId(lapId);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

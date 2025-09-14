@@ -3,17 +3,21 @@ package com.kurios.f1_analysis.session;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.kurios.f1_analysis.driver_team_assignment.DriverTeamAssignment;
 import com.kurios.f1_analysis.event_round.EventRound;
+import com.kurios.f1_analysis.session_name.SessionName;
 import com.kurios.f1_analysis.weather.Weather;
 import jakarta.persistence.*;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "session", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"event_round_id", "session_date", "session_name"})
+})
 public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="session_id")
+    @Column(name="session_id", unique=true)
     private Integer id;
 
     @ManyToOne()
@@ -21,8 +25,10 @@ public class Session {
     @JsonBackReference
     private EventRound eventRound;
 
-    @Column(length=20)
-    private String sessionName;
+    @ManyToOne()
+    @JoinColumn(name= "session_name_id")
+    @JsonBackReference
+    private SessionName sessionName;
 
     private Date sessionDate;
 
@@ -41,10 +47,10 @@ public class Session {
     public Session() {
     }
 
-    public Session(EventRound eventRound, String sessionName, Date sessionDate) {
+    public Session(EventRound eventRound, Date sessionDate, SessionName sessionName) {
         this.eventRound = eventRound;
-        this.sessionName = sessionName;
         this.sessionDate = sessionDate;
+        this.sessionName = sessionName;
     }
 
     public Integer getId() {
@@ -63,11 +69,11 @@ public class Session {
         this.eventRound = eventRound;
     }
 
-    public String getSessionName() {
+    public SessionName getSessionName() {
         return sessionName;
     }
 
-    public void setSessionName(String sessionName) {
+    public void setSessionName(SessionName sessionName) {
         this.sessionName = sessionName;
     }
 

@@ -9,12 +9,13 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "dta")
+@Table(name = "dta", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"session_id", "driver_id", "team_id"})
+})
 public class DriverTeamAssignment {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "dta_id")
+    @Column (name = "dta_id", unique=true)
     private Integer id;
 
     @ManyToOne()

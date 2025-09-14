@@ -1,16 +1,15 @@
 package com.kurios.f1_analysis.weather;
 
 import com.kurios.f1_analysis.session.Session;
-import com.kurios.f1_analysis.wind_direction.WindDirection;
 import org.springframework.stereotype.Service;
 
 @Service
 public class WeatherMapper {
 
-    public Weather toWeather(WeatherDto weatherDto, Session session, WindDirection windDirection) {
+    public Weather toWeather(WeatherDto weatherDto, Session session) {
         return new Weather(
                 session,
-                windDirection,
+                weatherDto.windDirection(),
                 weatherDto.airTemp(),
                 weatherDto.humidity(),
                 weatherDto.pressure(),
@@ -23,7 +22,7 @@ public class WeatherMapper {
     public WeatherResponseDto toWeatherResponseDto(Weather weather) {
         return new WeatherResponseDto(
                 weather.getWeather().getId(),
-                weather.getWindDirection().getId(),
+                weather.getWindDirection(),
                 weather.getAirTemp(),
                 weather.getHumidity(),
                 weather.getPressure(),

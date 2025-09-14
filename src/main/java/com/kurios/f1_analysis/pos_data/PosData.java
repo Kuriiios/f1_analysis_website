@@ -7,10 +7,13 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "pos_data", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"lap_id", "track_status_id", "date_time", "time", "session_time", "x", "y", "z", "is_car_on_track"})
+})
 public class PosData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="pos_data_id")
+    @Column(name="pos_data_id", unique=true)
     private Integer id;
 
     @ManyToOne()

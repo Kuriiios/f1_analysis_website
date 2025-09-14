@@ -6,10 +6,12 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-
+@Table(name = "drs", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"drs_id", "drs_state" })
+})
 public class Drs {
     @Id
-    @Column(name = "drs_id")
+    @Column(name = "drs_id", unique=true)
     private Integer id;
 
     @OneToMany(

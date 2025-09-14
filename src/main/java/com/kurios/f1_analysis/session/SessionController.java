@@ -1,6 +1,5 @@
 package com.kurios.f1_analysis.session;
 
-import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/session")
 public class SessionController {
 
     private final SessionService sessionService;
@@ -21,19 +19,27 @@ public class SessionController {
         this.sessionService = sessionService;
     }
 
-    @PostMapping("")
-    public SessionResponseDto create(@Valid @RequestBody SessionDto sessionDto) {
-        return this.sessionService.save(sessionDto);
-    }
-
-    @GetMapping("")
+    @GetMapping("/sessions")
     public List<SessionResponseDto> findAll() {
         return sessionService.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/sessions/{id}")
     public SessionResponseDto findById(@PathVariable Integer id) {
         return sessionService.findById(id);
+    }
+
+    @PostMapping("/sessions/{year}")
+    public ResponseEntity<String> importAllSessions(@PathVariable Integer year) {
+        sessionService.saveAllSessions(year);
+        return ResponseEntity.ok().body("Succesfully imported all data from fastF1 to database.");
+    }
+
+    @PostMapping("/session/{year}/{roundNumber}")
+    public ResponseEntity<String> importSession(@PathVariable Integer year,
+                                                 @PathVariable Short roundNumber) {
+        sessionService.saveSessionForRoundNumber(year, roundNumber);
+        return ResponseEntity.ok().body("Succesfully imported data from fastF1 to database.");
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

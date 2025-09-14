@@ -8,11 +8,14 @@ import java.util.Date;
 import java.util.List;
 
 @Entity()
+@Table(name = "event_round", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"year", "round_number", "country", "location", "event_name", "event_date", "is_sprint_event", "soft", "medium", "hard"})
+})
 public class EventRound {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "event_round_id")
+    @Column(name= "event_round_id", unique=true)
     private Integer id;
 
     @OneToMany(
@@ -24,7 +27,6 @@ public class EventRound {
 
     private Short year;
 
-    @Column(unique = true)
     private Short roundNumber;
 
     @Column(length = 30)
@@ -33,7 +35,7 @@ public class EventRound {
     @Column(length = 30)
     private String location;
 
-    @Column(length = 50)
+    @Column(length = 100)
     private String eventName;
 
     @Column(unique = true)

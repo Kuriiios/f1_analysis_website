@@ -53,4 +53,11 @@ public class LapService {
                 .map(lapMapper::toLapResponseDto)
                 .orElse(null);
     }
+
+    public List<LapResponseDto> findAllByDtaId(Integer dtaId) {
+        return lapRepository.findAllByDriverTeamAssignment_Id(dtaId)
+                .stream()
+                .map(lapMapper::toLapResponseDto)
+                .toList();
+    }
 }

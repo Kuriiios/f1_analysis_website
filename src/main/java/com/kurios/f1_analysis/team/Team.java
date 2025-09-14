@@ -6,10 +6,13 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "team", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"team_name", "team_abbreviation", "team_hex_color"})
+})
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "team_id")
+    @Column (name = "team_id", unique=true)
     private Integer id;
 
     @Column(length = 30, unique = true)

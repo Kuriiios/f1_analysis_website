@@ -6,11 +6,13 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "driver", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"driver_number", "driver_abbreviation", "driver_name", "driver_hex_color", "country"})
+})
 public class Driver {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "driver_id")
+    @Column(name = "driver_id", unique=true)
     private Integer id;
 
     @OneToMany(

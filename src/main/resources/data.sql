@@ -1,32 +1,4 @@
-TRUNCATE TABLE
-    wind_direction,
-    track_status,
-    compound,
-    drs,
-    event_round,
-    session,
-    driver,
-    team,
-    dta
-RESTART IDENTITY CASCADE;
-
-INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (1, 'N');
-INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (2, 'NNE');
-INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (3, 'NE');
-INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (4, 'ENE');
-INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (5, 'E');
-INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (6, 'ESE');
-INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (7, 'SE');
-INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (8, 'SSE');
-INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (9, 'S');
-INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (10, 'SSW');
-INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (11, 'SW');
-INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (12, 'WSW');
-INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (13, 'W');
-INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (14, 'WNW');
-INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (15, 'NW');
-INSERT INTO wind_direction (wind_direction_id, cardinal_direction) VALUES (16, 'NNW');
-
+INSERT INTO track_status (track_status_id, track_state) VALUES (0, 'Unknown');
 INSERT INTO track_status (track_status_id, track_state) VALUES (1, 'TrackClear');
 INSERT INTO track_status (track_status_id, track_state) VALUES (2, 'Yellow flag');
 INSERT INTO track_status (track_status_id, track_state) VALUES (3, 'Unknown');
@@ -44,12 +16,20 @@ INSERT INTO compound (compound_id, compound_name) VALUES (6, 'Unknown');
 
 INSERT INTO drs (drs_id, drs_state) VALUES (0, 'Off');
 INSERT INTO drs (drs_id, drs_state) VALUES (1, 'Off');
-INSERT INTO drs (drs_id, drs_state) VALUES (2, 'Unknowned');
-INSERT INTO drs (drs_id, drs_state) VALUES (3, 'Unknowned');
+INSERT INTO drs (drs_id, drs_state) VALUES (2, 'Unknown');
+INSERT INTO drs (drs_id, drs_state) VALUES (3, 'Unknown');
 INSERT INTO drs (drs_id, drs_state) VALUES (8, 'Detected');
 INSERT INTO drs (drs_id, drs_state) VALUES (10, 'On');
 INSERT INTO drs (drs_id, drs_state) VALUES (12, 'On');
 INSERT INTO drs (drs_id, drs_state) VALUES (14, 'On');
+
+INSERT INTO session_name (session_name_id, session_name) VALUES (1, 'Practice 1');
+INSERT INTO session_name (session_name_id, session_name) VALUES (2, 'Practice 2');
+INSERT INTO session_name (session_name_id, session_name) VALUES (3, 'Practice 3');
+INSERT INTO session_name (session_name_id, session_name) VALUES (4, 'Sprint Qualifying');
+INSERT INTO session_name (session_name_id, session_name) VALUES (5, 'Sprint Race');
+INSERT INTO session_name (session_name_id, session_name) VALUES (6, 'Qualifying');
+INSERT INTO session_name (session_name_id, session_name) VALUES (7, 'Race');
 
 INSERT INTO team (team_name, team_abbreviation, team_hex_color) VALUES ('Ferrari', 'FER', '#e80020');
 INSERT INTO team (team_name, team_abbreviation, team_hex_color) VALUES ('McLaren', 'MCL', '#ff8000');
@@ -83,10 +63,3 @@ INSERT INTO driver (driver_number, driver_abbreviation, driver_name, driver_hex_
 INSERT INTO driver (driver_number, driver_abbreviation, driver_name, driver_hex_color, country) VALUES (87, 'BEA', 'Ollie Bearman', '#fff200', 'UK');
 INSERT INTO driver (driver_number, driver_abbreviation, driver_name, driver_hex_color, country) VALUES (4, 'NOR', 'Lando Norris', '#d2ff00', 'UK');
 INSERT INTO driver (driver_number, driver_abbreviation, driver_name, driver_hex_color, country) VALUES (81, 'PIA', 'Oscar Piastri', '#0e1f66', 'AU');
-
-INSERT INTO event_round (event_round_id, year, round_number, country, location, event_name, event_date, is_sprint_event, soft, medium, hard)
-VALUES (1, 2025, 1, 'Australia', 'Melbourne', 'Australian Grand Prix', '2025-05-16T15:15:00Z', 'false', '5', '4', '3');
-
-INSERT INTO session (session_id, event_round_id, session_date, session_name) VALUES (1, 1, '2025-05-16T15:15:00Z', 'Race');
-
-INSERT INTO dta(dta_id, session_id, driver_id, team_id) VALUES (1, 1,1,1);

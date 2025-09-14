@@ -1,6 +1,5 @@
 package com.kurios.f1_analysis.driver_team_assignment;
 
-import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +33,21 @@ public class DriverTeamAssignmentController {
     @GetMapping("/{id}")
     public DriverTeamAssignmentResponseDto findById(@PathVariable Integer id) {
         return driverTeamAssignmentService.findById(id);
+    }
+
+    @GetMapping("/by-session/{sessionId}")
+    public List<DriverTeamAssignmentResponseDto> findBySessionId(@PathVariable Integer sessionId) {
+        return driverTeamAssignmentService.findAllBySessionId(sessionId);
+    }
+
+    @GetMapping("/by-driver/{driverId}")
+    public List<DriverTeamAssignmentResponseDto> findByDriverId(@PathVariable Integer driverId) {
+        return driverTeamAssignmentService.findAllByDriverId(driverId);
+    }
+
+    @GetMapping("/by-team/{teamId}")
+    public List<DriverTeamAssignmentResponseDto> findByTeamId(@PathVariable Integer teamId) {
+        return driverTeamAssignmentService.findAllByTeamId(teamId);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

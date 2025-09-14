@@ -54,4 +54,11 @@ public class CarDataService {
                 .map(carDataMapper::toCarDataResponseDto)
                 .orElse(null);
     }
+
+    public List<CarDataResponseDto> findAllByLapId(Integer lapId) {
+        return carDataRepository.findAllByCarDataLap_Id(lapId)
+                .stream()
+                .map(carDataMapper::toCarDataResponseDto)
+                .toList();
+    }
 }

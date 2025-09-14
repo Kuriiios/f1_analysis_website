@@ -5,7 +5,7 @@ import jakarta.validation.constraints.*;
 
 public record WeatherDto(
         @NotNull Integer sessionId,
-        @NotNull Integer windDirectionId,
+        Short windDirection,
         Short airTemp,
         @Min(0) @Max(100) Short humidity,
         @Positive Short pressure,
