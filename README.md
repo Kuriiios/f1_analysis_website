@@ -16,18 +16,21 @@ While you are welcome to explore and test the existing features, please be aware
 
 Prerequisites
     
-    Java 21+ (JDK)
+    **Java 21+ (JDK):** Required to run the application.
     
-    Spring Boot 3+
+    **Spring Boot 3+:** The core framework (handled by Maven).
     
-    Maven
+    **Maven:** To manage dependencies and build the project.
     
-    A PostgreSQL/H2 Database (for persistence and mock data)
+    **Database:** PostgreSQL
 
 ## ⚙️ Architecture and Logic (Spring Boot)
 
     The application adheres to a clean, layered Spring Boot architecture to ensure maintainability and testability.
+    
+<img width="2565" height="1539" alt="Untitled" src="https://github.com/user-attachments/assets/816eaa2a-d4cd-46a7-a517-cce8562bc5b7" />
 
+    
 ## Data Model / Entities
 
 The following core entities have been modeled, providing comprehensive data coverage for F1 sessions:
@@ -42,11 +45,11 @@ The following core entities have been modeled, providing comprehensive data cove
 
 ## Key Java Functionality
     
-    Data Ingestion Status: Data ingestion logic is currently under active development to load and normalize raw F1 data into the PostgreSQL/H2 database model.
+    Data Ingestion/Source: Data ingestion logic is currently under development to load and normalize raw F1 data. (Note: This API is currently designed to fetch data from an external F1 API or a local file source.)
 
 ## Data Processing Services:
 
-    Pace Calculation: Implements core business logic for pace comparison, normalizing lap times based on track conditions, fuel load, and tire degradation.
+    Pace Normalization Service: Implements advanced pace comparison logic by normalizing lap times based on key variables: fuel load correction (estimated), tire compound, and degradation models.
     
     Data Transformation: Handles conversion of raw F1 data (intended to be fetched from an external source) into structured DTOs (Data Transfer Objects) for API responses.
     
@@ -58,10 +61,12 @@ The following core entities have been modeled, providing comprehensive data cove
 
 ## Time Formatting:
     
-    Utility classes ensure all time values are converted and returned in the standard M:SS.mmm format, ready for frontend display.
+    API Response Formatting: Utility classes ensure all timing data is consistently returned in the M:SS.mmm format, optimized for direct rendering by the frontend dashboard.
 
 ## 👨‍💻 Author
 
 Cyril Leconte 📍 Créteil, France
+
 📧 cyril.leconte@proton.me
-🔗 LinkedIn | GitHub
+
+🔗 [LinkedIn](https://www.linkedin.com/in/cyril-leconte/) | [Kaggle](https://www.kaggle.com/cyrilleconte)
