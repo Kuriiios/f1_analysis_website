@@ -5,9 +5,9 @@ import jakarta.validation.constraints.*;
 import java.util.Date;
 
 public record CarDataDto(
-        @NotNull Integer lapId,
+        @NotNull Integer dtaId,
         @Min(0) @Max(14) Integer drsId,
-        Integer trackStatusId,
+        Integer trackStatus,
         @PastOrPresent Date dateTime,
         @PositiveOrZero Integer time,
         @PositiveOrZero Integer sessionTime,

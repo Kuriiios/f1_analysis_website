@@ -1,9 +1,7 @@
 package com.kurios.f1_analysis.lap;
 
 import com.kurios.f1_analysis.compound.CompoundRepository;
-import com.kurios.f1_analysis.driver_team_assignment.DriverTeamAssignmentRepository;
-import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
-import com.kurios.f1_analysis.track_status.TrackStatusRepository;
+import com.kurios.f1_analysis.dta.DtaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,28 +13,23 @@ public class LapService {
 
     private final LapRepository lapRepository;
 
-    private final DriverTeamAssignmentRepository driverTeamAssignmentRepository;
+    private final DtaRepository dtaRepository;
 
     private final CompoundRepository compoundRepository;
 
-    private final TrackStatusRepository trackStatusRepository;
-
-    public LapService(LapMapper lapMapper, LapRepository lapRepository, DriverTeamAssignmentRepository driverTeamAssignmentRepository, CompoundRepository compoundRepository, TrackStatusRepository trackStatusRepository) {
+    public LapService(LapMapper lapMapper, LapRepository lapRepository, DtaRepository dtaRepository, CompoundRepository compoundRepository) {
         this.lapMapper = lapMapper;
         this.lapRepository = lapRepository;
-        this.driverTeamAssignmentRepository = driverTeamAssignmentRepository;
+        this.dtaRepository = dtaRepository;
         this.compoundRepository = compoundRepository;
-        this.trackStatusRepository = trackStatusRepository;
     }
 
     public LapResponseDto save(LapDto lapDto) {
-        var dta = driverTeamAssignmentRepository.findById(lapDto.driverTeamAssignmentId())
+        var dta = dtaRepository.findById(lapDto.driverTeamAssignmentId())
                 .orElseThrow(() -> new RuntimeException("DriverTeamAssignment not found"));
         var compound = compoundRepository.findById(lapDto.compoundId())
                 .orElseThrow(() -> new RuntimeException("Compound not found"));
-        var trackStatus = trackStatusRepository.findById(lapDto.trackStatusId())
-                .orElseThrow(() -> new RuntimeException("TrackStatus not found"));
-        var lap = lapMapper.toLap(lapDto, dta, compound, trackStatus);
+        var lap = lapMapper.toLap(lapDto, dta, compound);
         lapRepository.save(lap);
         return  lapMapper.toLapResponseDto(lap);
     }
@@ -55,7 +48,7 @@ public class LapService {
     }
 
     public List<LapResponseDto> findAllByDtaId(Integer dtaId) {
-        return lapRepository.findAllByDriverTeamAssignment_Id(dtaId)
+        return lapRepository.findAllByDta_Id(dtaId)
                 .stream()
                 .map(lapMapper::toLapResponseDto)
                 .toList();

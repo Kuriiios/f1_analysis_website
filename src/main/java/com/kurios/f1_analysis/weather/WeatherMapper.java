@@ -1,14 +1,15 @@
 package com.kurios.f1_analysis.weather;
 
-import com.kurios.f1_analysis.session.Session;
+import com.kurios.f1_analysis.event_session.EventSession;
 import org.springframework.stereotype.Service;
 
 @Service
 public class WeatherMapper {
 
-    public Weather toWeather(WeatherDto weatherDto, Session session) {
+    public Weather toWeather(WeatherDto weatherDto, EventSession eventSession) {
         return new Weather(
-                session,
+                eventSession,
+                weatherDto.time(),
                 weatherDto.windDirection(),
                 weatherDto.airTemp(),
                 weatherDto.humidity(),
@@ -22,6 +23,7 @@ public class WeatherMapper {
     public WeatherResponseDto toWeatherResponseDto(Weather weather) {
         return new WeatherResponseDto(
                 weather.getWeather().getId(),
+                weather.getTime(),
                 weather.getWindDirection(),
                 weather.getAirTemp(),
                 weather.getHumidity(),

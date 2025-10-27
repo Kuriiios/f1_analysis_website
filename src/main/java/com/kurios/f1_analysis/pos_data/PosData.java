@@ -1,14 +1,13 @@
 package com.kurios.f1_analysis.pos_data;
 
-import com.kurios.f1_analysis.lap.Lap;
-import com.kurios.f1_analysis.track_status.TrackStatus;
+import com.kurios.f1_analysis.dta.Dta;
 import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "pos_data", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"lap_id", "track_status_id", "date_time", "time", "session_time", "x", "y", "z", "is_car_on_track"})
+        @UniqueConstraint(columnNames = {"dta_id", "track_status", "date_time", "time", "session_time", "x", "y", "z", "is_car_on_track"})
 })
 public class PosData {
     @Id
@@ -17,12 +16,10 @@ public class PosData {
     private Integer id;
 
     @ManyToOne()
-    @JoinColumn(name= "lap_id")
-    private Lap posDataLap;
+    @JoinColumn(name= "dta_id", nullable = true)
+    private Dta posDataDta;
 
-    @ManyToOne()
-    @JoinColumn(name= "track_status_id")
-    private TrackStatus trackStatus;
+    private Integer trackStatus;
 
     private Date dateTime;
 
@@ -41,8 +38,8 @@ public class PosData {
     public PosData() {
     }
 
-    public PosData(Lap posDataLap, TrackStatus trackStatus, Date dateTime, Integer time, Integer sessionTime, Short x, Short y, Short z, Boolean isCarOnTrack) {
-        this.posDataLap = posDataLap;
+    public PosData(Dta posDataDta, Integer trackStatus, Date dateTime, Integer time, Integer sessionTime, Short x, Short y, Short z, Boolean isCarOnTrack) {
+        this.posDataDta = posDataDta;
         this.trackStatus = trackStatus;
         this.dateTime = dateTime;
         this.time = time;
@@ -61,19 +58,19 @@ public class PosData {
         this.id = id;
     }
 
-    public Lap getPosDataLap() {
-        return posDataLap;
+    public Dta getPosDataDta() {
+        return posDataDta;
     }
 
-    public void setPosDataLap(Lap posDataLap) {
-        this.posDataLap = posDataLap;
+    public void setPosDataDta(Dta posDataDta) {
+        this.posDataDta = posDataDta;
     }
 
-    public TrackStatus getTrackStatus() {
+    public Integer getTrackStatus() {
         return trackStatus;
     }
 
-    public void setTrackStatus(TrackStatus trackStatus) {
+    public void setTrackStatus(Integer trackStatus) {
         this.trackStatus = trackStatus;
     }
 

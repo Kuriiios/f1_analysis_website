@@ -1,24 +1,24 @@
-package com.kurios.f1_analysis.session;
+package com.kurios.f1_analysis.event_session;
 
 import com.kurios.f1_analysis.event_round.EventRound;
 import com.kurios.f1_analysis.session_name.SessionName;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SessionMapper {
+public class EventSessionMapper {
 
-    public Session toSession(SessionDto sessionDto, EventRound eventRound, SessionName sessionName) {
-        var sessions = new Session();
+    public EventSession toSession(EventSessionDto eventSessionDto, EventRound eventRound, SessionName sessionName) {
+        var sessions = new EventSession();
         sessions.setSessionName(sessionName);
-        sessions.setSessionDate(sessionDto.sessionDate());
+        sessions.setSessionDate(eventSessionDto.sessionDate());
         sessions.setEventRound(eventRound);
 
         return sessions;
     }
 
-    public SessionResponseDto toSessionResponseDto(Session sessions) {
+    public EventSessionResponseDto toSessionResponseDto(EventSession sessions) {
 
-        return new SessionResponseDto(
+        return new EventSessionResponseDto(
                 sessions.getEventRound().getRoundNumber(),
                 sessions.getSessionName().getId(),
                 sessions.getSessionDate()

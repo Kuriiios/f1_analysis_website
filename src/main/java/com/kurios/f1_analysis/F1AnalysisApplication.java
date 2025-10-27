@@ -2,8 +2,10 @@ package com.kurios.f1_analysis;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.kurios.f1_analysis")
+@EntityScan(basePackages = "com.kurios.f1_analysis")
 public class F1AnalysisApplication {
 
 	public static void main(String[] args) {

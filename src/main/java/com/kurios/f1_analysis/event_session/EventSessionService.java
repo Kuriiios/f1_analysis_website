@@ -1,4 +1,4 @@
-package com.kurios.f1_analysis.session;
+package com.kurios.f1_analysis.event_session;
 
 import com.kurios.f1_analysis.event_round.EventRound;
 import com.kurios.f1_analysis.event_round.EventRoundRepository;
@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -17,21 +16,21 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class SessionService {
+public class EventSessionService {
 
     private final SessionNameRepository sessionNameRepository;
     private RestTemplate restTemplate = new RestTemplate();
 
-    private final SessionRepository sessionRepository;
+    private final EventSessionRepository eventSessionRepository;
 
-    private final SessionMapper sessionMapper;
+    private final EventSessionMapper eventSessionMapper;
 
     private final EventRoundRepository eventRoundRepository;
 
 
-    public SessionService(SessionRepository sessionRepository, SessionMapper sessionMapper, EventRoundRepository eventRoundRepository, SessionNameRepository sessionNameRepository) {
-        this.sessionRepository = sessionRepository;
-        this.sessionMapper = sessionMapper;
+    public EventSessionService(EventSessionRepository eventSessionRepository, EventSessionMapper eventSessionMapper, EventRoundRepository eventRoundRepository, SessionNameRepository sessionNameRepository) {
+        this.eventSessionRepository = eventSessionRepository;
+        this.eventSessionMapper = eventSessionMapper;
         this.eventRoundRepository = eventRoundRepository;
         this.sessionNameRepository = sessionNameRepository;
     }
@@ -40,31 +39,31 @@ public class SessionService {
     @Transactional
     public void saveAllSessions(Integer year) {
         String url = "http://127.0.0.1:8000/sessions/" + year;
-        ResponseEntity<SessionDto[]> response =
-                restTemplate.getForEntity(url, SessionDto[].class);
+        ResponseEntity<EventSessionDto[]> response =
+                restTemplate.getForEntity(url, EventSessionDto[].class);
 
-        SessionDto[] sessions = response.getBody();
+        EventSessionDto[] sessions = response.getBody();
 
         Map<Integer, EventRound> eventRoundCache = new HashMap<>();
 
 
-        for  (SessionDto sessionDto : sessions) {
-            Short roundNumber = sessionDto.roundNumber();
+        for  (EventSessionDto eventSessionDto : sessions) {
+            Short roundNumber = eventSessionDto.roundNumber();
             EventRound eventRoundEntity = eventRoundRepository.findAllByRoundNumber(roundNumber)
                     .orElseThrow(() -> new RuntimeException("Event Round not found for round " + roundNumber));
-            Date dateTime = sessionDto.sessionDate();
-            SessionName sessionName = sessionNameRepository.getSessionNameById(sessionDto.sessionNameId());
+            Date dateTime = eventSessionDto.sessionDate();
+            SessionName sessionName = sessionNameRepository.getSessionNameById(eventSessionDto.sessionNameId());
 
-            boolean exists = sessionRepository.existsByEventRoundAndSessionNameAndSessionDate(
+            boolean exists = eventSessionRepository.existsByEventRoundAndSessionNameAndSessionDate(
                     eventRoundEntity, sessionName, dateTime);
 
             if (!exists) {
-                Session sessionEntity = new Session(
+                EventSession eventSessionEntity = new EventSession(
                         eventRoundEntity,
                         dateTime,
                         sessionName
                 );
-                sessionRepository.save(sessionEntity);
+                eventSessionRepository.save(eventSessionEntity);
             }
         }
     }
@@ -72,42 +71,42 @@ public class SessionService {
     @Transactional
     public void saveSessionForRoundNumber(Integer year, Short roundNumber) {
         String url = "http://127.0.0.1:8000/sessions/" + year + "/" + roundNumber;
-        ResponseEntity<SessionDto[]> response =
-                restTemplate.getForEntity(url, SessionDto[].class);
+        ResponseEntity<EventSessionDto[]> response =
+                restTemplate.getForEntity(url, EventSessionDto[].class);
 
-        SessionDto[] sessions = response.getBody();
+        EventSessionDto[] sessions = response.getBody();
         EventRound eventRoundEntity = eventRoundRepository.findAllByRoundNumber(roundNumber)
                 .orElseThrow(() -> new RuntimeException("Event Round not found for round " + roundNumber));
 
-        for  (SessionDto sessionDto : sessions) {
-            Date dateTime = sessionDto.sessionDate();
-            SessionName sessionName = sessionNameRepository.getSessionNameById(sessionDto.sessionNameId());
+        for  (EventSessionDto eventSessionDto : sessions) {
+            Date dateTime = eventSessionDto.sessionDate();
+            SessionName sessionName = sessionNameRepository.getSessionNameById(eventSessionDto.sessionNameId());
 
-            boolean exists = sessionRepository.existsByEventRoundAndSessionNameAndSessionDate(
+            boolean exists = eventSessionRepository.existsByEventRoundAndSessionNameAndSessionDate(
                     eventRoundEntity, sessionName, dateTime);
 
             if (!exists) {
-                Session sessionEntity = new Session(
+                EventSession eventSessionEntity = new EventSession(
                         eventRoundEntity,
                         dateTime,
                         sessionName
                 );
-                sessionRepository.save(sessionEntity);
+                eventSessionRepository.save(eventSessionEntity);
             }
         }
     }
 
-    public List<SessionResponseDto> findAll() {
-        return sessionRepository.findAll()
+    public List<EventSessionResponseDto> findAll() {
+        return eventSessionRepository.findAll()
                 .stream()
-                .map(sessionMapper::toSessionResponseDto)
+                .map(eventSessionMapper::toSessionResponseDto)
                 .collect(Collectors.toList()
                 );
     }
 
-    public SessionResponseDto findById(Integer id) {
-        return sessionRepository.findById(id)
-                .map(sessionMapper::toSessionResponseDto)
+    public EventSessionResponseDto findById(Integer id) {
+        return eventSessionRepository.findById(id)
+                .map(eventSessionMapper::toSessionResponseDto)
                 .orElse(null);
     }
 }

@@ -1,19 +1,18 @@
 package com.kurios.f1_analysis.lap;
 
 import com.kurios.f1_analysis.compound.Compound;
-import com.kurios.f1_analysis.driver_team_assignment.DriverTeamAssignment;
-import com.kurios.f1_analysis.track_status.TrackStatus;
+import com.kurios.f1_analysis.dta.Dta;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LapMapper {
 
-    public Lap toLap(LapDto lapDto, DriverTeamAssignment dta, Compound compound, TrackStatus trackStatus) {
+    public Lap toLap(LapDto lapDto, Dta dta, Compound compound) {
         return new Lap(
                 compound,
                 dta,
-                trackStatus,
-                lapDto.laptimeS(),
+                lapDto.trackStatus(),
+                lapDto.laptimeMs(),
                 lapDto.lapNumber(),
                 lapDto.stint(),
                 lapDto.pitInTime(),
@@ -41,9 +40,9 @@ public class LapMapper {
     public LapResponseDto toLapResponseDto(Lap lap) {
         return new LapResponseDto(
                 lap.getCompound().getId(),
-                lap.getDriverTeamAssignment().getId(),
-                lap.getTrackStatus().getId(),
-                lap.getLaptimeS(),
+                lap.getDta().getId(),
+                lap.getTrackStatus(),
+                lap.getLaptimeMs(),
                 lap.getLapNumber(),
                 lap.getStint(),
                 lap.getPitInTime(),

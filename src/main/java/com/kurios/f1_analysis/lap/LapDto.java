@@ -7,8 +7,8 @@ import java.util.Date;
 public record LapDto(
         @NotNull @Min(1) @Max(6) Integer compoundId,
         @NotNull(message = "Lap should be related to a dta object so I can be linked to a driver, a team and a session")  Integer driverTeamAssignmentId,
-        Integer trackStatusId,
-        @NotNull @PositiveOrZero Integer laptimeS,
+        Integer trackStatus,
+        @NotNull @PositiveOrZero Integer laptimeMs,
         @PositiveOrZero Short lapNumber,
         @PositiveOrZero Short stint,
         @PositiveOrZero Integer pitInTime,

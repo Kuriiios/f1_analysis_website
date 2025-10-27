@@ -1,18 +1,14 @@
 package com.kurios.f1_analysis.lap;
 
-import com.kurios.f1_analysis.car_data.CarData;
 import com.kurios.f1_analysis.compound.Compound;
-import com.kurios.f1_analysis.driver_team_assignment.DriverTeamAssignment;
-import com.kurios.f1_analysis.pos_data.PosData;
-import com.kurios.f1_analysis.track_status.TrackStatus;
+import com.kurios.f1_analysis.dta.Dta;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "lap", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"compound_id", "dta_id", "track_status_id", "laptime_s", "lap_number", "stint", "pit_in_time", "pit_out_time", "sector1_time", "sector2_time", "sector3_time", "sector1_session_time", "sector2_session_time", "sector3_session_time", "speed_i1", "speed_i2", "speed_fl", "speed_st", "is_personal_best", "tyre_life", "lap_start_time", "lap_start_date", "position", "is_deleted", "is_accurate"})
+        @UniqueConstraint(columnNames = {"compound_id", "dta_id", "track_status", "laptime_ms", "lap_number", "lap_start_time", "lap_start_date"})
 })
 public class Lap {
     @Id
@@ -20,31 +16,18 @@ public class Lap {
     @Column(name = "lap_id", unique=true)
     private Integer id;
 
-    @OneToMany(
-            mappedBy = "carDataLap",
-            cascade = CascadeType.ALL
-    )
-    private List<CarData> carDataList;
-
-    @OneToMany(
-            mappedBy = "posDataLap",
-            cascade = CascadeType.ALL
-    )
-    private List<PosData> posDataList;
-
     @ManyToOne()
     @JoinColumn(name= "compound_id")
     private Compound compound;
 
     @ManyToOne()
     @JoinColumn(name= "dta_id")
-    private DriverTeamAssignment driverTeamAssignment;
+    private Dta dta;
 
-    @ManyToOne()
-    @JoinColumn(name= "track_status_id")
-    private TrackStatus trackStatus;
+    private Integer trackStatus;
 
-    private Integer laptimeS;
+    @Column(name = "laptime_ms")
+    private Integer laptimeMs;
 
     private Short lapNumber;
 
@@ -54,20 +37,28 @@ public class Lap {
 
     private Integer pitOutTime;
 
+    @Column(name = "sector1_time")
     private Integer sector1Time;
 
+    @Column(name = "sector2_time")
     private Integer sector2Time;
 
+    @Column(name = "sector3_time")
     private Integer sector3Time;
 
+    @Column(name = "sector1_session_time")
     private Integer sector1SessionTime;
 
+    @Column(name = "sector2_session_time")
     private Integer sector2SessionTime;
 
+    @Column(name = "sector3_session_time")
     private Integer sector3SessionTime;
 
+    @Column(name = "speed_i1")
     private Short speedI1;
 
+    @Column(name = "speed_i2")
     private Short speedI2;
 
     private Short speedFl;
@@ -91,11 +82,11 @@ public class Lap {
     public Lap() {
     }
 
-    public Lap(Compound compound, DriverTeamAssignment driverTeamAssignment, TrackStatus trackStatus, Integer laptimeS, Short lapNumber, Short stint, Integer pitInTime, Integer pitOutTime, Integer sector1Time, Integer sector2Time, Integer sector3Time, Integer sector1SessionTime, Integer sector2SessionTime, Integer sector3SessionTime, Short speedI1, Short speedI2, Short speedFl, Short speedSt, Boolean isPersonalBest, Short tyreLife, Integer lapStartTime, Date lapStartDate, Short position, Boolean isDeleted, Boolean isAccurate) {
+    public Lap(Compound compound, Dta dta, Integer trackStatus, Integer laptimeMs, Short lapNumber, Short stint, Integer pitInTime, Integer pitOutTime, Integer sector1Time, Integer sector2Time, Integer sector3Time, Integer sector1SessionTime, Integer sector2SessionTime, Integer sector3SessionTime, Short speedI1, Short speedI2, Short speedFl, Short speedSt, Boolean isPersonalBest, Short tyreLife, Integer lapStartTime, Date lapStartDate, Short position, Boolean isDeleted, Boolean isAccurate) {
         this.compound = compound;
-        this.driverTeamAssignment = driverTeamAssignment;
+        this.dta = dta;
         this.trackStatus = trackStatus;
-        this.laptimeS = laptimeS;
+        this.laptimeMs = laptimeMs;
         this.lapNumber = lapNumber;
         this.stint = stint;
         this.pitInTime = pitInTime;
@@ -303,28 +294,28 @@ public class Lap {
         this.lapNumber = lapNumber;
     }
 
-    public Integer getLaptimeS() {
-        return laptimeS;
+    public Integer getLaptimeMs() {
+        return laptimeMs;
     }
 
-    public void setLaptimeS(Integer laptimeS) {
-        this.laptimeS = laptimeS;
+    public void setLaptimeMs(Integer laptimeMs) {
+        this.laptimeMs = laptimeMs;
     }
 
-    public TrackStatus getTrackStatus() {
+    public Integer getTrackStatus() {
         return trackStatus;
     }
 
-    public void setTrackStatus(TrackStatus trackStatus) {
+    public void setTrackStatus(Integer trackStatus) {
         this.trackStatus = trackStatus;
     }
 
-    public DriverTeamAssignment getDriverTeamAssignment() {
-        return driverTeamAssignment;
+    public Dta getDta() {
+        return dta;
     }
 
-    public void setDriverTeamAssignment(DriverTeamAssignment driverTeamAssignment) {
-        this.driverTeamAssignment = driverTeamAssignment;
+    public void setDta(Dta dta) {
+        this.dta = dta;
     }
 
     public Compound getCompound() {

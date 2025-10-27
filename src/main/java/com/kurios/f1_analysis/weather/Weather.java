@@ -1,11 +1,11 @@
 package com.kurios.f1_analysis.weather;
 
-import com.kurios.f1_analysis.session.Session;
+import com.kurios.f1_analysis.event_session.EventSession;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "weather", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"session_id", "wind_direction", "air_temp", "humidity", "pressure", "is_rainfall", "track_temp", "wind_speed"})
+        @UniqueConstraint(columnNames = {"event_session_id", "time", "wind_direction", "air_temp", "humidity", "pressure", "is_rainfall", "track_temp", "wind_speed"})
 })
 public class Weather {
 
@@ -15,8 +15,10 @@ public class Weather {
     private Integer id;
 
     @ManyToOne()
-    @JoinColumn(name= "session_id")
-    private Session weather;
+    @JoinColumn(name= "event_session_id")
+    private EventSession weather;
+
+    private Integer time;
 
     private Short windDirection;
 
@@ -35,8 +37,9 @@ public class Weather {
     public Weather() {
     }
 
-    public Weather(Session weather, Short windDirection, Short airTemp, Short humidity, Short pressure, Boolean isRainfall, Short trackTemp, Short windSpeed) {
+    public Weather(EventSession weather, Integer time, Short windDirection, Short airTemp, Short humidity, Short pressure, Boolean isRainfall, Short trackTemp, Short windSpeed) {
         this.weather = weather;
+        this.time = time;
         this.windDirection = windDirection;
         this.airTemp = airTemp;
         this.humidity = humidity;
@@ -54,11 +57,19 @@ public class Weather {
         this.id = id;
     }
 
-    public Session getWeather() {
+    public Integer getTime() {
+        return time;
+    }
+
+    public void setTime(Integer time) {
+        this.time = time;
+    }
+
+    public EventSession getWeather() {
         return weather;
     }
 
-    public void setWeather(Session weather) {
+    public void setWeather(EventSession weather) {
         this.weather = weather;
     }
 

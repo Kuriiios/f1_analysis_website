@@ -1,7 +1,7 @@
 package com.kurios.f1_analysis.event_round;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.kurios.f1_analysis.session.Session;
+import com.kurios.f1_analysis.event_session.EventSession;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -12,7 +12,6 @@ import java.util.List;
         @UniqueConstraint(columnNames = {"year", "round_number", "country", "location", "event_name", "event_date", "is_sprint_event", "soft", "medium", "hard"})
 })
 public class EventRound {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "event_round_id", unique=true)
@@ -23,7 +22,7 @@ public class EventRound {
             cascade = CascadeType.ALL
     )
     @JsonManagedReference
-    private List<Session> sessions;
+    private List<EventSession> eventSessions;
 
     private Short year;
 
@@ -73,12 +72,12 @@ public class EventRound {
         this.id = id;
     }
 
-    public List<Session> getSessions() {
-        return sessions;
+    public List<EventSession> getSessions() {
+        return eventSessions;
     }
 
-    public void setSessions(List<Session> sessions) {
-        this.sessions = sessions;
+    public void setSessions(List<EventSession> eventSessions) {
+        this.eventSessions = eventSessions;
     }
 
     public Integer getEventRoundId() {

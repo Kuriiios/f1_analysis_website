@@ -1,8 +1,8 @@
-package com.kurios.f1_analysis.session;
+package com.kurios.f1_analysis.event_session;
 
 import java.util.Date;
 
-public record SessionResponseDto(
+public record EventSessionResponseDto(
         Short roundNumber,
 
         Integer sessionNameId,

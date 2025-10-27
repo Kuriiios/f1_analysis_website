@@ -1,7 +1,7 @@
-package com.kurios.f1_analysis.session;
+package com.kurios.f1_analysis.event_session;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.kurios.f1_analysis.driver_team_assignment.DriverTeamAssignment;
+import com.kurios.f1_analysis.dta.Dta;
 import com.kurios.f1_analysis.event_round.EventRound;
 import com.kurios.f1_analysis.session_name.SessionName;
 import com.kurios.f1_analysis.weather.Weather;
@@ -11,13 +11,13 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "session", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"event_round_id", "session_date", "session_name"})
+@Table(name = "event_session", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"event_round_id", "session_date", "session_name_id"})
 })
-public class Session {
+public class EventSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="session_id", unique=true)
+    @Column(name="event_session_id", unique=true)
     private Integer id;
 
     @ManyToOne()
@@ -39,15 +39,15 @@ public class Session {
     private List<Weather> weatherList;
 
     @OneToMany(
-            mappedBy = "session",
+            mappedBy = "eventSession",
             cascade = CascadeType.ALL
     )
-    private List<DriverTeamAssignment> dtaList;
+    private List<Dta> dtaList;
 
-    public Session() {
+    public EventSession() {
     }
 
-    public Session(EventRound eventRound, Date sessionDate, SessionName sessionName) {
+    public EventSession(EventRound eventRound, Date sessionDate, SessionName sessionName) {
         this.eventRound = eventRound;
         this.sessionDate = sessionDate;
         this.sessionName = sessionName;

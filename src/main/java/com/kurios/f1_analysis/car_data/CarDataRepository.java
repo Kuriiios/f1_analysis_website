@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CarDataRepository extends JpaRepository<CarData, Integer> {
 
-    List<CarData> findAllByCarDataLap_Id(Integer lapId);
+    List<CarData> findAllByCarDataDta_Id(Integer dtaId);
 }

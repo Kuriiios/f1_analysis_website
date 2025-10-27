@@ -37,9 +37,9 @@ public class CarDataController {
         return carDataService.findById(id);
     }
 
-    @GetMapping("/by-lap/{lapId}")
-    public List<CarDataResponseDto> findAllByLapId(@PathVariable Integer lapId) {
-        return carDataService.findAllByLapId(lapId);
+    @GetMapping("/by-dta/{dtaId}")
+    public List<CarDataResponseDto> findAllByDtaId(@PathVariable Integer dtaId) {
+        return carDataService.findAllByDtaId(dtaId);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
