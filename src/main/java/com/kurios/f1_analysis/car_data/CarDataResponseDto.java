@@ -3,9 +3,9 @@ package com.kurios.f1_analysis.car_data;
 import java.util.Date;
 
 public record CarDataResponseDto(
-        Integer lapId,
+        Integer dtaId,
         Integer drsId,
-        Integer trackStatusId,
+        Integer trackStatus,
         Date dateTime,
         Integer time,
         Integer sessionTime,

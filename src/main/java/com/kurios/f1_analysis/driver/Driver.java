@@ -1,6 +1,6 @@
 package com.kurios.f1_analysis.driver;
 
-import com.kurios.f1_analysis.driver_team_assignment.DriverTeamAssignment;
+import com.kurios.f1_analysis.dta.Dta;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class Driver {
             mappedBy = "driver",
             cascade = CascadeType.ALL
     )
-    private List<DriverTeamAssignment> dtaList;
+    private List<Dta> dtaList;
 
     private Short driverNumber;
 

@@ -5,8 +5,8 @@ import java.util.Date;
 public record LapResponseDto(
         Integer compoundId,
         Integer driverTeamAssignmentId,
-        Integer trackStatusId,
-        Integer laptimeS,
+        Integer trackStatus,
+        Integer laptimeMs,
         Short lapNumber,
         Short stint,
         Integer pitInTime,

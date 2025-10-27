@@ -1,15 +1,14 @@
 package com.kurios.f1_analysis.car_data;
 
 import com.kurios.f1_analysis.drs.Drs;
-import com.kurios.f1_analysis.lap.Lap;
-import com.kurios.f1_analysis.track_status.TrackStatus;
+import com.kurios.f1_analysis.dta.Dta;
 import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "car_data", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"lap_id", "drs_id", "track_status_id", "date_time", "time", "session_time", "rpm", "speed", "n_gear", "throttle", "is_braking", "distance", "differential_distance", "relative_distance", "distance_driver_ahead"})
+        @UniqueConstraint(columnNames = {"dta_id", "drs_id", "track_status", "date_time", "time", "session_time", "rpm", "speed", "n_gear", "throttle", "is_braking", "distance", "differential_distance", "relative_distance", "distance_driver_ahead"})
 })
 public class CarData {
     @Id
@@ -18,16 +17,14 @@ public class CarData {
     private Integer id;
 
     @ManyToOne()
-    @JoinColumn(name= "lap_id")
-    private Lap carDataLap;
+    @JoinColumn(name= "dta_id")
+    private Dta carDataDta;
 
     @ManyToOne()
     @JoinColumn(name= "drs_id")
     private Drs drs;
 
-    @ManyToOne()
-    @JoinColumn(name= "track_status_id")
-    private TrackStatus trackStatus;
+    private Integer trackStatus;
 
     private Date dateTime;
 
@@ -53,12 +50,11 @@ public class CarData {
 
     private Integer distanceDriverAhead;
 
-
     public CarData() {
     }
 
-    public CarData(Lap carDataLap, Drs drs, TrackStatus trackStatus, Date dateTime, Integer time, Integer sessionTime, Short rpm, Short speed, Short nGear, Short throttle, Boolean isBraking, Float distance, Float differentialDistance, Float relativeDistance, Integer distanceDriverAhead) {
-        this.carDataLap = carDataLap;
+    public CarData(Dta carDataDta, Drs drs, Integer trackStatus, Date dateTime, Integer time, Integer sessionTime, Short rpm, Short speed, Short nGear, Short throttle, Boolean isBraking, Float distance, Float differentialDistance, Float relativeDistance, Integer distanceDriverAhead) {
+        this.carDataDta = carDataDta;
         this.drs = drs;
         this.trackStatus = trackStatus;
         this.dateTime = dateTime;
@@ -83,12 +79,12 @@ public class CarData {
         this.id = id;
     }
 
-    public Lap getCarDataLap() {
-        return carDataLap;
+    public Dta getCarDataDta() {
+        return carDataDta;
     }
 
-    public void setCarDataLap(Lap carDataLap) {
-        this.carDataLap = carDataLap;
+    public void setCarDataDta(Dta carDataDta) {
+        this.carDataDta = carDataDta;
     }
 
     public Drs getDrs() {
@@ -99,11 +95,11 @@ public class CarData {
         this.drs = drs;
     }
 
-    public TrackStatus getTrackStatus() {
+    public Integer getTrackStatus() {
         return trackStatus;
     }
 
-    public void setTrackStatus(TrackStatus trackStatus) {
+    public void setTrackStatus(Integer trackStatus) {
         this.trackStatus = trackStatus;
     }
 

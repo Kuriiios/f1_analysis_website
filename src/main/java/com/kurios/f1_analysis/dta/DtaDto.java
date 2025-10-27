@@ -1,8 +1,8 @@
-package com.kurios.f1_analysis.driver_team_assignment;
+package com.kurios.f1_analysis.dta;
 
 import jakarta.validation.constraints.NotNull;
 
-public record DriverTeamAssignmentDto(
+public record DtaDto(
 
         @NotNull Integer sessionId,
         @NotNull Integer driverId,

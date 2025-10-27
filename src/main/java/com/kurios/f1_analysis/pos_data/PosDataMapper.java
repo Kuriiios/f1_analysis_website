@@ -1,16 +1,15 @@
 package com.kurios.f1_analysis.pos_data;
 
-import com.kurios.f1_analysis.lap.Lap;
-import com.kurios.f1_analysis.track_status.TrackStatus;
+import com.kurios.f1_analysis.dta.Dta;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PosDataMapper {
 
-    public PosData toPosData(PosDataDto posDataDto, Lap lap, TrackStatus trackStatus) {
+    public PosData toPosData(PosDataDto posDataDto, Dta dta) {
         return new PosData(
-                lap,
-                trackStatus,
+                dta,
+                posDataDto.trackStatus(),
                 posDataDto.dateTime(),
                 posDataDto.time(),
                 posDataDto.sessionTime(),
@@ -23,8 +22,8 @@ public class PosDataMapper {
 
     public PosDataResponseDto toPosDataResponseDto(PosData posData) {
         return new PosDataResponseDto(
-                posData.getPosDataLap().getId(),
-                posData.getTrackStatus().getId(),
+                posData.getPosDataDta().getId(),
+                posData.getTrackStatus(),
                 posData.getDateTime(),
                 posData.getTime(),
                 posData.getSessionTime(),

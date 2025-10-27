@@ -1,18 +1,17 @@
 package com.kurios.f1_analysis.car_data;
 
 import com.kurios.f1_analysis.drs.Drs;
-import com.kurios.f1_analysis.lap.Lap;
-import com.kurios.f1_analysis.track_status.TrackStatus;
+import com.kurios.f1_analysis.dta.Dta;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CarDataMapper {
 
-    public CarData toCarData(CarDataDto carDataDto, Lap lap, Drs drs, TrackStatus trackStatus) {
+    public CarData toCarData(CarDataDto carDataDto, Dta dta, Drs drs) {
         return new CarData(
-                lap,
+                dta,
                 drs,
-                trackStatus,
+                carDataDto.trackStatus(),
                 carDataDto.dateTime(),
                 carDataDto.time(),
                 carDataDto.sessionTime(),
@@ -30,9 +29,9 @@ public class CarDataMapper {
 
     public CarDataResponseDto toCarDataResponseDto(CarData carData) {
         return new CarDataResponseDto(
-                carData.getCarDataLap().getId(),
+                carData.getCarDataDta().getId(),
                 carData.getDrs().getId(),
-                carData.getTrackStatus().getId(),
+                carData.getTrackStatus(),
                 carData.getDateTime(),
                 carData.getTime(),
                 carData.getSessionTime(),

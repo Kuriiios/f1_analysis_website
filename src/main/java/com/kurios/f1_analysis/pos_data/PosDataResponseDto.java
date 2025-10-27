@@ -3,8 +3,8 @@ package com.kurios.f1_analysis.pos_data;
 import java.util.Date;
 
 public record PosDataResponseDto(
-        Integer lapId,
-        Integer trackStatusId,
+        Integer dtaId,
+        Integer trackStatus,
         Date dateTime,
         Integer time,
         Integer sessionTime,

@@ -1,12 +1,3 @@
-INSERT INTO track_status (track_status_id, track_state) VALUES (0, 'Unknown');
-INSERT INTO track_status (track_status_id, track_state) VALUES (1, 'TrackClear');
-INSERT INTO track_status (track_status_id, track_state) VALUES (2, 'Yellow flag');
-INSERT INTO track_status (track_status_id, track_state) VALUES (3, 'Unknown');
-INSERT INTO track_status (track_status_id, track_state) VALUES (4, 'Safety Car');
-INSERT INTO track_status (track_status_id, track_state) VALUES (5, 'Red Flag');
-INSERT INTO track_status (track_status_id, track_state) VALUES (6, 'VSC deployed');
-INSERT INTO track_status (track_status_id, track_state) VALUES (7, 'VSC ending');
-
 INSERT INTO compound (compound_id, compound_name) VALUES (1, 'Soft');
 INSERT INTO compound (compound_id, compound_name) VALUES (2, 'Medium');
 INSERT INTO compound (compound_id, compound_name) VALUES (3, 'Hard');

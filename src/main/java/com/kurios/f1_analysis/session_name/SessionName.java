@@ -1,6 +1,6 @@
 package com.kurios.f1_analysis.session_name;
 
-import com.kurios.f1_analysis.session.Session;
+import com.kurios.f1_analysis.event_session.EventSession;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class SessionName {
             mappedBy = "sessionName",
             cascade = CascadeType.ALL
     )
-    private List<Session> session;
+    private List<EventSession> eventSession;
 
     @Column(length = 25)
     private String sessionName;

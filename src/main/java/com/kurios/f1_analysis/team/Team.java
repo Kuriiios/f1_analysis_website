@@ -1,6 +1,6 @@
 package com.kurios.f1_analysis.team;
 
-import com.kurios.f1_analysis.driver_team_assignment.DriverTeamAssignment;
+import com.kurios.f1_analysis.dta.Dta;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class Team {
             mappedBy = "team",
             cascade = CascadeType.ALL
     )
-    private List<DriverTeamAssignment> dtaList;
+    private List<Dta> dtaList;
 
     public Team() {
     }

@@ -1,9 +1,7 @@
 package com.kurios.f1_analysis.car_data;
 
+import com.kurios.f1_analysis.dta.DtaRepository;
 import com.kurios.f1_analysis.drs.DrsRepository;
-import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
-import com.kurios.f1_analysis.lap.LapRepository;
-import com.kurios.f1_analysis.track_status.TrackStatusRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,32 +9,27 @@ import java.util.List;
 @Service
 public class CarDataService {
 
-    private final LapRepository lapRepository;
+    private final DtaRepository dtaRepository;
 
     private final DrsRepository drsRepository;
-
-    private final TrackStatusRepository trackStatusRepository;
 
     private CarDataRepository carDataRepository;
 
     private CarDataMapper carDataMapper;
 
-    public CarDataService(CarDataMapper carDataMapper, CarDataRepository carDataRepository, LapRepository lapRepository, DrsRepository drsRepository, TrackStatusRepository trackStatusRepository) {
+    public CarDataService(CarDataMapper carDataMapper, CarDataRepository carDataRepository, DtaRepository dtaRepository, DrsRepository drsRepository) {
         this.carDataMapper = carDataMapper;
         this.carDataRepository = carDataRepository;
-        this.lapRepository = lapRepository;
+        this.dtaRepository = dtaRepository;
         this.drsRepository = drsRepository;
-        this.trackStatusRepository = trackStatusRepository;
     }
 
     public CarDataResponseDto save(CarDataDto carDataDto) {
-        var lap = lapRepository.findById(carDataDto.lapId())
-                .orElseThrow(()-> new RuntimeException("Lap not found"));
+        var dta = dtaRepository.findById(carDataDto.dtaId())
+                .orElseThrow(()-> new RuntimeException("Dta not found"));
         var drs = drsRepository.findById(carDataDto.drsId())
                 .orElseThrow(()-> new RuntimeException("Drs not found"));
-        var trackStatus = trackStatusRepository.findById(carDataDto.trackStatusId())
-                .orElseThrow(() -> new RuntimeException("DriverTeamAssignment not found"));
-        var carData = carDataMapper.toCarData(carDataDto, lap, drs, trackStatus);
+        var carData = carDataMapper.toCarData(carDataDto, dta, drs);
         carDataRepository.save(carData);
         var carDataResponseDto = carDataMapper.toCarDataResponseDto(carData);
         return carDataResponseDto;
@@ -55,8 +48,8 @@ public class CarDataService {
                 .orElse(null);
     }
 
-    public List<CarDataResponseDto> findAllByLapId(Integer lapId) {
-        return carDataRepository.findAllByCarDataLap_Id(lapId)
+    public List<CarDataResponseDto> findAllByDtaId(Integer dtaId) {
+        return carDataRepository.findAllByCarDataDta_Id(dtaId)
                 .stream()
                 .map(carDataMapper::toCarDataResponseDto)
                 .toList();

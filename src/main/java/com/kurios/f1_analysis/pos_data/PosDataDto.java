@@ -7,8 +7,8 @@ import jakarta.validation.constraints.PositiveOrZero;
 import java.util.Date;
 
 public record PosDataDto(
-        @NotNull Integer lapId,
-        Integer trackStatusId,
+        @NotNull Integer dtaId,
+        Integer trackStatus,
         @NotNull @PastOrPresent Date dateTime,
         @PositiveOrZero Integer time,
         @PositiveOrZero Integer sessionTime,

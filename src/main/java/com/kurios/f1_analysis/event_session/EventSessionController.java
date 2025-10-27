@@ -1,6 +1,5 @@
-package com.kurios.f1_analysis.session;
+package com.kurios.f1_analysis.event_session;
 
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -11,34 +10,34 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-public class SessionController {
+public class EventSessionController {
 
-    private final SessionService sessionService;
+    private final EventSessionService eventSessionService;
 
-    public SessionController(SessionService sessionService) {
-        this.sessionService = sessionService;
+    public EventSessionController(EventSessionService eventSessionService) {
+        this.eventSessionService = eventSessionService;
     }
 
     @GetMapping("/sessions")
-    public List<SessionResponseDto> findAll() {
-        return sessionService.findAll();
+    public List<EventSessionResponseDto> findAll() {
+        return eventSessionService.findAll();
     }
 
     @GetMapping("/sessions/{id}")
-    public SessionResponseDto findById(@PathVariable Integer id) {
-        return sessionService.findById(id);
+    public EventSessionResponseDto findById(@PathVariable Integer id) {
+        return eventSessionService.findById(id);
     }
 
     @PostMapping("/sessions/{year}")
     public ResponseEntity<String> importAllSessions(@PathVariable Integer year) {
-        sessionService.saveAllSessions(year);
+        eventSessionService.saveAllSessions(year);
         return ResponseEntity.ok().body("Succesfully imported all data from fastF1 to database.");
     }
 
     @PostMapping("/session/{year}/{roundNumber}")
     public ResponseEntity<String> importSession(@PathVariable Integer year,
                                                  @PathVariable Short roundNumber) {
-        sessionService.saveSessionForRoundNumber(year, roundNumber);
+        eventSessionService.saveSessionForRoundNumber(year, roundNumber);
         return ResponseEntity.ok().body("Succesfully imported data from fastF1 to database.");
     }
 

@@ -1,7 +1,6 @@
 package com.kurios.f1_analysis.weather;
 
-import com.kurios.f1_analysis.session.Session;
-import com.kurios.f1_analysis.session.SessionRepository;
+import com.kurios.f1_analysis.event_session.EventSessionRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,18 +16,18 @@ public class WeatherService {
 
     private final WeatherRepository weatherRepository;
 
-    private final SessionRepository sessionRepository;
+    private final EventSessionRepository eventSessionRepository;
 
     private final WeatherMapper weatherMapper;
 
-    public WeatherService(WeatherRepository weatherRepository, SessionRepository sessionRepository, WeatherMapper weatherMapper) {
+    public WeatherService(WeatherRepository weatherRepository, EventSessionRepository eventSessionRepository, WeatherMapper weatherMapper) {
         this.weatherRepository = weatherRepository;
-        this.sessionRepository = sessionRepository;
+        this.eventSessionRepository = eventSessionRepository;
         this.weatherMapper = weatherMapper;
     }
 
     public WeatherResponseDto save(WeatherDto weatherDto) {
-        var session = sessionRepository.findById(weatherDto.sessionId())
+        var session = eventSessionRepository.findById(weatherDto.sessionId())
                 .orElseThrow(() -> new RuntimeException("Session not found"));
         var weather = weatherMapper.toWeather(weatherDto, session);
         var savedWeather= weatherRepository.save(weather);

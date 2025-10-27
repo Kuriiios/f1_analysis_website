@@ -1,7 +1,6 @@
 package com.kurios.f1_analysis.pos_data;
 
-import com.kurios.f1_analysis.lap.LapRepository;
-import com.kurios.f1_analysis.track_status.TrackStatusRepository;
+import com.kurios.f1_analysis.dta.DtaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,23 +12,18 @@ public class PosDataService {
 
     private final PosDataMapper posDataMapper;
 
-    private final LapRepository lapRepository;
+    private final DtaRepository dtaRepository;
 
-    private final TrackStatusRepository trackStatusRepository;
-
-    public PosDataService(PosDataRepository posDataRepository, PosDataMapper posDataMapper, LapRepository lapRepository, TrackStatusRepository trackStatusRepository) {
+    public PosDataService(PosDataRepository posDataRepository, PosDataMapper posDataMapper, DtaRepository dtaRepository) {
         this.posDataRepository = posDataRepository;
         this.posDataMapper = posDataMapper;
-        this.lapRepository = lapRepository;
-        this.trackStatusRepository = trackStatusRepository;
+        this.dtaRepository = dtaRepository;
     }
 
     public PosDataResponseDto save(PosDataDto posDataDto) {
-        var lap = lapRepository.findById(posDataDto.lapId())
-                .orElseThrow(()-> new RuntimeException("Lap not found"));
-        var trackStatus = trackStatusRepository.findById(posDataDto.trackStatusId())
-                .orElseThrow(() -> new RuntimeException("DriverTeamAssignment not found"));
-        var posData = posDataMapper.toPosData(posDataDto, lap, trackStatus);
+        var dta = dtaRepository.findById(posDataDto.dtaId())
+                .orElseThrow(()-> new RuntimeException("Dta not found"));
+        var posData = posDataMapper.toPosData(posDataDto, dta);
         posDataRepository.save(posData);
         return posDataMapper.toPosDataResponseDto(posData);
     }
