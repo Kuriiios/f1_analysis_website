@@ -28,7 +28,8 @@ Prerequisites
 
     The application adheres to a clean, layered Spring Boot architecture to ensure maintainability and testability.
     
-<img width="2565" height="1539" alt="Untitled" src="https://github.com/user-attachments/assets/816eaa2a-d4cd-46a7-a517-cce8562bc5b7" />
+<img width="1894" height="1360" alt="Untitled(1)" src="https://github.com/user-attachments/assets/7b545fc9-19e1-421d-a5b7-9c59fef7b63c" />
+
 
     
 ## Data Model / Entities
