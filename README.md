@@ -24,9 +24,7 @@ Prerequisites
     
     **Database:** PostgreSQL
 
-## ⚙️ Architecture and Logic (Spring Boot)
-
-    The application adheres to a clean, layered Spring Boot architecture to ensure maintainability and testability.
+## ⚙️ Data Base Schema
     
 <img width="1894" height="1360" alt="Untitled(1)" src="https://github.com/user-attachments/assets/7b545fc9-19e1-421d-a5b7-9c59fef7b63c" />
 
