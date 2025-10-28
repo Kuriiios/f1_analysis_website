@@ -4,7 +4,7 @@ import java.util.Date;
 
 public record LapResponseDto(
         Integer compoundId,
-        Integer driverTeamAssignmentId,
+        Integer dtaId,
         Integer trackStatus,
         Integer laptimeMs,
         Short lapNumber,

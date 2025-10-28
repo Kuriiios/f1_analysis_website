@@ -10,7 +10,8 @@ public interface LapRepository extends JpaRepository<Lap, Integer> {
     List<Lap> findAllByDta_Id(Integer dtaId);
 
     @Query(value = "SELECT " +
-            "lap_start_date, driver_number, driver_hex_color, driver_abbreviation, sector1_time, speed_i1, sector2_time, speed_i2, sector3_time, speed_fl, laptime_ms, speed_st, lap_number, compound_name, stint"+
+            //"lap_start_date, driver_number, driver_hex_color, driver_abbreviation, sector1_time, speed_i1, sector2_time, speed_i2, sector3_time, speed_fl, laptime_ms, speed_st, lap_number, compound_name, stint "+
+            "lap.* " +
             "FROM lap " +
             "INNER JOIN compound ON lap.compound_id = compound.compound_id " +
             "INNER JOIN dta ON lap.dta_id = dta.dta_id " +
@@ -29,7 +30,7 @@ public interface LapRepository extends JpaRepository<Lap, Integer> {
     List<Lap> findLapDataByYearRoundNumberSessionLapNumber(Integer year, Integer roundNumber, Integer sessionNameId, Integer lapNumber);
 
     @Query(value = "SELECT " +
-            "lap_start_date, driver_number, lap_number, sector1_time, speed_i1, sector2_time, speed_i2, sector3_time, speed_fl, laptime_ms, speed_st"+
+            "lap_start_date, driver_number, lap_number, sector1_time, speed_i1, sector2_time, speed_i2, sector3_time, speed_fl, laptime_ms, speed_st "+
             "FROM lap " +
             "INNER JOIN compound ON lap.compound_id = compound.compound_id " +
             "INNER JOIN dta ON lap.dta_id = dta.dta_id " +
@@ -50,7 +51,7 @@ public interface LapRepository extends JpaRepository<Lap, Integer> {
     List<Lap> findLastTenLapPerDriver(Integer year, Integer roundNumber, Integer sessionNameId, Integer lapNumber, Integer driverNumber);
 
     @Query(value = "SELECT " +
-            "lap_start_date, driver_abbreviation, driver_hex_color, driver_number, lap_number, sector1_time_s, gap_s, gap_percentage, compound_name"+
+            "lap_start_date, driver_abbreviation, driver_hex_color, driver_number, lap_number, sector1_time_s, gap_s, gap_percentage, compound_name "+
             "FROM ( " +
             "SELECT " +
             "lap_start_date, driver_abbreviation, driver_hex_color, driver_number, lap_number, sector1_time_s, gap_s, gap_percentage, compound_name" +
