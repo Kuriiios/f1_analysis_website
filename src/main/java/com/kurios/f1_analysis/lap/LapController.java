@@ -59,12 +59,14 @@ public class LapController {
         return lapService.findLastTenLapPerDriver(year, roundNumber, sessionNameId, lapNumber, driverNumber);
     }
 
-    @GetMapping("/best-sector1")
-    public List<LapDriverDataSector1Dto> findFastestSector1(
+    @GetMapping("/best-sector")
+    public List<LapDriverDataSectorDto> findFastestSector(
             @RequestParam("year") Integer year,
             @RequestParam("roundNumber") Integer roundNumber,
-            @RequestParam("sessionNameId") Integer sessionNameId) {
-        return lapService.findFastestSector1(year, roundNumber, sessionNameId);
+            @RequestParam("sessionNameId") Integer sessionNameId,
+            @RequestParam("lapNumber") Short lapNumber,
+            @RequestParam("sectorNumber") Short sectorNumber) {
+        return lapService.findFastestSector(year, roundNumber, sessionNameId, lapNumber, sectorNumber);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

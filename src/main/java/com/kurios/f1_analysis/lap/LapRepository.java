@@ -84,9 +84,9 @@ public interface LapRepository extends JpaRepository<Lap, Integer> {
                 "driver_hex_color, " +
                 "driver_number, " +
                 "lap_number, " +
-                "CAST(sector1_time_s AS DOUBLE PRECISION) as sector1_time_s, " +
+                "CAST(sector_time_s AS DOUBLE PRECISION) as sector_time_s, " +
                 "CAST(gap_s AS DOUBLE PRECISION) as gap_s, " +
-                "CAST(ROUND((gap_s / min(sector1_time_s)), 3) AS DOUBLE PRECISION) as gap_percentage, " +
+                "CAST(ROUND((gap_s / min_sector_time_s), 3) AS DOUBLE PRECISION) as gap_percentage, " +
                 "compound_name "+
             "FROM ( " +
                 "SELECT " +
@@ -96,9 +96,30 @@ public interface LapRepository extends JpaRepository<Lap, Integer> {
                     "driver_number, " +
                     "lap_number, " +
                     "compound_name, " +
-                    "ROUND(sector1_time / 1000.0, 3) AS sector1_time_s, " +
-                    "ROUND((sector1_time - MIN(sector1_time) OVER ()) / 1000.0, 3) AS gap_s, " +
-                    "ROW_NUMBER() OVER (PARTITION BY driver_abbreviation ORDER BY sector1_time ASC) as rn " +
+                    "CASE " +
+                        "WHEN :sectorNumber = 1 THEN ROUND(sector1_time / 1000.0, 3) " +
+                        "WHEN :sectorNumber = 2 THEN ROUND(sector2_time / 1000.0, 3) " +
+                        "WHEN :sectorNumber = 3 THEN ROUND(sector3_time / 1000.0, 3) " +
+                        "ELSE 0.0 " +
+                    "END AS sector_time_s, " +
+                    "CASE " +
+                        "WHEN :sectorNumber = 1 THEN MIN(sector1_time) OVER () / 1000.0 " +
+                        "WHEN :sectorNumber = 2 THEN MIN(sector2_time) OVER () / 1000.0 " +
+                        "WHEN :sectorNumber = 3 THEN MIN(sector3_time) OVER () / 1000.0 " +
+                        "ELSE 0.0 " +
+                    "END AS min_sector_time_s, " +
+                    "CASE " +
+                        "WHEN :sectorNumber = 1 THEN ROUND((sector1_time - MIN(sector1_time) OVER ()) / 1000.0, 3) " +
+                        "WHEN :sectorNumber = 2 THEN ROUND((sector2_time - MIN(sector2_time) OVER ()) / 1000.0, 3) " +
+                        "WHEN :sectorNumber = 3 THEN ROUND((sector3_time - MIN(sector3_time) OVER ()) / 1000.0, 3) " +
+                        "ELSE 999.0 " +
+                    "END AS gap_s, " +
+                    "CASE " +
+                        "WHEN :sectorNumber = 1 THEN ROW_NUMBER() OVER (PARTITION BY driver_abbreviation ORDER BY sector1_time ASC) " +
+                        "WHEN :sectorNumber = 2 THEN ROW_NUMBER() OVER (PARTITION BY driver_abbreviation ORDER BY sector2_time ASC) " +
+                        "WHEN :sectorNumber = 3 THEN ROW_NUMBER() OVER (PARTITION BY driver_abbreviation ORDER BY sector3_time ASC) " +
+                        "ELSE 999 " +
+                    "END AS rn " +
                 "FROM lap " +
                     "INNER JOIN compound ON lap.compound_id = compound.compound_id " +
                     "INNER JOIN dta ON lap.dta_id = dta.dta_id " +
@@ -110,8 +131,12 @@ public interface LapRepository extends JpaRepository<Lap, Integer> {
                 "WHERE " +
                     "event_round.year = :year "+
                     "AND event_round.round_number = :roundNumber "+
-                    "AND event_session.session_name_id = :sessionNameId "+
-                    "AND sector1_time <> 0" +
+                    "AND lap.lap_number <= :lapNumber "+
+                    "AND ( " +
+                        "(:sectorNumber = 1 AND sector1_time <> 0) OR " +
+                        "(:sectorNumber = 2 AND sector2_time <> 0) OR " +
+                        "(:sectorNumber = 3 AND sector3_time <> 0) " +
+                    ") " +
                 "GROUP BY " +
                     "driver_number, " +
                     "driver_abbreviation, " +
@@ -119,23 +144,14 @@ public interface LapRepository extends JpaRepository<Lap, Integer> {
                     "compound_name, " +
                     "lap_start_date, " +
                     "lap_number, " +
-                    "sector1_time " +
-                "ORDER BY sector1_time ASC " +
+                    "sector1_time, " +
+                    "sector2_time, " +
+                    "sector3_time " +
             ") AS subquery " +
             "WHERE rn = 1 " +
-            "GROUP BY " +
-                "lap_start_date, " +
-                "driver_abbreviation, " +
-                "driver_hex_color, " +
-                "driver_number, " +
-                "lap_number, " +
-                "sector1_time_s, " +
-                "gap_s, " +
-                "compound_name " +
             "ORDER BY " +
-                "gap_s, " +
-                "compound_name;",
+                "gap_s;",
             nativeQuery = true
     )
-    List<LapDriverDataSector1Dto> findFastestSector1(Integer year, Integer roundNumber, Integer sessionNameId);
+    List<LapDriverDataSectorDto> findFastestSector(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber, Short sectorNumber);
 }
