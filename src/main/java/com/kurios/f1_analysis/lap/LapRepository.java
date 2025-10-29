@@ -10,8 +10,7 @@ public interface LapRepository extends JpaRepository<Lap, Integer> {
     List<Lap> findAllByDta_Id(Integer dtaId);
 
     @Query(value = "SELECT " +
-            //"lap_start_date, driver_number, driver_hex_color, driver_abbreviation, sector1_time, speed_i1, sector2_time, speed_i2, sector3_time, speed_fl, laptime_ms, speed_st, lap_number, compound_name, stint "+
-            "lap.* " +
+            "lap.lap_start_date, driver.driver_number, driver.driver_hex_color, driver.driver_abbreviation, lap.sector1_time, lap.speed_i1, lap.sector2_time, lap.speed_i2, lap.sector3_time, lap.speed_fl, lap.laptime_ms, lap.speed_st, lap.lap_number, compound.compound_name, lap.stint "+
             "FROM lap " +
             "INNER JOIN compound ON lap.compound_id = compound.compound_id " +
             "INNER JOIN dta ON lap.dta_id = dta.dta_id " +
@@ -27,7 +26,7 @@ public interface LapRepository extends JpaRepository<Lap, Integer> {
             "ORDER BY lap_start_time;",
             nativeQuery = true
     )
-    List<Lap> findLapDataByYearRoundNumberSessionLapNumber(Integer year, Integer roundNumber, Integer sessionNameId, Integer lapNumber);
+    List<LapDataDto> findLapDataByYearRoundNumberSessionLapNumber(Integer year, Integer roundNumber, Integer sessionNameId, Integer lapNumber);
 
     @Query(value = "SELECT " +
             "lap_start_date, driver_number, lap_number, sector1_time, speed_i1, sector2_time, speed_i2, sector3_time, speed_fl, laptime_ms, speed_st "+

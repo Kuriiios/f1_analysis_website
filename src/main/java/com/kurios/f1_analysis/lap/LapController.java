@@ -41,7 +41,7 @@ public class LapController {
         return lapService.findAllByDtaId(dtaId);
     }
     @GetMapping("/all-driver-lap-info/{year}/{roundNumber}/{sessionNameId}/{lapNumber}")
-    public List<LapResponseDto> findLapDataByYearRoundNumberSessionLapNumber(@PathVariable Integer year, @PathVariable Integer roundNumber, @PathVariable Integer sessionNameId, @PathVariable Integer lapNumber) {
+    public List<LapDataDto> findLapDataByYearRoundNumberSessionLapNumber(@PathVariable Integer year, @PathVariable Integer roundNumber, @PathVariable Integer sessionNameId, @PathVariable Integer lapNumber) {
         return lapService.findAllDriverLapInfo(year, roundNumber, sessionNameId, lapNumber);
     }
 

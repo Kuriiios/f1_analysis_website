@@ -53,10 +53,15 @@ public class LapService {
                 .map(lapMapper::toLapResponseDto)
                 .toList();
     }
-    public List<LapResponseDto> findAllDriverLapInfo(Integer year, Integer roundNumber, Integer sessionNameId, Integer lapNumber) {
+/*
+    public List<LapDataDto> findAllDriverLapInfo2(Integer year, Integer roundNumber, Integer sessionNameId, Integer lapNumber) {
         return lapRepository.findLapDataByYearRoundNumberSessionLapNumber(year, roundNumber, sessionNameId, lapNumber)
                 .stream()
                 .map(lapMapper::toLapResponseDto)
                 .toList();
+    }
+    */
+    public List<LapDataDto> findAllDriverLapInfo(Integer year, Integer roundNumber, Integer sessionNameId, Integer lapNumber) {
+        return lapRepository.findLapDataByYearRoundNumberSessionLapNumber(year, roundNumber, sessionNameId, lapNumber);
     }
 }
