@@ -2,7 +2,7 @@ package com.kurios.f1_analysis.lap;
 
 import java.util.Date;
 
-public class LapDataDto {
+public class LapAllDriverDataDto {
     private Date lapStartDate;
     private Short driverNumber;
     private String driverHexColor;
@@ -19,7 +19,7 @@ public class LapDataDto {
     private String compoundName;
     private Short stint;
 
-    public LapDataDto(
+    public LapAllDriverDataDto(
             Date lapStartDate, Short driverNumber, String driverHexColor,
             String driverAbbreviation, Integer sector1Time, Short speedI1, Integer sector2Time,
             Short speedI2, Integer sector3Time, Short speedFl, Integer laptimeMs,

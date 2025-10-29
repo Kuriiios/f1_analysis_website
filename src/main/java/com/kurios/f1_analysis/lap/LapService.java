@@ -53,15 +53,16 @@ public class LapService {
                 .map(lapMapper::toLapResponseDto)
                 .toList();
     }
-/*
-    public List<LapDataDto> findAllDriverLapInfo2(Integer year, Integer roundNumber, Integer sessionNameId, Integer lapNumber) {
-        return lapRepository.findLapDataByYearRoundNumberSessionLapNumber(year, roundNumber, sessionNameId, lapNumber)
-                .stream()
-                .map(lapMapper::toLapResponseDto)
-                .toList();
+
+    public List<LapAllDriverDataDto> findAllDriverLapInfo(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber) {
+        return lapRepository.findAllDriverLapInfo(year, roundNumber, sessionNameId, lapNumber);
     }
-    */
-    public List<LapDataDto> findAllDriverLapInfo(Integer year, Integer roundNumber, Integer sessionNameId, Integer lapNumber) {
-        return lapRepository.findLapDataByYearRoundNumberSessionLapNumber(year, roundNumber, sessionNameId, lapNumber);
+
+    public List<LapDriverDataLastTenDto> findLastTenLapPerDriver(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber, Short driverNumber) {
+        return lapRepository.findLastTenLapPerDriver(year, roundNumber, sessionNameId, lapNumber, driverNumber);
+    }
+
+    public List<LapDriverDataSector1Dto> findFastestSector1(Integer year, Integer roundNumber, Integer sessionNameId) {
+        return lapRepository.findFastestSector1(year, roundNumber, sessionNameId);
     }
 }
