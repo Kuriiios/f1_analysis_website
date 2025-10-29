@@ -25,7 +25,7 @@ public class LapService {
     }
 
     public LapResponseDto save(LapDto lapDto) {
-        var dta = dtaRepository.findById(lapDto.driverTeamAssignmentId())
+        var dta = dtaRepository.findById(lapDto.dtaId())
                 .orElseThrow(() -> new RuntimeException("DriverTeamAssignment not found"));
         var compound = compoundRepository.findById(lapDto.compoundId())
                 .orElseThrow(() -> new RuntimeException("Compound not found"));
@@ -52,5 +52,17 @@ public class LapService {
                 .stream()
                 .map(lapMapper::toLapResponseDto)
                 .toList();
+    }
+
+    public List<LapAllDriverDataDto> findAllDriverLapInfo(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber) {
+        return lapRepository.findAllDriverLapInfo(year, roundNumber, sessionNameId, lapNumber);
+    }
+
+    public List<LapDriverDataLastTenDto> findLastTenLapPerDriver(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber, Short driverNumber) {
+        return lapRepository.findLastTenLapPerDriver(year, roundNumber, sessionNameId, lapNumber, driverNumber);
+    }
+
+    public List<LapDriverDataSector1Dto> findFastestSector1(Integer year, Integer roundNumber, Integer sessionNameId) {
+        return lapRepository.findFastestSector1(year, roundNumber, sessionNameId);
     }
 }

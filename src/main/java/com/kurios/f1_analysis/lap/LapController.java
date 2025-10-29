@@ -1,6 +1,5 @@
 package com.kurios.f1_analysis.lap;
 
-import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/lap")
+@RequestMapping("/laps")
 public class LapController {
 
     private LapService lapService;
@@ -39,6 +38,33 @@ public class LapController {
     @GetMapping("/by-dta/{dtaId}")
     public List<LapResponseDto> findByDtaId(@PathVariable Integer dtaId) {
         return lapService.findAllByDtaId(dtaId);
+    }
+
+    @GetMapping("/all-driver-info")
+    public List<LapAllDriverDataDto> findAllDriverLapInfo(
+            @RequestParam("year") Integer year,
+            @RequestParam("roundNumber") Integer roundNumber,
+            @RequestParam("sessionNameId") Integer sessionNameId,
+            @RequestParam("lapNumber") Short lapNumber) {
+        return lapService.findAllDriverLapInfo(year, roundNumber, sessionNameId, lapNumber);
+    }
+
+    @GetMapping("/per-driver-info")
+    public List<LapDriverDataLastTenDto> findLastTenLapPerDriver(
+            @RequestParam("year") Integer year,
+            @RequestParam("roundNumber") Integer roundNumber,
+            @RequestParam("sessionNameId") Integer sessionNameId,
+            @RequestParam("lapNumber") Short lapNumber,
+            @RequestParam("driverNumber") Short driverNumber) {
+        return lapService.findLastTenLapPerDriver(year, roundNumber, sessionNameId, lapNumber, driverNumber);
+    }
+
+    @GetMapping("/best-sector1")
+    public List<LapDriverDataSector1Dto> findFastestSector1(
+            @RequestParam("year") Integer year,
+            @RequestParam("roundNumber") Integer roundNumber,
+            @RequestParam("sessionNameId") Integer sessionNameId) {
+        return lapService.findFastestSector1(year, roundNumber, sessionNameId);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
