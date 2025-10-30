@@ -2,24 +2,24 @@ package com.kurios.f1_analysis.lap;
 
 import java.util.Date;
 
-public class LapDriverDataSector1Dto {
+public class LapDriverDataSectorDto {
     private Date lapStartDate;
     private String driverAbbreviation;
     private String driverHexColor;
     private Short driverNumber;
     private Short lapNumber;
-    private Double sector1TimeS;
+    private Double sectorTimeS;
     private Double gapS;
     private Double gapPercentage;
     private String compound_name;
 
-    public LapDriverDataSector1Dto(
+    public LapDriverDataSectorDto(
             Date lapStartDate,
             String driverAbbreviation,
             String driverHexColor,
             Short driverNumber,
             Short lapNumber,
-            Double sector1TimeS,
+            Double sectorTimeS,
             Double gapS,
             Double gapPercentage,
             String compound_name ){
@@ -29,7 +29,7 @@ public class LapDriverDataSector1Dto {
         this.driverHexColor = driverHexColor;
         this.driverNumber = driverNumber;
         this.lapNumber = lapNumber;
-        this.sector1TimeS = sector1TimeS;
+        this.sectorTimeS = sectorTimeS;
         this.gapS = gapS;
         this.gapPercentage = gapPercentage;
         this.compound_name = compound_name;
@@ -75,12 +75,12 @@ public class LapDriverDataSector1Dto {
         this.lapNumber = lapNumber;
     }
 
-    public Double getSector1TimeS() {
-        return sector1TimeS;
+    public Double getSectorTimeS() {
+        return sectorTimeS;
     }
 
-    public void setSector1TimeS(Double sector1TimeS) {
-        this.sector1TimeS = sector1TimeS;
+    public void setSectorTimeS(Double sectorTimeS) {
+        this.sectorTimeS = sectorTimeS;
     }
 
     public Double getGapS() {

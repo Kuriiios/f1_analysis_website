@@ -62,7 +62,15 @@ public class LapService {
         return lapRepository.findLastTenLapPerDriver(year, roundNumber, sessionNameId, lapNumber, driverNumber);
     }
 
-    public List<LapDriverDataSector1Dto> findFastestSector1(Integer year, Integer roundNumber, Integer sessionNameId) {
-        return lapRepository.findFastestSector1(year, roundNumber, sessionNameId);
+    public List<LapDriverDataSectorDto> findFastestSector(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber, Short sectorNumber) {
+        return lapRepository.findFastestSector(year, roundNumber, sessionNameId, lapNumber, sectorNumber);
+    }
+
+    public List<LapDriverDataLapDto> findFastestLap(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber) {
+        return lapRepository.findFastestLap(year, roundNumber, sessionNameId, lapNumber);
+    }
+
+    public List<LapDriverDataTheoreticalLapDto> findTheoreticalFastestLap(Integer year, Integer roundNumber, Integer sessionNameId,  Short lapNumber) {
+        return lapRepository.findTheoreticalFastestLap(year, roundNumber, sessionNameId, lapNumber);
     }
 }
