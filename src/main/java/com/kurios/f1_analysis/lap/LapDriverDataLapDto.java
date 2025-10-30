@@ -3,44 +3,44 @@ package com.kurios.f1_analysis.lap;
 import java.util.Date;
 
 public class LapDriverDataLapDto {
-    private Date lapStartDate;
+    private Date dateTime;
     private String driverAbbreviation;
     private String driverHexColor;
     private Short driverNumber;
     private Short lapNumber;
     private String formattedLaptime;
-    private Double gapS;
+    private Double gap;
     private Double gapPercentage;
     private String compound_name;
 
     public LapDriverDataLapDto(
-            Date lapStartDate,
+            Date dateTime,
             String driverAbbreviation,
             String driverHexColor,
             Short driverNumber,
             Short lapNumber,
             String formattedLaptime,
-            Double gapS,
+            Double gap,
             Double gapPercentage,
             String compound_name
     ) {
-        this.lapStartDate = lapStartDate;
+        this.dateTime = dateTime;
         this.driverAbbreviation = driverAbbreviation;
         this.driverHexColor = driverHexColor;
         this.driverNumber = driverNumber;
         this.lapNumber = lapNumber;
         this.formattedLaptime = formattedLaptime;
-        this.gapS = gapS;
+        this.gap = gap;
         this.gapPercentage = gapPercentage;
         this.compound_name = compound_name;
     }
 
-    public Date getLapStartDate() {
-        return lapStartDate;
+    public Date getDateTime() {
+        return dateTime;
     }
 
-    public void setLapStartDate(Date lapStartDate) {
-        this.lapStartDate = lapStartDate;
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getDriverAbbreviation() {
@@ -83,12 +83,12 @@ public class LapDriverDataLapDto {
         this.formattedLaptime = formattedLaptime;
     }
 
-    public Double getGapS() {
-        return gapS;
+    public Double getGap() {
+        return gap;
     }
 
-    public void setGapS(Double gapS) {
-        this.gapS = gapS;
+    public void setGap(Double gap) {
+        this.gap = gap;
     }
 
     public Double getGapPercentage() {

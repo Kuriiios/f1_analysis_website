@@ -3,7 +3,7 @@ package com.kurios.f1_analysis.lap;
 import java.util.Date;
 
 public class LapDriverDataLastTenDto {
-    private Date lapStartDate;
+    private Date dateTime;
     private Short driverNumber;
     private Short lapNumber;
     private Double sector1Time;
@@ -15,8 +15,8 @@ public class LapDriverDataLastTenDto {
     private String formattedLaptime;
     private Short speedSt;
 
-    public LapDriverDataLastTenDto(Date lapStartDate, Short driverNumber, Short lapNumber, Double sector1Time, Short speedI1, Double sector2Time, Short speedI2, Double sector3Time, Short speedFl, String formattedLaptime, Short speedSt) {
-        this.lapStartDate = lapStartDate;
+    public LapDriverDataLastTenDto(Date dateTime, Short driverNumber, Short lapNumber, Double sector1Time, Short speedI1, Double sector2Time, Short speedI2, Double sector3Time, Short speedFl, String formattedLaptime, Short speedSt) {
+        this.dateTime = dateTime;
         this.driverNumber = driverNumber;
         this.lapNumber = lapNumber;
         this.sector1Time = sector1Time;
@@ -29,12 +29,12 @@ public class LapDriverDataLastTenDto {
         this.speedSt = speedSt;
     }
 
-    public Date getLapStartDate() {
-        return lapStartDate;
+    public Date getDateTime() {
+        return dateTime;
     }
 
-    public void setLapStartDate(Date lapStartDate) {
-        this.lapStartDate = lapStartDate;
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
     }
 
     public Short getDriverNumber() {

@@ -21,7 +21,21 @@ public interface LapRepository extends JpaRepository<Lap, Integer> {
                 "l.speed_i2, " +
                 "CAST(ROUND(l.sector3_time / 1000.0, 3) AS DOUBLE PRECISION) AS sector3_time, " +
                 "l.speed_fl, " +
-                "l.laptime_ms, " +
+                "CONCAT( " +
+                    "FLOOR(l.laptime_ms / 60000), " +
+                    "':' ," +
+                "LPAD( " +
+                    "CAST(FLOOR((l.laptime_ms % 60000) / 1000) AS TEXT), " +
+                    "2, " +
+                        "'0' " +
+                        "), " +
+                    "'.'," +
+                "LPAD( " +
+                    "CAST((l.laptime_ms % 1000) AS TEXT), " +
+                    "3, " +
+                        "'0' " +
+                        ") " +
+                ") AS formatted_laptime, " +
                 "l.speed_st, " +
                 "l.lap_number, " +
                 "c.compound_name, " +
