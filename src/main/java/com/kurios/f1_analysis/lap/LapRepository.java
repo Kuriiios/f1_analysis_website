@@ -222,7 +222,7 @@ List<LapDriverDataLapDto> findFastestLap(Integer year, Integer roundNumber, Inte
             "driver_abbreviation, " +
             "driver_number, " +
             "driver_hex_color, " +
-            "ROUND(MIN(sector1_time_s) + MIN(sector2_time_s) + MIN(sector3_time_s), 3) AS theoretical_best_lap_s, " +
+            "CAST ( ROUND(MIN(sector1_time_s) + MIN(sector2_time_s) + MIN(sector3_time_s), 3) AS DOUBLE PRECISION) AS theoretical_best_lap_s, " +
             "CAST (" +
                 "ROUND( " +
                     "(MIN(sector1_time_s) + MIN(sector2_time_s) + MIN(sector3_time_s)) - " +
@@ -269,6 +269,6 @@ List<LapDriverDataLapDto> findFastestLap(Integer year, Integer roundNumber, Inte
             "theoretical_best_lap_s ASC;",
         nativeQuery = true
 )
-List<LapDriverDataTheoraticalLapDto> findTheoraticalFastestLap(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber);
+List<LapDriverDataTheoreticalLapDto> findTheoreticalFastestLap(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber);
 
 }

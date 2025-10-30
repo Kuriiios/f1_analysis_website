@@ -79,12 +79,12 @@ public class LapController {
     }
 
     @GetMapping("/theoratical-best-lap")
-    public List<LapDriverDataTheoraticalLapDto> findTheoraticalFastestLap(
+    public List<LapDriverDataTheoreticalLapDto> findTheoraticalFastestLap(
             @RequestParam("year") Integer year,
             @RequestParam("roundNumber") Integer roundNumber,
             @RequestParam("sessionNameId") Integer sessionNameId,
             @RequestParam("lapNumber") Short lapNumber) {
-        return lapService.findTheoraticalFastestLap(year, roundNumber, sessionNameId, lapNumber);
+        return lapService.findTheoreticalFastestLap(year, roundNumber, sessionNameId, lapNumber);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

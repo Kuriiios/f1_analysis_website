@@ -70,7 +70,7 @@ public class LapService {
         return lapRepository.findFastestLap(year, roundNumber, sessionNameId, lapNumber);
     }
 
-    public List<LapDriverDataTheoraticalLapDto> findTheoraticalFastestLap(Integer year, Integer roundNumber, Integer sessionNameId,  Short lapNumber) {
-        return lapRepository.findTheoraticalFastestLap(year, roundNumber, sessionNameId, lapNumber);
+    public List<LapDriverDataTheoreticalLapDto> findTheoreticalFastestLap(Integer year, Integer roundNumber, Integer sessionNameId,  Short lapNumber) {
+        return lapRepository.findTheoreticalFastestLap(year, roundNumber, sessionNameId, lapNumber);
     }
 }
