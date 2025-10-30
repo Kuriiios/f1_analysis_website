@@ -175,7 +175,7 @@ List<LapDriverDataSectorDto> findFastestSector(Integer year, Integer roundNumber
                 "lap_number, " +
                 "compound_name, " +
                 "ROUND(laptime_ms / 1000.0, 3) AS laptime_s, " +
-                "CAST (ROUND((laptime_ms - MIN(laptime_ms) OVER ()) / 1000.0, 3) AS DOUBLE PRECISION) AS gap_s, " +
+                "ROUND((laptime_ms - MIN(laptime_ms) OVER ()) / 1000.0, 3) AS gap_s, " +
                 "ROW_NUMBER() OVER (PARTITION BY driver_abbreviation ORDER BY laptime_ms ASC) as rn " +
             "FROM lap " +
                 "INNER JOIN compound ON lap.compound_id = compound.compound_id " +
