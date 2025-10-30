@@ -65,4 +65,12 @@ public class LapService {
     public List<LapDriverDataSectorDto> findFastestSector(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber, Short sectorNumber) {
         return lapRepository.findFastestSector(year, roundNumber, sessionNameId, lapNumber, sectorNumber);
     }
+
+    public List<LapDriverDataLapDto> findFastestLap(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber) {
+        return lapRepository.findFastestLap(year, roundNumber, sessionNameId, lapNumber);
+    }
+
+    public List<LapDriverDataTheoraticalLapDto> findTheoraticalFastestLap(Integer year, Integer roundNumber, Integer sessionNameId,  Short lapNumber) {
+        return lapRepository.findTheoraticalFastestLap(year, roundNumber, sessionNameId, lapNumber);
+    }
 }

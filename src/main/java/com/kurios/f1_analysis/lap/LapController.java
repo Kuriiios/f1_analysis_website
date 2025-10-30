@@ -69,6 +69,24 @@ public class LapController {
         return lapService.findFastestSector(year, roundNumber, sessionNameId, lapNumber, sectorNumber);
     }
 
+    @GetMapping("/best-lap")
+    public List<LapDriverDataLapDto> findFastestLap(
+            @RequestParam("year") Integer year,
+            @RequestParam("roundNumber") Integer roundNumber,
+            @RequestParam("sessionNameId") Integer sessionNameId,
+            @RequestParam("lapNumber") Short lapNumber) {
+        return lapService.findFastestLap(year, roundNumber, sessionNameId, lapNumber);
+    }
+
+    @GetMapping("/theoratical-best-lap")
+    public List<LapDriverDataTheoraticalLapDto> findTheoraticalFastestLap(
+            @RequestParam("year") Integer year,
+            @RequestParam("roundNumber") Integer roundNumber,
+            @RequestParam("sessionNameId") Integer sessionNameId,
+            @RequestParam("lapNumber") Short lapNumber) {
+        return lapService.findTheoraticalFastestLap(year, roundNumber, sessionNameId, lapNumber);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleMethodArgumentNotValidException(
             MethodArgumentNotValidException e
