@@ -24,13 +24,16 @@ public class WeatherController {
         return ResponseEntity.ok().body("Succesfully imported data from fastF1 to database.");
     }
 
-    @GetMapping("")
+    @GetMapping("/all")
     public List<WeatherResponseDto> findAll() {
         return this.weatherService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public WeatherResponseDto findById(@PathVariable Integer id) {
-        return weatherService.findById(id);
+    @GetMapping("")
+    public List<WeatherDataDto> findWeatherDataPerSession(
+            @RequestParam("year") Integer year,
+            @RequestParam("roundNumber") Integer roundNumber,
+            @RequestParam("sessionNameId") Integer sessionNameId){
+        return weatherService.findWeatherDataPerSession(year, roundNumber, sessionNameId);
     }
 }
