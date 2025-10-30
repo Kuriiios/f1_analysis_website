@@ -15,11 +15,11 @@ public interface LapRepository extends JpaRepository<Lap, Integer> {
                 "d.driver_number, " +
                 "d.driver_hex_color, " +
                 "d.driver_abbreviation, " +
-                "l.sector1_time, " +
+                "CAST(ROUND(l.sector1_time / 1000.0, 3) AS DOUBLE PRECISION) AS sector1_time, " +
                 "l.speed_i1, " +
-                "l.sector2_time, " +
+                "CAST(ROUND(l.sector2_time / 1000.0, 3) AS DOUBLE PRECISION) AS sector2_time, " +
                 "l.speed_i2, " +
-                "l.sector3_time, " +
+                "CAST(ROUND(l.sector3_time / 1000.0, 3) AS DOUBLE PRECISION) AS sector3_time, " +
                 "l.speed_fl, " +
                 "l.laptime_ms, " +
                 "l.speed_st, " +
@@ -48,13 +48,27 @@ public interface LapRepository extends JpaRepository<Lap, Integer> {
                 "l.lap_start_date, " +
                 "d.driver_number, " +
                 "l.lap_number, " +
-                "l.sector1_time, " +
+                "CAST(ROUND(l.sector1_time / 1000.0, 3) AS DOUBLE PRECISION) AS sector1_time, " +
                 "l.speed_i1, " +
-                "l.sector2_time, " +
+                "CAST(ROUND(l.sector2_time / 1000.0, 3) AS DOUBLE PRECISION) AS sector2_time, " +
                 "l.speed_i2, " +
-                "l.sector3_time, " +
+                "CAST(ROUND(l.sector3_time / 1000.0, 3) AS DOUBLE PRECISION) AS sector3_time, " +
                 "l.speed_fl, " +
-                "l.laptime_ms, " +
+                "CONCAT( " +
+                    "FLOOR(l.laptime_ms / 60000), " +
+                        "':' ," +
+                "LPAD( " +
+                    "CAST(FLOOR((l.laptime_ms % 60000) / 1000) AS TEXT), " +
+                    "2, " +
+                        "'0' " +
+                "), " +
+                "'.'," +
+                "LPAD( " +
+                    "CAST((l.laptime_ms % 1000) AS TEXT), " +
+                    "3, " +
+                        "'0' " +
+                        ") " +
+                ") AS formatted_laptime, " +
                 "l.speed_st "+
             "FROM lap AS l " +
                 "INNER JOIN compound AS c ON l.compound_id = c.compound_id " +
@@ -163,7 +177,22 @@ List<LapDriverDataSectorDto> findFastestSector(Integer year, Integer roundNumber
                 "d.driver_number, " +
                 "l.lap_number, " +
                 "c.compound_name, " +
-                "ROUND(laptime_ms / 1000.0, 3) AS laptime_s, " +
+                "laptime_ms, " +
+                "CONCAT( " +
+                    "FLOOR(l.laptime_ms / 60000), " +
+                    "':' ," +
+                "LPAD( " +
+                    "CAST(FLOOR((l.laptime_ms % 60000) / 1000) AS TEXT), " +
+                        "2, " +
+                        "'0' " +
+                "), " +
+                "'.'," +
+                "LPAD( " +
+                    "CAST((l.laptime_ms % 1000) AS TEXT), " +
+                        "3, " +
+                        "'0' " +
+                ") " +
+                ") AS formatted_laptime, " +
                 "ROUND((laptime_ms - MIN(laptime_ms) OVER ()) / 1000.0, 3) AS gap_s, " +
                 "ROW_NUMBER() OVER (PARTITION BY driver_abbreviation ORDER BY laptime_ms ASC) as rn " +
             "FROM lap AS l " +
@@ -195,9 +224,9 @@ List<LapDriverDataSectorDto> findFastestSector(Integer year, Integer roundNumber
             "driver_hex_color, " +
             "driver_number, " +
             "lap_number, " +
-            "CAST(laptime_s AS DOUBLE PRECISION), " +
+            "formatted_laptime, " +
             "CAST(gap_s AS DOUBLE PRECISION) as gap_s, " +
-            "CAST(ROUND((gap_s / min(laptime_s)), 3) AS DOUBLE PRECISION) as gap_percentage, " +
+            "CAST(ROUND((gap_s * 1000 / min(laptime_ms)), 3) * 100 AS DOUBLE PRECISION) as gap_percentage, " +
             "compound_name "+
         "FROM subquery " +
         "WHERE rn = 1 " +
@@ -209,7 +238,8 @@ List<LapDriverDataSectorDto> findFastestSector(Integer year, Integer roundNumber
             "compound_name, " +
             "lap_start_date, " +
             "lap_number, " +
-            "laptime_s, " +
+            "laptime_ms, " +
+            "formatted_laptime, " +
             "gap_s " +
         "ORDER BY " +
             "gap_s;",
@@ -223,9 +253,9 @@ List<LapDriverDataLapDto> findFastestLap(Integer year, Integer roundNumber, Inte
                 "d.driver_abbreviation, " +
                 "d.driver_number, " +
                 "d.driver_hex_color, " +
-                "ROUND(l.sector1_time / 1000.0, 3) AS sector1_time_s, " +
-                "ROUND(l.sector2_time / 1000.0, 3) AS sector2_time_s, " +
-                "ROUND(l.sector3_time / 1000.0, 3) AS sector3_time_s " +
+                "l.sector1_time, " +
+                "l.sector2_time, " +
+                "l.sector3_time " +
             "FROM lap AS l " +
                 "INNER JOIN compound AS c ON l.compound_id = c.compound_id " +
                 "INNER JOIN dta ON l.dta_id = dta.dta_id " +
@@ -246,20 +276,34 @@ List<LapDriverDataLapDto> findFastestLap(Integer year, Integer roundNumber, Inte
             "driver_abbreviation, " +
             "driver_number, " +
             "driver_hex_color, " +
-            "CAST ( ROUND(MIN(sector1_time_s) + MIN(sector2_time_s) + MIN(sector3_time_s), 3) AS DOUBLE PRECISION) AS theoretical_best_lap_s, " +
+            "CONCAT( " +
+                "FLOOR((MIN(sector1_time) + MIN(sector2_time) + MIN(sector3_time)) / 60000), " +
+                "':' ," +
+            "LPAD( " +
+                "CAST(FLOOR(((MIN(sector1_time) + MIN(sector2_time) + MIN(sector3_time)) % 60000) / 1000) AS TEXT), " +
+                "2, " +
+                    "'0' " +
+                    "), " +
+                "'.'," +
+            "LPAD( " +
+                "CAST(((MIN(sector1_time) + MIN(sector2_time) + MIN(sector3_time)) % 1000) AS TEXT), " +
+                "3, " +
+                    "'0' " +
+                    ") " +
+            ") AS formatted_laptime, " +
             "CAST (" +
                 "ROUND( " +
-                    "(MIN(sector1_time_s) + MIN(sector2_time_s) + MIN(sector3_time_s)) - " +
-                        "MIN(ROUND(MIN(sector1_time_s) + MIN(sector2_time_s) + MIN(sector3_time_s), 3)) OVER (), " +
+                    "(MIN(sector1_time) + MIN(sector2_time) + MIN(sector3_time)) - " +
+                        "MIN(ROUND(MIN(sector1_time) + MIN(sector2_time) + MIN(sector3_time), 3)) OVER (), " +
                     "3 " +
-                ") " +
-            "AS DOUBLE PRECISION) AS gap_s, " +
+                ") /1000 " +
+            "AS DOUBLE PRECISION) AS gap, " +
             "CAST (" +
                 "ROUND ( " +
                 "( " +
-                    "((MIN(sector1_time_s) + MIN(sector2_time_s) + MIN(sector3_time_s)) - " +
-                    "MIN(ROUND(MIN(sector1_time_s) + MIN(sector2_time_s) + MIN(sector3_time_s), 3)) OVER ()) / " +
-                    "MIN(ROUND(MIN(sector1_time_s) + MIN(sector2_time_s) + MIN(sector3_time_s), 3)) OVER () " +
+                    "((MIN(sector1_time) + MIN(sector2_time) + MIN(sector3_time)) - " +
+                    "MIN(ROUND(MIN(sector1_time) + MIN(sector2_time) + MIN(sector3_time), 3)) OVER ()) / " +
+                    "MIN(ROUND(MIN(sector1_time) + MIN(sector2_time) + MIN(sector3_time), 3)) OVER () " +
                 ") * 100, 2 ) " +
             "AS DOUBLE PRECISION) AS gap_percentage " +
         "FROM subquery " +
@@ -268,7 +312,7 @@ List<LapDriverDataLapDto> findFastestLap(Integer year, Integer roundNumber, Inte
             "driver_number, " +
             "driver_hex_color " +
         "ORDER BY " +
-            "theoretical_best_lap_s ASC;",
+            "gap ASC;",
         nativeQuery = true
 )
 List<LapDriverDataTheoreticalLapDto> findTheoreticalFastestLap(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber);

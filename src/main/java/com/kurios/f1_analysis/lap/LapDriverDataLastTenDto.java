@@ -6,20 +6,16 @@ public class LapDriverDataLastTenDto {
     private Date lapStartDate;
     private Short driverNumber;
     private Short lapNumber;
-    private Integer sector1Time;
+    private Double sector1Time;
     private Short speedI1;
-    private Integer sector2Time;
+    private Double sector2Time;
     private Short speedI2;
-    private Integer sector3Time;
+    private Double sector3Time;
     private Short speedFl;
-    private Integer laptimeMs;
+    private String formattedLaptime;
     private Short speedSt;
 
-    public LapDriverDataLastTenDto(
-            Date lapStartDate, Short lapNumber, Short driverNumber, Integer sector1Time,
-            Short speedI1, Integer sector2Time, Short speedI2, Integer sector3Time,
-            Short speedFl, Integer laptimeMs, Short speedSt) {
-
+    public LapDriverDataLastTenDto(Date lapStartDate, Short driverNumber, Short lapNumber, Double sector1Time, Short speedI1, Double sector2Time, Short speedI2, Double sector3Time, Short speedFl, String formattedLaptime, Short speedSt) {
         this.lapStartDate = lapStartDate;
         this.driverNumber = driverNumber;
         this.lapNumber = lapNumber;
@@ -29,7 +25,7 @@ public class LapDriverDataLastTenDto {
         this.speedI2 = speedI2;
         this.sector3Time = sector3Time;
         this.speedFl = speedFl;
-        this.laptimeMs = laptimeMs;
+        this.formattedLaptime = formattedLaptime;
         this.speedSt = speedSt;
     }
 
@@ -57,11 +53,11 @@ public class LapDriverDataLastTenDto {
         this.lapNumber = lapNumber;
     }
 
-    public Integer getSector1Time() {
+    public Double getSector1Time() {
         return sector1Time;
     }
 
-    public void setSector1Time(Integer sector1Time) {
+    public void setSector1Time(Double sector1Time) {
         this.sector1Time = sector1Time;
     }
 
@@ -73,11 +69,11 @@ public class LapDriverDataLastTenDto {
         this.speedI1 = speedI1;
     }
 
-    public Integer getSector2Time() {
+    public Double getSector2Time() {
         return sector2Time;
     }
 
-    public void setSector2Time(Integer sector2Time) {
+    public void setSector2Time(Double sector2Time) {
         this.sector2Time = sector2Time;
     }
 
@@ -89,11 +85,11 @@ public class LapDriverDataLastTenDto {
         this.speedI2 = speedI2;
     }
 
-    public Integer getSector3Time() {
+    public Double getSector3Time() {
         return sector3Time;
     }
 
-    public void setSector3Time(Integer sector3Time) {
+    public void setSector3Time(Double sector3Time) {
         this.sector3Time = sector3Time;
     }
 
@@ -105,12 +101,12 @@ public class LapDriverDataLastTenDto {
         this.speedFl = speedFl;
     }
 
-    public Integer getLaptimeMs() {
-        return laptimeMs;
+    public String getFormattedLaptime() {
+        return formattedLaptime;
     }
 
-    public void setLaptimeMs(Integer laptimeMs) {
-        this.laptimeMs = laptimeMs;
+    public void setFormattedLaptime(String formattedLaptime) {
+        this.formattedLaptime = formattedLaptime;
     }
 
     public Short getSpeedSt() {

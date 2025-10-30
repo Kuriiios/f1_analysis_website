@@ -8,7 +8,7 @@ public class LapDriverDataLapDto {
     private String driverHexColor;
     private Short driverNumber;
     private Short lapNumber;
-    private Double lapTimeS;
+    private String formattedLaptime;
     private Double gapS;
     private Double gapPercentage;
     private String compound_name;
@@ -19,17 +19,17 @@ public class LapDriverDataLapDto {
             String driverHexColor,
             Short driverNumber,
             Short lapNumber,
-            Double lapTimeS,
+            String formattedLaptime,
             Double gapS,
             Double gapPercentage,
-            String compound_name ){
-
+            String compound_name
+    ) {
         this.lapStartDate = lapStartDate;
         this.driverAbbreviation = driverAbbreviation;
         this.driverHexColor = driverHexColor;
         this.driverNumber = driverNumber;
         this.lapNumber = lapNumber;
-        this.lapTimeS = lapTimeS;
+        this.formattedLaptime = formattedLaptime;
         this.gapS = gapS;
         this.gapPercentage = gapPercentage;
         this.compound_name = compound_name;
@@ -75,12 +75,12 @@ public class LapDriverDataLapDto {
         this.lapNumber = lapNumber;
     }
 
-    public Double getLapTimeS() {
-        return lapTimeS;
+    public String getFormattedLaptime() {
+        return formattedLaptime;
     }
 
-    public void setLapTimeS(Double lapTimeS) {
-        this.lapTimeS = lapTimeS;
+    public void setFormattedLaptime(String formattedLaptime) {
+        this.formattedLaptime = formattedLaptime;
     }
 
     public Double getGapS() {

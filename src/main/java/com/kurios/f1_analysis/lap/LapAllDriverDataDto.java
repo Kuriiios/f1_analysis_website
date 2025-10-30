@@ -7,11 +7,11 @@ public class LapAllDriverDataDto {
     private Short driverNumber;
     private String driverHexColor;
     private String driverAbbreviation;
-    private Integer sector1Time;
+    private Double sector1Time;
     private Short speedI1;
-    private Integer sector2Time;
+    private Double sector2Time;
     private Short speedI2;
-    private Integer sector3Time;
+    private Double sector3Time;
     private Short speedFl;
     private Integer laptimeMs;
     private Short speedSt;
@@ -21,8 +21,8 @@ public class LapAllDriverDataDto {
 
     public LapAllDriverDataDto(
             Date lapStartDate, Short driverNumber, String driverHexColor,
-            String driverAbbreviation, Integer sector1Time, Short speedI1, Integer sector2Time,
-            Short speedI2, Integer sector3Time, Short speedFl, Integer laptimeMs,
+            String driverAbbreviation, Double sector1Time, Short speedI1, Double sector2Time,
+            Short speedI2, Double sector3Time, Short speedFl, Integer laptimeMs,
             Short speedSt, Short lapNumber, String compoundName, Short stint) {
 
         this.lapStartDate = lapStartDate;
@@ -74,11 +74,11 @@ public class LapAllDriverDataDto {
         this.driverAbbreviation = driverAbbreviation;
     }
 
-    public Integer getSector1Time() {
+    public Double getSector1Time() {
         return sector1Time;
     }
 
-    public void setSector1Time(Integer sector1Time) {
+    public void setSector1Time(Double sector1Time) {
         this.sector1Time = sector1Time;
     }
 
@@ -90,11 +90,11 @@ public class LapAllDriverDataDto {
         this.speedI1 = speedI1;
     }
 
-    public Integer getSector2Time() {
+    public Double getSector2Time() {
         return sector2Time;
     }
 
-    public void setSector2Time(Integer sector2Time) {
+    public void setSector2Time(Double sector2Time) {
         this.sector2Time = sector2Time;
     }
 
@@ -106,11 +106,11 @@ public class LapAllDriverDataDto {
         this.speedI2 = speedI2;
     }
 
-    public Integer getSector3Time() {
+    public Double getSector3Time() {
         return sector3Time;
     }
 
-    public void setSector3Time(Integer sector3Time) {
+    public void setSector3Time(Double sector3Time) {
         this.sector3Time = sector3Time;
     }
 
