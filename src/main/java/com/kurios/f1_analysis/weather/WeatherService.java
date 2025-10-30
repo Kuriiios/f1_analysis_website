@@ -49,6 +49,10 @@ public class WeatherService {
                 .orElse(null);
     }
 
+    public List<WeatherDataDto> findWeatherDataPerSession(Integer year, Integer roundNumber, Integer sessionNameId) {
+        return weatherRepository.findWeatherDataPerSession(year, roundNumber, sessionNameId);
+    }
+
     @Transactional
     public void saveWeathersForRoundNumber(Integer year, Integer roundNumber) {
         String url = "http://127.0.0.1:8000/weathers/" + year + "/" + roundNumber;
