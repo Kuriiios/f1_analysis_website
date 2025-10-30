@@ -4,16 +4,23 @@ public class LapDriverDataTheoreticalLapDto {
     private String driverAbbreviation;
     private Short driverNumber;
     private String driverHexColor;
-    private Double theoreticalLapTimeS;
-    private Double gapS;
+    private String formattedLapTime;
+    private Double gap;
     private Double gapPercentage;
 
-    public LapDriverDataTheoreticalLapDto(String driverAbbreviation, Short driverNumber, String driverHexColor, Double theoraticalLapTimeS, Double gapS, Double gapPercentage) {
+    public LapDriverDataTheoreticalLapDto(
+            String driverAbbreviation,
+            Short driverNumber,
+            String driverHexColor,
+            String formattedLapTime,
+            Double gap,
+            Double gapPercentage
+    ) {
         this.driverAbbreviation = driverAbbreviation;
         this.driverNumber = driverNumber;
         this.driverHexColor = driverHexColor;
-        this.theoreticalLapTimeS = theoraticalLapTimeS;
-        this.gapS = gapS;
+        this.formattedLapTime = formattedLapTime;
+        this.gap = gap;
         this.gapPercentage = gapPercentage;
     }
 
@@ -41,20 +48,20 @@ public class LapDriverDataTheoreticalLapDto {
         this.driverHexColor = driverHexColor;
     }
 
-    public Double getTheoraticalLapTimeS() {
-        return theoreticalLapTimeS;
+    public String getFormattedLapTime() {
+        return formattedLapTime;
     }
 
-    public void setTheoraticalLapTimeS(Double theoraticalLapTimeS) {
-        this.theoreticalLapTimeS = theoraticalLapTimeS;
+    public void setFormattedLapTime(String formattedLapTime) {
+        this.formattedLapTime = formattedLapTime;
     }
 
-    public Double getGapS() {
-        return gapS;
+    public Double getGap() {
+        return gap;
     }
 
-    public void setGapS(Double gapS) {
-        this.gapS = gapS;
+    public void setGap(Double gap) {
+        this.gap = gap;
     }
 
     public Double getGapPercentage() {

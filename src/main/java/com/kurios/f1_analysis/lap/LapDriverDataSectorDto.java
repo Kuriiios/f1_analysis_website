@@ -3,44 +3,44 @@ package com.kurios.f1_analysis.lap;
 import java.util.Date;
 
 public class LapDriverDataSectorDto {
-    private Date lapStartDate;
+    private Date dateTime;
     private String driverAbbreviation;
     private String driverHexColor;
     private Short driverNumber;
     private Short lapNumber;
-    private Double sectorTimeS;
-    private Double gapS;
+    private Double sectorTime;
+    private Double gap;
     private Double gapPercentage;
-    private String compound_name;
+    private String compoundName;
 
     public LapDriverDataSectorDto(
-            Date lapStartDate,
+            Date dateTime,
             String driverAbbreviation,
             String driverHexColor,
             Short driverNumber,
             Short lapNumber,
-            Double sectorTimeS,
-            Double gapS,
+            Double sectorTime,
+            Double gap,
             Double gapPercentage,
-            String compound_name ){
-
-        this.lapStartDate = lapStartDate;
+            String compoundName
+    ) {
+        this.dateTime = dateTime;
         this.driverAbbreviation = driverAbbreviation;
         this.driverHexColor = driverHexColor;
         this.driverNumber = driverNumber;
         this.lapNumber = lapNumber;
-        this.sectorTimeS = sectorTimeS;
-        this.gapS = gapS;
+        this.sectorTime = sectorTime;
+        this.gap = gap;
         this.gapPercentage = gapPercentage;
-        this.compound_name = compound_name;
+        this.compoundName = compoundName;
     }
 
-    public Date getLapStartDate() {
-        return lapStartDate;
+    public Date getDateTime() {
+        return dateTime;
     }
 
-    public void setLapStartDate(Date lapStartDate) {
-        this.lapStartDate = lapStartDate;
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getDriverAbbreviation() {
@@ -75,20 +75,20 @@ public class LapDriverDataSectorDto {
         this.lapNumber = lapNumber;
     }
 
-    public Double getSectorTimeS() {
-        return sectorTimeS;
+    public Double getSectorTime() {
+        return sectorTime;
     }
 
-    public void setSectorTimeS(Double sectorTimeS) {
-        this.sectorTimeS = sectorTimeS;
+    public void setSectorTime(Double sectorTime) {
+        this.sectorTime = sectorTime;
     }
 
-    public Double getGapS() {
-        return gapS;
+    public Double getGap() {
+        return gap;
     }
 
-    public void setGapS(Double gapS) {
-        this.gapS = gapS;
+    public void setGap(Double gap) {
+        this.gap = gap;
     }
 
     public Double getGapPercentage() {
@@ -99,11 +99,11 @@ public class LapDriverDataSectorDto {
         this.gapPercentage = gapPercentage;
     }
 
-    public String getCompound_name() {
-        return compound_name;
+    public String getCompoundName() {
+        return compoundName;
     }
 
-    public void setCompound_name(String compound_name) {
-        this.compound_name = compound_name;
+    public void setCompoundName(String compoundName) {
+        this.compoundName = compoundName;
     }
 }

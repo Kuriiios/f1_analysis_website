@@ -3,29 +3,29 @@ package com.kurios.f1_analysis.lap;
 import java.util.Date;
 
 public class LapAllDriverDataDto {
-    private Date lapStartDate;
+    private Date dateTime;
     private Short driverNumber;
     private String driverHexColor;
     private String driverAbbreviation;
-    private Integer sector1Time;
+    private Double sector1Time;
     private Short speedI1;
-    private Integer sector2Time;
+    private Double sector2Time;
     private Short speedI2;
-    private Integer sector3Time;
+    private Double sector3Time;
     private Short speedFl;
-    private Integer laptimeMs;
+    private String formattedLaptime;
     private Short speedSt;
     private Short lapNumber;
     private String compoundName;
     private Short stint;
 
     public LapAllDriverDataDto(
-            Date lapStartDate, Short driverNumber, String driverHexColor,
-            String driverAbbreviation, Integer sector1Time, Short speedI1, Integer sector2Time,
-            Short speedI2, Integer sector3Time, Short speedFl, Integer laptimeMs,
+            Date dateTime, Short driverNumber, String driverHexColor,
+            String driverAbbreviation, Double sector1Time, Short speedI1, Double sector2Time,
+            Short speedI2, Double sector3Time, Short speedFl, String formattedLaptime,
             Short speedSt, Short lapNumber, String compoundName, Short stint) {
 
-        this.lapStartDate = lapStartDate;
+        this.dateTime = dateTime;
         this.driverNumber = driverNumber;
         this.driverHexColor = driverHexColor;
         this.driverAbbreviation = driverAbbreviation;
@@ -35,19 +35,19 @@ public class LapAllDriverDataDto {
         this.speedI2 = speedI2;
         this.sector3Time = sector3Time;
         this.speedFl = speedFl;
-        this.laptimeMs = laptimeMs;
+        this.formattedLaptime = formattedLaptime;
         this.speedSt = speedSt;
         this.lapNumber = lapNumber;
         this.compoundName = compoundName;
         this.stint = stint;
     }
 
-    public Date getLapStartDate() {
-        return lapStartDate;
+    public Date getDateTime() {
+        return dateTime;
     }
 
-    public void setLapStartDate(Date lapStartDate) {
-        this.lapStartDate = lapStartDate;
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
     }
 
     public Short getDriverNumber() {
@@ -74,11 +74,11 @@ public class LapAllDriverDataDto {
         this.driverAbbreviation = driverAbbreviation;
     }
 
-    public Integer getSector1Time() {
+    public Double getSector1Time() {
         return sector1Time;
     }
 
-    public void setSector1Time(Integer sector1Time) {
+    public void setSector1Time(Double sector1Time) {
         this.sector1Time = sector1Time;
     }
 
@@ -90,11 +90,11 @@ public class LapAllDriverDataDto {
         this.speedI1 = speedI1;
     }
 
-    public Integer getSector2Time() {
+    public Double getSector2Time() {
         return sector2Time;
     }
 
-    public void setSector2Time(Integer sector2Time) {
+    public void setSector2Time(Double sector2Time) {
         this.sector2Time = sector2Time;
     }
 
@@ -106,11 +106,11 @@ public class LapAllDriverDataDto {
         this.speedI2 = speedI2;
     }
 
-    public Integer getSector3Time() {
+    public Double getSector3Time() {
         return sector3Time;
     }
 
-    public void setSector3Time(Integer sector3Time) {
+    public void setSector3Time(Double sector3Time) {
         this.sector3Time = sector3Time;
     }
 
@@ -122,12 +122,12 @@ public class LapAllDriverDataDto {
         this.speedFl = speedFl;
     }
 
-    public Integer getLaptimeMs() {
-        return laptimeMs;
+    public String getFormattedLaptime() {
+        return formattedLaptime;
     }
 
-    public void setLaptimeMs(Integer laptimeMs) {
-        this.laptimeMs = laptimeMs;
+    public void setFormattedLaptime(String formattedLaptime) {
+        this.formattedLaptime = formattedLaptime;
     }
 
     public Short getSpeedSt() {
