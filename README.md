@@ -26,9 +26,7 @@ Prerequisites
 
 ## ⚙️ Data Base Schema
     
-<img width="1894" height="1360" alt="Untitled(1)" src="https://github.com/user-attachments/assets/7b545fc9-19e1-421d-a5b7-9c59fef7b63c" />
-
-
+<img width="2131" height="1196" alt="db_schema" src="https://github.com/user-attachments/assets/63689770-4bf5-4ffb-a4cd-331737ed2bb8" />
     
 ## Data Model / Entities
 
