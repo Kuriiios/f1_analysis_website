@@ -32,13 +32,15 @@ Prerequisites
 
 The following core entities have been modeled, providing comprehensive data coverage for F1 sessions:
 
-    Session Metadata: EventRound, EventSession, SessionName
+    Session Metadata: EventRound, EventSession
     
     Participants: Driver, Team
     
-    Timing & Lap Data: Lap, PosData, CarData, DTA
-    
-    Track & External Factors: TrackStatus, Weather, Compound, DRS
+    Timing & Lap Data: Lap, PosData, CarData
+
+    Track & External Factors: Weather, TeamRadio, RaceControl
+
+    Junctions & Reference : DTA, SessionName, DRS, Compound, TrackStatus, SessionName
 
 ## Key Java Functionality
     
