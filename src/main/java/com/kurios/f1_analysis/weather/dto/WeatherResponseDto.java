@@ -1,6 +1,4 @@
-package com.kurios.f1_analysis.weather;
-
-import jakarta.validation.constraints.NotNull;
+package com.kurios.f1_analysis.weather.dto;
 
 public record WeatherResponseDto(
         Integer sessionId,

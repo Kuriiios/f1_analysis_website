@@ -2,6 +2,7 @@ package com.kurios.f1_analysis.lap;
 
 import com.kurios.f1_analysis.compound.CompoundRepository;
 import com.kurios.f1_analysis.dta.DtaRepository;
+import com.kurios.f1_analysis.lap.dto.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,23 +55,27 @@ public class LapService {
                 .toList();
     }
 
-    public List<LapAllDriverDataDto> findAllDriverLapInfo(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber) {
+    public List<LapOnTrackDto> findDriversOnTrack(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber) {
+        return lapRepository.findDriversOnTrack(year, roundNumber, sessionNameId, lapNumber);
+    }
+
+    public List<LapDataAllDriverDto> findAllDriverLapInfo(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber) {
         return lapRepository.findAllDriverLapInfo(year, roundNumber, sessionNameId, lapNumber);
     }
 
-    public List<LapDriverDataLastTenDto> findLastTenLapPerDriver(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber, Short driverNumber) {
-        return lapRepository.findLastTenLapPerDriver(year, roundNumber, sessionNameId, lapNumber, driverNumber);
+    public List<LapDataLastTenDto> findLastTenLapsPerDriver(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber, Short driverNumber) {
+        return lapRepository.findLastTenLapsPerDriver(year, roundNumber, sessionNameId, lapNumber, driverNumber);
     }
 
-    public List<LapDriverDataSectorDto> findFastestSector(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber, Short sectorNumber) {
+    public List<LapDataSectorDto> findFastestSector(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber, Short sectorNumber) {
         return lapRepository.findFastestSector(year, roundNumber, sessionNameId, lapNumber, sectorNumber);
     }
 
-    public List<LapDriverDataLapDto> findFastestLap(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber) {
+    public List<LapDataFastestDto> findFastestLap(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber) {
         return lapRepository.findFastestLap(year, roundNumber, sessionNameId, lapNumber);
     }
 
-    public List<LapDriverDataTheoreticalLapDto> findTheoreticalFastestLap(Integer year, Integer roundNumber, Integer sessionNameId,  Short lapNumber) {
+    public List<LapDataTheoreticalDto> findTheoreticalFastestLap(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber) {
         return lapRepository.findTheoreticalFastestLap(year, roundNumber, sessionNameId, lapNumber);
     }
 }

@@ -1,12 +1,11 @@
-package com.kurios.f1_analysis.lap;
+package com.kurios.f1_analysis.lap.dto;
 
 import java.util.Date;
 
-public class LapAllDriverDataDto {
+public class LapDataLastTenDto {
     private Date dateTime;
     private Short driverNumber;
-    private String driverHexColor;
-    private String driverAbbreviation;
+    private Short lapNumber;
     private Double sector1Time;
     private Short speedI1;
     private Double sector2Time;
@@ -15,20 +14,11 @@ public class LapAllDriverDataDto {
     private Short speedFl;
     private String formattedLaptime;
     private Short speedSt;
-    private Short lapNumber;
-    private String compoundName;
-    private Short stint;
 
-    public LapAllDriverDataDto(
-            Date dateTime, Short driverNumber, String driverHexColor,
-            String driverAbbreviation, Double sector1Time, Short speedI1, Double sector2Time,
-            Short speedI2, Double sector3Time, Short speedFl, String formattedLaptime,
-            Short speedSt, Short lapNumber, String compoundName, Short stint) {
-
+    public LapDataLastTenDto(Date dateTime, Short driverNumber, Short lapNumber, Double sector1Time, Short speedI1, Double sector2Time, Short speedI2, Double sector3Time, Short speedFl, String formattedLaptime, Short speedSt) {
         this.dateTime = dateTime;
         this.driverNumber = driverNumber;
-        this.driverHexColor = driverHexColor;
-        this.driverAbbreviation = driverAbbreviation;
+        this.lapNumber = lapNumber;
         this.sector1Time = sector1Time;
         this.speedI1 = speedI1;
         this.sector2Time = sector2Time;
@@ -37,9 +27,6 @@ public class LapAllDriverDataDto {
         this.speedFl = speedFl;
         this.formattedLaptime = formattedLaptime;
         this.speedSt = speedSt;
-        this.lapNumber = lapNumber;
-        this.compoundName = compoundName;
-        this.stint = stint;
     }
 
     public Date getDateTime() {
@@ -58,20 +45,12 @@ public class LapAllDriverDataDto {
         this.driverNumber = driverNumber;
     }
 
-    public String getDriverHexColor() {
-        return driverHexColor;
+    public Short getLapNumber() {
+        return lapNumber;
     }
 
-    public void setDriverHexColor(String driverHexColor) {
-        this.driverHexColor = driverHexColor;
-    }
-
-    public String getDriverAbbreviation() {
-        return driverAbbreviation;
-    }
-
-    public void setDriverAbbreviation(String driverAbbreviation) {
-        this.driverAbbreviation = driverAbbreviation;
+    public void setLapNumber(Short lapNumber) {
+        this.lapNumber = lapNumber;
     }
 
     public Double getSector1Time() {
@@ -136,29 +115,5 @@ public class LapAllDriverDataDto {
 
     public void setSpeedSt(Short speedSt) {
         this.speedSt = speedSt;
-    }
-
-    public Short getLapNumber() {
-        return lapNumber;
-    }
-
-    public void setLapNumber(Short lapNumber) {
-        this.lapNumber = lapNumber;
-    }
-
-    public String getCompoundName() {
-        return compoundName;
-    }
-
-    public void setCompoundName(String compoundName) {
-        this.compoundName = compoundName;
-    }
-
-    public Short getStint() {
-        return stint;
-    }
-
-    public void setStint(Short stint) {
-        this.stint = stint;
     }
 }

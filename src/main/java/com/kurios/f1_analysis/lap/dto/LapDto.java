@@ -1,4 +1,4 @@
-package com.kurios.f1_analysis.lap;
+package com.kurios.f1_analysis.lap.dto;
 
 import jakarta.validation.constraints.*;
 

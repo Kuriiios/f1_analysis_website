@@ -1,38 +1,38 @@
-package com.kurios.f1_analysis.lap;
+package com.kurios.f1_analysis.lap.dto;
 
 import java.util.Date;
 
-public class LapDriverDataSectorDto {
+public class LapDataFastestDto {
     private Date dateTime;
     private String driverAbbreviation;
     private String driverHexColor;
     private Short driverNumber;
     private Short lapNumber;
-    private Double sectorTime;
+    private String formattedLaptime;
     private Double gap;
     private Double gapPercentage;
-    private String compoundName;
+    private String compound_name;
 
-    public LapDriverDataSectorDto(
+    public LapDataFastestDto(
             Date dateTime,
             String driverAbbreviation,
             String driverHexColor,
             Short driverNumber,
             Short lapNumber,
-            Double sectorTime,
+            String formattedLaptime,
             Double gap,
             Double gapPercentage,
-            String compoundName
+            String compound_name
     ) {
         this.dateTime = dateTime;
         this.driverAbbreviation = driverAbbreviation;
         this.driverHexColor = driverHexColor;
         this.driverNumber = driverNumber;
         this.lapNumber = lapNumber;
-        this.sectorTime = sectorTime;
+        this.formattedLaptime = formattedLaptime;
         this.gap = gap;
         this.gapPercentage = gapPercentage;
-        this.compoundName = compoundName;
+        this.compound_name = compound_name;
     }
 
     public Date getDateTime() {
@@ -75,12 +75,12 @@ public class LapDriverDataSectorDto {
         this.lapNumber = lapNumber;
     }
 
-    public Double getSectorTime() {
-        return sectorTime;
+    public String getFormattedLaptime() {
+        return formattedLaptime;
     }
 
-    public void setSectorTime(Double sectorTime) {
-        this.sectorTime = sectorTime;
+    public void setFormattedLaptime(String formattedLaptime) {
+        this.formattedLaptime = formattedLaptime;
     }
 
     public Double getGap() {
@@ -99,11 +99,11 @@ public class LapDriverDataSectorDto {
         this.gapPercentage = gapPercentage;
     }
 
-    public String getCompoundName() {
-        return compoundName;
+    public String getCompound_name() {
+        return compound_name;
     }
 
-    public void setCompoundName(String compoundName) {
-        this.compoundName = compoundName;
+    public void setCompound_name(String compound_name) {
+        this.compound_name = compound_name;
     }
 }

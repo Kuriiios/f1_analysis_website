@@ -1,6 +1,6 @@
-package com.kurios.f1_analysis.lap;
+package com.kurios.f1_analysis.lap.dto;
 
-public class LapDriverDataTheoreticalLapDto {
+public class LapDataTheoreticalDto {
     private String driverAbbreviation;
     private Short driverNumber;
     private String driverHexColor;
@@ -8,7 +8,7 @@ public class LapDriverDataTheoreticalLapDto {
     private Double gap;
     private Double gapPercentage;
 
-    public LapDriverDataTheoreticalLapDto(
+    public LapDataTheoreticalDto(
             String driverAbbreviation,
             Short driverNumber,
             String driverHexColor,

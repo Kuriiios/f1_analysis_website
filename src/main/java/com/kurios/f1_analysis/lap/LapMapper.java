@@ -2,6 +2,8 @@ package com.kurios.f1_analysis.lap;
 
 import com.kurios.f1_analysis.compound.Compound;
 import com.kurios.f1_analysis.dta.Dta;
+import com.kurios.f1_analysis.lap.dto.LapDto;
+import com.kurios.f1_analysis.lap.dto.LapResponseDto;
 import org.springframework.stereotype.Service;
 
 @Service

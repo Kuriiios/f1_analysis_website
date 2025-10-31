@@ -1,5 +1,6 @@
 package com.kurios.f1_analysis.lap;
 
+import com.kurios.f1_analysis.lap.dto.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -8,6 +9,58 @@ import java.util.List;
 public interface LapRepository extends JpaRepository<Lap, Integer> {
 
     List<Lap> findAllByDta_Id(Integer dtaId);
+
+    @Query(value =
+            "WITH all_participants AS ( " +
+                "SELECT DISTINCT " +
+                    "d.driver_id, " +
+                    "d.driver_number " +
+                "FROM dta " +
+                    "INNER JOIN event_session AS es ON dta.event_session_id = es.event_session_id " +
+                    "INNER JOIN event_round AS er ON es.event_round_id = er.event_round_id " +
+                    "INNER JOIN session_name AS sn ON es.session_name_id = sn.session_name_id " +
+                    "INNER JOIN driver AS d ON d.driver_id = dta.driver_id " +
+                "WHERE er.year = :year " +
+                    "AND er.round_number = :roundNumber " +
+                    "AND sn.session_name_id = :sessionNameId " +
+            "), " +
+            "lappers_who_hit_target AS ( " +
+                "SELECT DISTINCT " +
+                    "dta.driver_id, " +
+                    "l.lap_start_date " +
+                "FROM lap AS l " +
+                    "INNER JOIN dta ON l.dta_id = dta.dta_id " +
+                    "INNER JOIN event_session AS es ON dta.event_session_id = es.event_session_id " +
+                    "INNER JOIN event_round AS er ON es.event_round_id = er.event_round_id " +
+                    "INNER JOIN session_name AS sn ON es.session_name_id = sn.session_name_id " +
+                "WHERE er.year = :year " +
+                    "AND er.round_number = :roundNumber " +
+                    "AND sn.session_name_id = :sessionNameId " +
+                    "AND l.lap_number = :lapNumber " +
+                "GROUP BY " +
+                    "dta.driver_id, " +
+                    "l.lap_start_date " +
+                "ORDER BY l.lap_start_date " +
+            "), " +
+            "ordered_drivers  AS ( "+
+                "SELECT DISTINCT " +
+                    "p.driver_number, " +
+                    "l.lap_start_date, " +
+                    "CASE " +
+                        "WHEN l.driver_id IS NOT NULL THEN 'OnTrack' " +
+                        "ELSE 'DNF' " +
+                    "END AS is_on_track " +
+                "FROM all_participants p " +
+                    "LEFT JOIN lappers_who_hit_target AS l "+
+                        "ON p.driver_id = l.driver_id "+
+                "ORDER BY l.lap_start_date ASC) "+
+            "SELECT " +
+                "driver_number, " +
+                "is_on_track " +
+            "FROM ordered_drivers;",
+            nativeQuery = true
+    )
+    List<LapOnTrackDto> findDriversOnTrack(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber);
 
     @Query(value =
             "SELECT " +
@@ -55,7 +108,7 @@ public interface LapRepository extends JpaRepository<Lap, Integer> {
             "ORDER BY lap_start_time;",
             nativeQuery = true
     )
-    List<LapAllDriverDataDto> findAllDriverLapInfo(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber);
+    List<LapDataAllDriverDto> findAllDriverLapInfo(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber);
 
     @Query(value =
             "SELECT " +
@@ -101,7 +154,7 @@ public interface LapRepository extends JpaRepository<Lap, Integer> {
             "ORDER BY lap_start_date ",
             nativeQuery = true
     )
-    List<LapDriverDataLastTenDto> findLastTenLapPerDriver(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber, Short driverNumber);
+    List<LapDataLastTenDto> findLastTenLapsPerDriver(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber, Short driverNumber);
 
 @Query(value =
         "WITH subquery AS ( " +
@@ -180,7 +233,7 @@ public interface LapRepository extends JpaRepository<Lap, Integer> {
             "gap_s;",
         nativeQuery = true
 )
-List<LapDriverDataSectorDto> findFastestSector(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber, Short sectorNumber);
+List<LapDataSectorDto> findFastestSector(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber, Short sectorNumber);
 
 @Query(value =
         "WITH subquery AS ( " +
@@ -259,7 +312,7 @@ List<LapDriverDataSectorDto> findFastestSector(Integer year, Integer roundNumber
             "gap_s;",
         nativeQuery = true
 )
-List<LapDriverDataLapDto> findFastestLap(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber);
+List<LapDataFastestDto> findFastestLap(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber);
 
 @Query(value =
         "WITH subquery AS ( " +
@@ -329,6 +382,6 @@ List<LapDriverDataLapDto> findFastestLap(Integer year, Integer roundNumber, Inte
             "gap ASC;",
         nativeQuery = true
 )
-List<LapDriverDataTheoreticalLapDto> findTheoreticalFastestLap(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber);
+List<LapDataTheoreticalDto> findTheoreticalFastestLap(Integer year, Integer roundNumber, Integer sessionNameId, Short lapNumber);
 
 }

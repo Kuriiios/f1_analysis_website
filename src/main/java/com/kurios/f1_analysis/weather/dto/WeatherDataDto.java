@@ -1,6 +1,4 @@
-package com.kurios.f1_analysis.weather;
-
-import java.util.Date;
+package com.kurios.f1_analysis.weather.dto;
 
 public class WeatherDataDto {
     private String time;

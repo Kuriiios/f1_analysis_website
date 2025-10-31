@@ -1,6 +1,6 @@
 package com.kurios.f1_analysis.weather;
 
-import com.kurios.f1_analysis.lap.Lap;
+import com.kurios.f1_analysis.weather.dto.WeatherDataDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

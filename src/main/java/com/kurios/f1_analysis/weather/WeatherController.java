@@ -1,7 +1,7 @@
 package com.kurios.f1_analysis.weather;
 
-import com.kurios.f1_analysis.event_round.EventRoundResponseDto;
-import jakarta.validation.Valid;
+import com.kurios.f1_analysis.weather.dto.WeatherDataDto;
+import com.kurios.f1_analysis.weather.dto.WeatherResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.kurios.f1_analysis.weather;
+package com.kurios.f1_analysis.weather.dto;
 
 
 import jakarta.validation.constraints.*;

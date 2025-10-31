@@ -1,6 +1,9 @@
 package com.kurios.f1_analysis.weather;
 
 import com.kurios.f1_analysis.event_session.EventSessionRepository;
+import com.kurios.f1_analysis.weather.dto.WeatherDataDto;
+import com.kurios.f1_analysis.weather.dto.WeatherDto;
+import com.kurios.f1_analysis.weather.dto.WeatherResponseDto;
 import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

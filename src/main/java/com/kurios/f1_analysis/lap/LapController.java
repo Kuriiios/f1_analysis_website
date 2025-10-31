@@ -1,5 +1,6 @@
 package com.kurios.f1_analysis.lap;
 
+import com.kurios.f1_analysis.lap.dto.*;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,8 +41,16 @@ public class LapController {
         return lapService.findAllByDtaId(dtaId);
     }
 
-    @GetMapping("/all-driver-info")
-    public List<LapAllDriverDataDto> findAllDriverLapInfo(
+    @GetMapping("/on-track")
+    public List<LapOnTrackDto> findDriversOnTrack(
+            @RequestParam("year") Integer year,
+            @RequestParam("roundNumber") Integer roundNumber,
+            @RequestParam("sessionNameId") Integer sessionNameId,
+            @RequestParam("lapNumber") Short lapNumber) {
+        return lapService.findDriversOnTrack(year, roundNumber, sessionNameId, lapNumber);
+    }
+    @GetMapping("/all-drivers-info")
+    public List<LapDataAllDriverDto> findAllDriverLapInfo(
             @RequestParam("year") Integer year,
             @RequestParam("roundNumber") Integer roundNumber,
             @RequestParam("sessionNameId") Integer sessionNameId,
@@ -50,17 +59,17 @@ public class LapController {
     }
 
     @GetMapping("/per-driver-info")
-    public List<LapDriverDataLastTenDto> findLastTenLapPerDriver(
+    public List<LapDataLastTenDto> findLastTenLapsPerDriver(
             @RequestParam("year") Integer year,
             @RequestParam("roundNumber") Integer roundNumber,
             @RequestParam("sessionNameId") Integer sessionNameId,
             @RequestParam("lapNumber") Short lapNumber,
             @RequestParam("driverNumber") Short driverNumber) {
-        return lapService.findLastTenLapPerDriver(year, roundNumber, sessionNameId, lapNumber, driverNumber);
+        return lapService.findLastTenLapsPerDriver(year, roundNumber, sessionNameId, lapNumber, driverNumber);
     }
 
     @GetMapping("/best-sector")
-    public List<LapDriverDataSectorDto> findFastestSector(
+    public List<LapDataSectorDto> findFastestSector(
             @RequestParam("year") Integer year,
             @RequestParam("roundNumber") Integer roundNumber,
             @RequestParam("sessionNameId") Integer sessionNameId,
@@ -70,7 +79,7 @@ public class LapController {
     }
 
     @GetMapping("/best-lap")
-    public List<LapDriverDataLapDto> findFastestLap(
+    public List<LapDataFastestDto> findFastestLap(
             @RequestParam("year") Integer year,
             @RequestParam("roundNumber") Integer roundNumber,
             @RequestParam("sessionNameId") Integer sessionNameId,
@@ -79,7 +88,7 @@ public class LapController {
     }
 
     @GetMapping("/theoratical-best-lap")
-    public List<LapDriverDataTheoreticalLapDto> findTheoraticalFastestLap(
+    public List<LapDataTheoreticalDto> findTheoraticalFastestLap(
             @RequestParam("year") Integer year,
             @RequestParam("roundNumber") Integer roundNumber,
             @RequestParam("sessionNameId") Integer sessionNameId,

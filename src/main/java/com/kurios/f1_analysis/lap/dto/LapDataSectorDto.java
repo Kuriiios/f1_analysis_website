@@ -1,38 +1,38 @@
-package com.kurios.f1_analysis.lap;
+package com.kurios.f1_analysis.lap.dto;
 
 import java.util.Date;
 
-public class LapDriverDataLapDto {
+public class LapDataSectorDto {
     private Date dateTime;
     private String driverAbbreviation;
     private String driverHexColor;
     private Short driverNumber;
     private Short lapNumber;
-    private String formattedLaptime;
+    private Double sectorTime;
     private Double gap;
     private Double gapPercentage;
-    private String compound_name;
+    private String compoundName;
 
-    public LapDriverDataLapDto(
+    public LapDataSectorDto(
             Date dateTime,
             String driverAbbreviation,
             String driverHexColor,
             Short driverNumber,
             Short lapNumber,
-            String formattedLaptime,
+            Double sectorTime,
             Double gap,
             Double gapPercentage,
-            String compound_name
+            String compoundName
     ) {
         this.dateTime = dateTime;
         this.driverAbbreviation = driverAbbreviation;
         this.driverHexColor = driverHexColor;
         this.driverNumber = driverNumber;
         this.lapNumber = lapNumber;
-        this.formattedLaptime = formattedLaptime;
+        this.sectorTime = sectorTime;
         this.gap = gap;
         this.gapPercentage = gapPercentage;
-        this.compound_name = compound_name;
+        this.compoundName = compoundName;
     }
 
     public Date getDateTime() {
@@ -75,12 +75,12 @@ public class LapDriverDataLapDto {
         this.lapNumber = lapNumber;
     }
 
-    public String getFormattedLaptime() {
-        return formattedLaptime;
+    public Double getSectorTime() {
+        return sectorTime;
     }
 
-    public void setFormattedLaptime(String formattedLaptime) {
-        this.formattedLaptime = formattedLaptime;
+    public void setSectorTime(Double sectorTime) {
+        this.sectorTime = sectorTime;
     }
 
     public Double getGap() {
@@ -99,11 +99,11 @@ public class LapDriverDataLapDto {
         this.gapPercentage = gapPercentage;
     }
 
-    public String getCompound_name() {
-        return compound_name;
+    public String getCompoundName() {
+        return compoundName;
     }
 
-    public void setCompound_name(String compound_name) {
-        this.compound_name = compound_name;
+    public void setCompoundName(String compoundName) {
+        this.compoundName = compoundName;
     }
 }

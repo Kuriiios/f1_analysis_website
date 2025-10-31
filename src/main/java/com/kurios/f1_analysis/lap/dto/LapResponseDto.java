@@ -1,4 +1,4 @@
-package com.kurios.f1_analysis.lap;
+package com.kurios.f1_analysis.lap.dto;
 
 import java.util.Date;
 

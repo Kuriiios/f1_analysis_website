@@ -1,6 +1,8 @@
 package com.kurios.f1_analysis.weather;
 
 import com.kurios.f1_analysis.event_session.EventSession;
+import com.kurios.f1_analysis.weather.dto.WeatherDto;
+import com.kurios.f1_analysis.weather.dto.WeatherResponseDto;
 import org.springframework.stereotype.Service;
 
 @Service
