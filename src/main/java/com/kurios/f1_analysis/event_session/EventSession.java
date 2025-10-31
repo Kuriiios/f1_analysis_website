@@ -3,6 +3,7 @@ package com.kurios.f1_analysis.event_session;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.kurios.f1_analysis.dta.Dta;
 import com.kurios.f1_analysis.event_round.EventRound;
+import com.kurios.f1_analysis.race_control.RaceControl;
 import com.kurios.f1_analysis.session_name.SessionName;
 import com.kurios.f1_analysis.weather.Weather;
 import jakarta.persistence.*;
@@ -29,6 +30,11 @@ public class EventSession {
     @JoinColumn(name= "session_name_id")
     @JsonBackReference
     private SessionName sessionName;
+
+    @ManyToOne()
+    @JoinColumn(name= "race_control_id")
+    @JsonBackReference
+    private RaceControl raceControl;
 
     private Date sessionDate;
 
