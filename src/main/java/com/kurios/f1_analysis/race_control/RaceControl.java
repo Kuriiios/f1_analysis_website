@@ -10,11 +10,12 @@ import java.util.List;
 @Table(name = "race_control", uniqueConstraints = {})
 public class RaceControl {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "race_control_id", unique = true)
     private Integer raceControlId;
 
     @OneToMany(
-            mappedBy = "race_control",
+            mappedBy = "raceControl",
             cascade = CascadeType.ALL
     )
     private List<EventSession> eventSessions;

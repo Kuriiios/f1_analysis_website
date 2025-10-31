@@ -6,6 +6,7 @@ import com.kurios.f1_analysis.lap.Lap;
 import com.kurios.f1_analysis.event_session.EventSession;
 import com.kurios.f1_analysis.pos_data.PosData;
 import com.kurios.f1_analysis.team.Team;
+import com.kurios.f1_analysis.team_radio.TeamRadio;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -49,6 +50,12 @@ public class Dta {
             cascade = CascadeType.ALL
     )
     private List<Lap> laps;
+
+    @OneToMany(
+            mappedBy = "dta_team_radio",
+            cascade = CascadeType.ALL
+    )
+    private List<TeamRadio> teamRadio;
 
     public Dta() {
     }

@@ -5,6 +5,7 @@ import com.kurios.f1_analysis.dta.Dta;
 import com.kurios.f1_analysis.event_round.EventRound;
 import com.kurios.f1_analysis.race_control.RaceControl;
 import com.kurios.f1_analysis.session_name.SessionName;
+import com.kurios.f1_analysis.team_radio.TeamRadio;
 import com.kurios.f1_analysis.weather.Weather;
 import jakarta.persistence.*;
 
